@@ -33,511 +33,735 @@
       --line:#e4e7ec;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior:smooth; }
 
     body {
-      margin: 0;
-      font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      color: #222;
-      background: #fff;
-      line-height: 1.75;
-      padding-bottom: 88px;
+      margin:0;
+      font-family:Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color:#222;
+      background:#fff;
+      line-height:1.75;
+      padding-bottom:88px;
     }
 
-    a {
-      color: inherit;
-    }
+    a { color:inherit; }
 
     img {
-      width: 100%;
-      display: block;
-      border-radius: 18px;
+      width:100%;
+      display:block;
+      border-radius:18px;
     }
 
     .wrap {
-      width: min(100% - 28px, 1120px);
-      margin: auto;
+      width:min(100% - 28px,1120px);
+      margin:auto;
     }
 
     .topbar {
-      background: var(--navy);
-      color: white;
-      text-align: center;
-      padding: 10px 14px;
-      font-size: 14px;
-      font-weight: 900;
+      background:var(--navy);
+      color:white;
+      text-align:center;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:900;
     }
 
     .hero {
-      color: #fff;
-      text-align: center;
-      padding: 48px 14px 36px;
+      color:#fff;
+      text-align:center;
+      padding:48px 14px 36px;
       background:
-        linear-gradient(135deg, rgba(18,60,85,.93), rgba(217,54,54,.6)),
+        linear-gradient(135deg, rgba(18,60,85,.93), rgba(217,54,54,.62)),
         url("大樓外觀.jpg");
-      background-size: cover;
-      background-position: center;
+      background-size:cover;
+      background-position:center;
     }
 
     .badge {
-      display: inline-block;
-      background: var(--yellow);
-      color: #111;
-      padding: 7px 15px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 900;
-      margin-bottom: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,.22);
+      display:inline-block;
+      background:var(--yellow);
+      color:#111;
+      padding:7px 15px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:900;
+      margin-bottom:12px;
+      box-shadow:0 8px 18px rgba(0,0,0,.22);
     }
 
     h1 {
-      font-size: 34px;
-      line-height: 1.15;
-      margin: 0 0 12px;
-      text-shadow: 0 4px 14px rgba(0,0,0,.36);
-      letter-spacing: .5px;
+      font-size:34px;
+      line-height:1.15;
+      margin:0 0 12px;
+      text-shadow:0 4px 14px rgba(0,0,0,.36);
+      letter-spacing:.5px;
     }
 
     .hero p {
-      margin: 0 0 18px;
-      font-size: 16px;
-      font-weight: 900;
-      text-shadow: 0 3px 12px rgba(0,0,0,.32);
+      margin:0 0 18px;
+      font-size:16px;
+      font-weight:900;
+      text-shadow:0 3px 12px rgba(0,0,0,.32);
     }
 
     .hero-actions {
-      display: grid;
-      gap: 10px;
-      margin-top: 18px;
+      display:grid;
+      gap:10px;
+      margin-top:18px;
     }
 
     .btn {
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      background: var(--orange);
-      border-radius: 14px;
-      padding: 14px 18px;
-      font-size: 17px;
-      font-weight: 900;
-      box-shadow: 0 8px 18px rgba(0,0,0,.16);
-      transition: .2s;
+      display:inline-block;
+      text-align:center;
+      text-decoration:none;
+      color:#fff;
+      background:var(--orange);
+      border-radius:14px;
+      padding:14px 18px;
+      font-size:17px;
+      font-weight:900;
+      box-shadow:0 8px 18px rgba(0,0,0,.16);
+      transition:.2s;
+      border:0;
+      cursor:pointer;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.05);
+      transform:translateY(-2px);
+      filter:brightness(1.05);
     }
 
-    .btn.red { background: var(--red); }
-    .btn.blue { background: var(--blue); }
-    .btn.dark { background: var(--dark); }
-    .btn.green { background: var(--green); }
-    .btn.yellow {
-      background: var(--yellow);
-      color: #111;
-    }
+    .btn.red { background:var(--red); }
+    .btn.blue { background:var(--blue); }
+    .btn.dark { background:var(--dark); }
+    .btn.green { background:var(--green); }
+    .btn.yellow { background:var(--yellow); color:#111; }
 
     .quick {
-      background: var(--cream);
-      padding: 18px 14px;
+      background:var(--cream);
+      padding:18px 14px;
     }
 
     .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
     }
 
     .quick-grid a {
-      background: white;
-      border: 1px solid #eadfca;
-      border-radius: 14px;
-      padding: 13px 8px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 900;
-      box-shadow: 0 5px 14px rgba(0,0,0,.05);
+      background:white;
+      border:1px solid #eadfca;
+      border-radius:14px;
+      padding:13px 8px;
+      text-align:center;
+      text-decoration:none;
+      font-size:15px;
+      font-weight:900;
+      box-shadow:0 5px 14px rgba(0,0,0,.05);
     }
 
-    section {
-      padding: 38px 0;
-    }
+    section { padding:38px 0; }
 
-    .white { background: #fff; }
-    .cream { background: var(--cream); }
-    .light { background: var(--light); }
-    .bluebg { background: linear-gradient(135deg, #e8f8ff, #fff); }
+    .white { background:#fff; }
+    .cream { background:var(--cream); }
+    .light { background:var(--light); }
+    .bluebg { background:linear-gradient(135deg,#e8f8ff,#fff); }
 
     h2 {
-      font-size: 28px;
-      line-height: 1.28;
-      text-align: center;
-      margin: 0 0 10px;
-      color: var(--dark);
+      font-size:28px;
+      line-height:1.28;
+      text-align:center;
+      margin:0 0 10px;
+      color:var(--dark);
     }
 
     .sub {
-      text-align: center;
-      color: var(--muted);
-      font-size: 16px;
-      margin: 0 auto 22px;
-      max-width: 760px;
+      text-align:center;
+      color:var(--muted);
+      font-size:16px;
+      margin:0 auto 22px;
+      max-width:760px;
     }
 
     .card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 14px;
-      box-shadow: 0 8px 20px rgba(31,41,51,.07);
+      background:white;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      margin-bottom:14px;
+      box-shadow:0 8px 20px rgba(31,41,51,.07);
     }
 
     .card h3 {
-      margin: 0 0 8px;
-      font-size: 22px;
-      color: var(--navy);
-      line-height: 1.3;
+      margin:0 0 8px;
+      font-size:22px;
+      color:var(--navy);
+      line-height:1.3;
+    }
+
+    .calendar-shell {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 10px 26px rgba(31,41,51,.08);
+    }
+
+    .calendar-head {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:12px;
+    }
+
+    .calendar-title {
+      font-size:21px;
+      font-weight:900;
+      color:var(--navy);
+      text-align:center;
+      flex:1;
+    }
+
+    .cal-btn {
+      border:0;
+      background:var(--navy);
+      color:#fff;
+      font-size:16px;
+      font-weight:900;
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+    }
+
+    .calendar-grid {
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:6px;
+    }
+
+    .weekday {
+      text-align:center;
+      font-size:13px;
+      font-weight:900;
+      color:var(--muted);
+      padding:5px 0;
+    }
+
+    .day {
+      min-height:88px;
+      border:1px solid #e8edf3;
+      border-radius:14px;
+      background:#fff;
+      padding:7px;
+      cursor:pointer;
+      transition:.15s;
+      overflow:hidden;
+      text-align:left;
+    }
+
+    .day:hover {
+      transform:translateY(-2px);
+      box-shadow:0 8px 16px rgba(31,41,51,.08);
+    }
+
+    .day.muted {
+      opacity:.35;
+      background:#f4f6f8;
+      cursor:default;
+    }
+
+    .day.selected {
+      outline:3px solid var(--orange);
+      background:#fff9e9;
+    }
+
+    .date-num {
+      font-weight:900;
+      color:var(--dark);
+      margin-bottom:4px;
+    }
+
+    .slot-pill {
+      display:block;
+      font-size:11px;
+      line-height:1.25;
+      font-weight:900;
+      color:#fff;
+      padding:3px 5px;
+      border-radius:999px;
+      margin:3px 0;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .slot-a { background:var(--red); }
+    .slot-b { background:var(--blue); }
+    .slot-hold { background:var(--orange); }
+    .slot-internal { background:var(--purple); }
+
+    .calendar-legend {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .legend-item {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:#f7f8fa;
+      padding:6px 9px;
+      border-radius:999px;
+    }
+
+    .dot {
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      display:inline-block;
+    }
+
+    .dot.red { background:var(--red); }
+    .dot.blue { background:var(--blue); }
+    .dot.orange { background:var(--orange); }
+    .dot.purple { background:var(--purple); }
+
+    .booking-panel {
+      margin-top:18px;
+      display:grid;
+      gap:14px;
+    }
+
+    .field {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .field h3 {
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:20px;
+    }
+
+    .choice-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .choice-grid.time {
+      grid-template-columns:1fr;
+    }
+
+    .choice {
+      position:relative;
+    }
+
+    .choice input {
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .choice label {
+      display:block;
+      border:2px solid #dce3ea;
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
+      font-weight:900;
+      text-align:center;
+      cursor:pointer;
+    }
+
+    .choice input:checked + label {
+      border-color:var(--orange);
+      background:#fff3d6;
+      color:#111;
+    }
+
+    .choice input:disabled + label {
+      opacity:.45;
+      background:#eee;
+      cursor:not-allowed;
+      text-decoration:line-through;
+    }
+
+    .estimate {
+      background:linear-gradient(135deg,#fff,#fff6db);
+      border:2px solid #ffe1a1;
+      border-radius:20px;
+      padding:18px;
+      font-weight:900;
+    }
+
+    .estimate-total {
+      font-size:32px;
+      color:var(--red);
+      line-height:1.2;
+      margin-top:8px;
+    }
+
+    .summary-box {
+      background:#f8fbff;
+      border:1px solid #d9e8f3;
+      border-radius:16px;
+      padding:14px;
+      margin-top:12px;
+      white-space:pre-line;
+      font-weight:800;
+      color:#24313d;
+    }
+
+    .form-grid {
+      display:grid;
+      gap:12px;
+    }
+
+    label.form-label {
+      display:block;
+      font-weight:900;
+      color:#344054;
+      margin-bottom:5px;
+    }
+
+    input, textarea, select {
+      width:100%;
+      border:1px solid #d0d5dd;
+      border-radius:12px;
+      padding:12px;
+      font-size:16px;
+      font-family:inherit;
+      background:white;
+    }
+
+    textarea {
+      min-height:90px;
+      resize:vertical;
     }
 
     .photo-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(31,41,51,.07);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      margin-bottom:16px;
+      box-shadow:0 8px 20px rgba(31,41,51,.07);
     }
 
     .photo-card img {
-      border-radius: 0;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
+      border-radius:0;
+      aspect-ratio:4 / 3;
+      object-fit:cover;
     }
 
     .photo-card p {
-      margin: 0;
-      padding: 14px 16px 17px;
-      font-weight: 900;
-      color: var(--dark);
+      margin:0;
+      padding:14px 16px 17px;
+      font-weight:900;
+      color:var(--dark);
     }
 
     .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 18px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:18px;
     }
 
     .summary-item {
-      background: #fff;
-      border-radius: 16px;
-      border-top: 6px solid var(--blue);
-      padding: 16px 10px;
-      text-align: center;
-      font-weight: 900;
-      box-shadow: 0 7px 18px rgba(31,41,51,.06);
+      background:#fff;
+      border-radius:16px;
+      border-top:6px solid var(--blue);
+      padding:16px 10px;
+      text-align:center;
+      font-weight:900;
+      box-shadow:0 7px 18px rgba(31,41,51,.06);
     }
 
-    .summary-item:nth-child(2) { border-top-color: var(--orange); }
-    .summary-item:nth-child(3) { border-top-color: var(--green); }
-    .summary-item:nth-child(4) { border-top-color: var(--purple); }
+    .summary-item:nth-child(2) { border-top-color:var(--orange); }
+    .summary-item:nth-child(3) { border-top-color:var(--green); }
+    .summary-item:nth-child(4) { border-top-color:var(--purple); }
 
     .summary-item strong {
-      display: block;
-      color: var(--red);
-      font-size: 24px;
-      line-height: 1.25;
+      display:block;
+      color:var(--red);
+      font-size:24px;
+      line-height:1.25;
     }
 
-    .price-card {
-      border-top: 8px solid var(--red);
-    }
+    .price-card { border-top:8px solid var(--red); }
 
     .price-big {
-      font-size: 31px;
-      line-height: 1.22;
-      color: var(--red);
-      font-weight: 900;
-      margin: 7px 0;
+      font-size:31px;
+      line-height:1.22;
+      color:var(--red);
+      font-weight:900;
+      margin:7px 0;
     }
 
     .time-note {
-      background: #fff6db;
-      border-left: 6px solid var(--orange);
-      border-radius: 12px;
-      padding: 15px;
-      font-weight: 800;
-      margin-top: 14px;
+      background:#fff6db;
+      border-left:6px solid var(--orange);
+      border-radius:12px;
+      padding:15px;
+      font-weight:800;
+      margin-top:14px;
     }
 
     .room-a {
-      background: linear-gradient(135deg, #fffde1, #fff7ad);
-      border: 2px solid var(--yellow);
+      background:linear-gradient(135deg,#fffde1,#fff7ad);
+      border:2px solid var(--yellow);
     }
 
     .room-b {
-      background: linear-gradient(135deg, #e5f8ff, #c8efff);
-      border: 2px solid var(--sky);
+      background:linear-gradient(135deg,#e5f8ff,#c8efff);
+      border:2px solid var(--sky);
     }
 
     .tag {
-      display: inline-block;
-      background: #fff;
-      color: var(--navy);
-      border: 1px solid rgba(15,76,129,.18);
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 900;
-      margin: 3px 3px 7px 0;
+      display:inline-block;
+      background:#fff;
+      color:var(--navy);
+      border:1px solid rgba(15,76,129,.18);
+      padding:5px 11px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      margin:3px 3px 7px 0;
     }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
     }
 
     .gallery img {
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 14px;
-      box-shadow: 0 6px 15px rgba(31,41,51,.08);
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      border-radius:14px;
+      box-shadow:0 6px 15px rgba(31,41,51,.08);
     }
 
     .rules {
-      padding-left: 0;
-      margin: 0;
-      list-style: none;
+      padding-left:0;
+      margin:0;
+      list-style:none;
     }
 
     .rules li {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-left: 6px solid var(--purple);
-      border-radius: 13px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
-      font-weight: 800;
+      background:#fff;
+      border:1px solid var(--line);
+      border-left:6px solid var(--purple);
+      border-radius:13px;
+      padding:12px 14px;
+      margin-bottom:10px;
+      font-weight:800;
     }
 
     .parking-img {
-      border-radius: 20px;
-      box-shadow: 0 10px 24px rgba(31,41,51,.1);
-      border: 1px solid var(--line);
-      background: #fff;
+      border-radius:20px;
+      box-shadow:0 10px 24px rgba(31,41,51,.1);
+      border:1px solid var(--line);
+      background:#fff;
     }
 
-    .parking-list {
-      margin-top: 16px;
-    }
+    .parking-list { margin-top:16px; }
 
     .process-step {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 6px 16px rgba(31,41,51,.06);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      margin-bottom:12px;
+      box-shadow:0 6px 16px rgba(31,41,51,.06);
     }
 
     .process-step strong {
-      min-width: 38px;
-      height: 38px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      background: var(--blue);
-      color: #fff;
-      border-radius: 50%;
-      font-size: 18px;
+      min-width:38px;
+      height:38px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      background:var(--blue);
+      color:#fff;
+      border-radius:50%;
+      font-size:18px;
     }
 
     .process-step h3 {
-      margin: 0 0 4px;
-      font-size: 19px;
-      color: var(--navy);
+      margin:0 0 4px;
+      font-size:19px;
+      color:var(--navy);
     }
 
-    .process-step p {
-      margin: 0;
-    }
+    .process-step p { margin:0; }
 
     .contact {
       background:
         linear-gradient(135deg, rgba(18,60,85,.96), rgba(31,41,51,.96)),
         url("休息室.jpg");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding-bottom: 48px;
+      background-size:cover;
+      background-position:center;
+      color:white;
+      text-align:center;
+      padding-bottom:48px;
     }
 
-    .contact h2 {
-      color: white;
-    }
+    .contact h2 { color:white; }
 
-    .contact .sub {
-      color: #e8eef5;
-    }
+    .contact .sub { color:#e8eef5; }
 
     .contact-box {
-      background: rgba(255,255,255,.13);
-      border: 1px solid rgba(255,255,255,.26);
-      border-radius: 18px;
-      padding: 18px;
-      margin: 16px 0;
-      backdrop-filter: blur(6px);
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.26);
+      border-radius:18px;
+      padding:18px;
+      margin:16px 0;
+      backdrop-filter:blur(6px);
     }
 
-    .contact-box strong {
-      color: var(--yellow);
-    }
+    .contact-box strong { color:var(--yellow); }
 
     .bottom-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 9999;
-      background: #fff;
-      border-top: 1px solid #ddd;
-      padding: 9px 10px calc(9px + env(safe-area-inset-bottom));
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      box-shadow: 0 -8px 20px rgba(0,0,0,.12);
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:9999;
+      background:#fff;
+      border-top:1px solid #ddd;
+      padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      box-shadow:0 -8px 20px rgba(0,0,0,.12);
     }
 
     .bottom-bar a {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      padding: 12px 8px;
-      font-weight: 900;
-      color: #fff;
-      background: var(--red);
-      font-size: 15px;
+      display:block;
+      text-align:center;
+      text-decoration:none;
+      border-radius:12px;
+      padding:12px 8px;
+      font-weight:900;
+      color:#fff;
+      background:var(--red);
+      font-size:15px;
     }
 
-    .bottom-bar a:nth-child(2) {
-      background: var(--blue);
-    }
+    .bottom-bar a:nth-child(2) { background:var(--blue); }
 
-    .desktop-only {
-      display: none;
-    }
+    @media (min-width:768px) {
+      body { padding-bottom:0; }
 
-    @media (min-width: 768px) {
-      body {
-        padding-bottom: 0;
-      }
+      .hero { padding:92px 20px 82px; }
 
-      .hero {
-        padding: 92px 20px 82px;
-      }
+      h1 { font-size:58px; }
 
-      h1 {
-        font-size: 58px;
-      }
-
-      .hero p {
-        font-size: 22px;
-      }
+      .hero p { font-size:22px; }
 
       .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:8px;
       }
 
-      .btn {
-        width: auto;
-      }
-
-      .quick-grid {
-        grid-template-columns: repeat(6, 1fr);
-      }
+      .quick-grid { grid-template-columns:repeat(7,1fr); }
 
       .overview-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:18px;
       }
 
-      .photo-card {
-        margin-bottom: 0;
-      }
+      .photo-card { margin-bottom:0; }
 
-      .summary-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .summary-grid { grid-template-columns:repeat(4,1fr); }
 
       .price-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
       }
 
       .room-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-        align-items: center;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:28px;
+        align-items:center;
       }
 
-      .gallery {
-        grid-template-columns: repeat(3, 1fr);
+      .gallery { grid-template-columns:repeat(3,1fr); }
+
+      .booking-panel {
+        grid-template-columns:1.15fr .85fr;
+        align-items:start;
+      }
+
+      .choice-grid.time {
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .form-grid.two {
+        grid-template-columns:repeat(2,1fr);
       }
 
       .parking-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:18px;
       }
 
       .process-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:16px;
       }
 
       .process-step {
-        display: block;
-        text-align: center;
+        display:block;
+        text-align:center;
       }
 
-      .process-step strong {
-        margin-bottom: 10px;
-      }
+      .process-step strong { margin-bottom:10px; }
 
       .location-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-        align-items: center;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:28px;
+        align-items:center;
       }
 
-      .bottom-bar {
-        display: none;
+      .bottom-bar { display:none; }
+    }
+
+    @media (max-width:520px) {
+      .day {
+        min-height:74px;
+        padding:5px;
       }
 
-      .desktop-only {
-        display: inline-block;
+      .slot-pill {
+        font-size:10px;
+        padding:2px 4px;
+      }
+
+      .calendar-shell {
+        padding:10px;
       }
     }
   </style>
@@ -556,7 +780,7 @@
       <p>40人大教室・10人會議室｜企業內訓・課程講座・商務會議</p>
 
       <div class="hero-actions">
-        <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫預約表單</a>
+        <a class="btn red" href="#calendar">查看可預約時段</a>
         <a class="btn yellow" href="#price">查看租借費用</a>
         <a class="btn blue" href="#parking">停車資訊</a>
         <a class="btn dark" href="#contact">聯絡資訊</a>
@@ -567,6 +791,7 @@
   <nav class="quick">
     <div class="wrap">
       <div class="quick-grid">
+        <a href="#calendar">預約月曆</a>
         <a href="#a-room">A案大教室</a>
         <a href="#b-room">B案會議室</a>
         <a href="#price">價目表</a>
@@ -576,6 +801,160 @@
       </div>
     </div>
   </nav>
+
+  <section id="calendar" class="bluebg">
+    <div class="wrap">
+      <h2>每月預約使用情形</h2>
+      <p class="sub">
+        點選日期、教室與時段後，系統會自動試算費用。送出後需由工作人員確認檔期，才算完成保留。
+      </p>
+
+      <div class="calendar-shell">
+        <div class="calendar-head">
+          <button class="cal-btn" type="button" id="prevMonth">‹ 上月</button>
+          <div class="calendar-title" id="calendarTitle"></div>
+          <button class="cal-btn" type="button" id="nextMonth">下月 ›</button>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+
+        <div class="calendar-legend">
+          <span class="legend-item"><span class="dot red"></span>A案已預約</span>
+          <span class="legend-item"><span class="dot blue"></span>B案已預約</span>
+          <span class="legend-item"><span class="dot orange"></span>暫保留</span>
+          <span class="legend-item"><span class="dot purple"></span>內部使用</span>
+        </div>
+      </div>
+
+      <div class="booking-panel">
+        <div>
+          <div class="field">
+            <h3>選擇日期與時段</h3>
+            <p style="margin-top:0;color:#667085;font-weight:800;">
+              已選日期：<span id="selectedDateText">請先點選月曆日期</span>
+            </p>
+
+            <div class="field" style="box-shadow:none;margin-bottom:12px;">
+              <h3>1. 選擇教室</h3>
+              <div class="choice-grid">
+                <div class="choice">
+                  <input type="radio" name="room" id="roomA" value="A" checked>
+                  <label for="roomA">A案<br>40人大教室</label>
+                </div>
+                <div class="choice">
+                  <input type="radio" name="room" id="roomB" value="B">
+                  <label for="roomB">B案<br>10人會議室</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field" style="box-shadow:none;margin-bottom:0;">
+              <h3>2. 選擇時段</h3>
+              <div class="choice-grid time">
+                <div class="choice">
+                  <input type="checkbox" name="time" id="morning" value="morning">
+                  <label for="morning">早上<br>08:00–12:00</label>
+                </div>
+                <div class="choice">
+                  <input type="checkbox" name="time" id="afternoon" value="afternoon">
+                  <label for="afternoon">下午<br>13:00–17:00</label>
+                </div>
+                <div class="choice">
+                  <input type="checkbox" name="time" id="evening" value="evening">
+                  <label for="evening">晚上<br>18:00–21:00</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <h3>填寫預約資料</h3>
+
+            <div class="form-grid two">
+              <div>
+                <label class="form-label" for="name">姓名 *</label>
+                <input id="name" type="text" placeholder="請輸入姓名">
+              </div>
+
+              <div>
+                <label class="form-label" for="phone">電話 *</label>
+                <input id="phone" type="tel" placeholder="請輸入電話">
+              </div>
+
+              <div>
+                <label class="form-label" for="email">Email</label>
+                <input id="email" type="email" placeholder="請輸入 Email">
+              </div>
+
+              <div>
+                <label class="form-label" for="lineId">Line ID</label>
+                <input id="lineId" type="text" placeholder="請輸入 Line ID">
+              </div>
+
+              <div>
+                <label class="form-label" for="lineName">Line 暱稱</label>
+                <input id="lineName" type="text" placeholder="請輸入 Line 暱稱">
+              </div>
+
+              <div>
+                <label class="form-label" for="topic">活動主題</label>
+                <input id="topic" type="text" placeholder="例如：企業內訓、課程講座">
+              </div>
+
+              <div>
+                <label class="form-label" for="invoiceTitle">發票抬頭</label>
+                <input id="invoiceTitle" type="text" placeholder="需要發票再填">
+              </div>
+
+              <div>
+                <label class="form-label" for="taxId">統一編號</label>
+                <input id="taxId" type="text" placeholder="需要發票再填">
+              </div>
+
+              <div>
+                <label class="form-label" for="bankLast5">匯款後五碼</label>
+                <input id="bankLast5" type="text" placeholder="確認匯款後再填">
+              </div>
+
+              <div>
+                <label class="form-label" for="address">發票寄送地址</label>
+                <input id="address" type="text" placeholder="需要寄送再填">
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <label class="form-label" for="note">備註</label>
+              <textarea id="note" placeholder="可填寫人數、設備需求、特殊需求"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="estimate">
+          <h3 style="margin-top:0;color:#123c55;">費用試算</h3>
+          <div id="estimateText">請選擇日期、教室與時段。</div>
+          <div class="estimate-total" id="estimateTotal">0 元</div>
+
+          <div class="summary-box" id="bookingSummary">尚未選擇預約內容。</div>
+
+          <button class="btn green" style="width:100%;margin-top:12px;" type="button" id="copySummary">
+            複製預約摘要
+          </button>
+
+          <button class="btn red" style="width:100%;margin-top:10px;" type="button" id="submitBooking">
+            送出預約資料
+          </button>
+
+          <a class="btn blue" style="width:100%;margin-top:10px;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">
+            備用：前往 Google 表單
+          </a>
+
+          <p style="font-size:13px;color:#667085;margin-bottom:0;">
+            提醒：送出表單不代表預約完成，需由工作人員確認檔期後才算保留。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="white">
     <div class="wrap">
@@ -640,7 +1019,7 @@
         加時費：每半小時 500 元，未滿半小時以半小時計。
       </div>
 
-      <a class="btn red" style="margin-top:16px;width:100%;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫預約表單</a>
+      <a class="btn red" style="margin-top:16px;width:100%;" href="#calendar">查看可預約時段</a>
     </div>
   </section>
 
@@ -669,7 +1048,7 @@
             <span class="tag">WiFi</span>
             <span class="tag">HDMI 線</span>
 
-            <a class="btn red" style="margin-top:12px;width:100%;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 A案大教室</a>
+            <a class="btn red" style="margin-top:12px;width:100%;" href="#calendar">預約 A案大教室</a>
           </div>
         </div>
 
@@ -708,7 +1087,7 @@
             <span class="tag">冷氣</span>
             <span class="tag">安靜會議</span>
 
-            <a class="btn blue" style="margin-top:12px;width:100%;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 B案會議室</a>
+            <a class="btn blue" style="margin-top:12px;width:100%;" href="#calendar">預約 B案會議室</a>
           </div>
         </div>
 
@@ -794,7 +1173,7 @@
   <section id="booking" class="white">
     <div class="wrap">
       <h2>預約流程</h2>
-      <p class="sub">請先填寫預約表單，以利保留權益及安排規劃。</p>
+      <p class="sub">請先填寫預約資料，以利保留權益及安排規劃。</p>
 
       <div class="process-grid">
         <div class="process-step">
@@ -808,29 +1187,29 @@
         <div class="process-step">
           <strong>2</strong>
           <div>
-            <h3>填寫表單</h3>
-            <p>留下姓名、電話、LINE、日期、時段與活動主題。</p>
+            <h3>選擇時段</h3>
+            <p>點選月曆日期，選擇早上、下午或晚上。</p>
           </div>
         </div>
 
         <div class="process-step">
           <strong>3</strong>
           <div>
-            <h3>確認檔期</h3>
-            <p>我們會依日期、時段與需求確認是否可預約。</p>
+            <h3>送出資料</h3>
+            <p>留下姓名、電話、LINE、活動主題。</p>
           </div>
         </div>
 
         <div class="process-step">
           <strong>4</strong>
           <div>
-            <h3>完成預約</h3>
-            <p>確認後再依說明完成匯款與保留檔期。</p>
+            <h3>確認檔期</h3>
+            <p>工作人員確認後，才算正式保留。</p>
           </div>
         </div>
       </div>
 
-      <a class="btn red" style="width:100%;margin-top:14px;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫 Google 預約表單</a>
+      <a class="btn red" style="width:100%;margin-top:14px;" href="#calendar">立即選擇預約時段</a>
     </div>
   </section>
 
@@ -842,7 +1221,7 @@
         <p><strong>戶名：</strong>中成不動產股份有限公司</p>
         <p><strong>銀行：</strong>永豐銀行（807）南桃園分行</p>
         <p><strong>帳號：</strong>185-001-0018098-6</p>
-        <p><strong>提醒：</strong>請先填寫預約表單並確認檔期後，再依指示匯款。</p>
+        <p><strong>提醒：</strong>請先確認檔期後，再依指示匯款。</p>
       </div>
     </div>
   </section>
@@ -881,10 +1260,10 @@
           教室聯絡人：0938-560-333
         </p>
 
-        <p>建議先填寫預約表單，我們會依日期、時段、人數與活動需求協助確認。</p>
+        <p>建議先於頁面上選擇日期與時段，送出後我們會協助確認。</p>
       </div>
 
-      <a class="btn red" style="width:100%;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
+      <a class="btn red" style="width:100%;" href="#calendar">選擇預約時段</a>
       <a class="btn yellow" style="width:100%;" href="#price">查看費用</a>
       <a class="btn blue" style="width:100%;" href="#parking">查看停車資訊</a>
 
@@ -895,9 +1274,341 @@
   </section>
 
   <div class="bottom-bar">
-    <a href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即預約</a>
+    <a href="#calendar">選時段試算</a>
     <a href="#contact">聯絡資訊</a>
   </div>
+
+  <script>
+    const SCRIPT_URL = "";
+
+    const prices = {
+      A: { morning: 3500, afternoon: 3500, evening: 3000 },
+      B: { morning: 1500, afternoon: 1500, evening: 1500 }
+    };
+
+    const roomNames = {
+      A: "A案 40人大教室",
+      B: "B案 10人會議室"
+    };
+
+    const timeNames = {
+      morning: "早上 08:00–12:00",
+      afternoon: "下午 13:00–17:00",
+      evening: "晚上 18:00–21:00"
+    };
+
+    let bookedData = {
+      "2026-07-06": [
+        { room:"A", time:"morning", status:"bookedA", label:"A早 已預約" },
+        { room:"B", time:"evening", status:"bookedB", label:"B晚 已預約" }
+      ],
+      "2026-07-09": [
+        { room:"A", time:"afternoon", status:"hold", label:"A午 暫保留" }
+      ],
+      "2026-07-13": [
+        { room:"B", time:"morning", status:"bookedB", label:"B早 已預約" },
+        { room:"B", time:"afternoon", status:"bookedB", label:"B午 已預約" }
+      ],
+      "2026-07-18": [
+        { room:"A", time:"morning", status:"internal", label:"A早 內部" },
+        { room:"A", time:"afternoon", status:"internal", label:"A午 內部" }
+      ],
+      "2026-07-25": [
+        { room:"A", time:"evening", status:"bookedA", label:"A晚 已預約" }
+      ]
+    };
+
+    const calendarGrid = document.getElementById("calendarGrid");
+    const calendarTitle = document.getElementById("calendarTitle");
+    const selectedDateText = document.getElementById("selectedDateText");
+    const estimateText = document.getElementById("estimateText");
+    const estimateTotal = document.getElementById("estimateTotal");
+    const bookingSummary = document.getElementById("bookingSummary");
+
+    const roomInputs = document.querySelectorAll("input[name='room']");
+    const timeInputs = document.querySelectorAll("input[name='time']");
+
+    let today = new Date();
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth();
+    let selectedDate = null;
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function toDateKey(year, month, day) {
+      return `${year}-${pad(month + 1)}-${pad(day)}`;
+    }
+
+    function getSelectedRoom() {
+      return document.querySelector("input[name='room']:checked").value;
+    }
+
+    function getSelectedTimes() {
+      return Array.from(timeInputs).filter(i => i.checked && !i.disabled).map(i => i.value);
+    }
+
+    function statusClass(status) {
+      if (status === "bookedA") return "slot-a";
+      if (status === "bookedB") return "slot-b";
+      if (status === "hold") return "slot-hold";
+      if (status === "internal") return "slot-internal";
+      return "slot-hold";
+    }
+
+    function renderCalendar() {
+      calendarGrid.innerHTML = "";
+
+      const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
+      weekdays.forEach(w => {
+        const el = document.createElement("div");
+        el.className = "weekday";
+        el.textContent = w;
+        calendarGrid.appendChild(el);
+      });
+
+      calendarTitle.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const startWeekday = firstDay.getDay();
+      const daysInMonth = lastDay.getDate();
+
+      for (let i = 0; i < startWeekday; i++) {
+        const empty = document.createElement("div");
+        empty.className = "day muted";
+        calendarGrid.appendChild(empty);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateKey = toDateKey(currentYear, currentMonth, day);
+        const cell = document.createElement("button");
+        cell.type = "button";
+        cell.className = "day";
+        if (selectedDate === dateKey) cell.classList.add("selected");
+
+        const num = document.createElement("div");
+        num.className = "date-num";
+        num.textContent = day;
+        cell.appendChild(num);
+
+        const bookings = bookedData[dateKey] || [];
+        bookings.forEach(b => {
+          const pill = document.createElement("span");
+          pill.className = `slot-pill ${statusClass(b.status)}`;
+          pill.textContent = b.label;
+          cell.appendChild(pill);
+        });
+
+        cell.addEventListener("click", () => {
+          selectedDate = dateKey;
+          selectedDateText.textContent = dateKey;
+          renderCalendar();
+          updateDisabledTimes();
+          updateEstimate();
+        });
+
+        calendarGrid.appendChild(cell);
+      }
+    }
+
+    function updateDisabledTimes() {
+      const room = getSelectedRoom();
+      const bookings = selectedDate ? (bookedData[selectedDate] || []) : [];
+
+      timeInputs.forEach(input => {
+        const blocked = bookings.some(b => b.room === room && b.time === input.value);
+        input.disabled = blocked;
+        if (blocked) input.checked = false;
+      });
+    }
+
+    function updateEstimate() {
+      const room = getSelectedRoom();
+      const times = getSelectedTimes();
+
+      if (!selectedDate) {
+        estimateText.textContent = "請先點選月曆日期。";
+        estimateTotal.textContent = "0 元";
+        bookingSummary.textContent = "尚未選擇預約內容。";
+        return;
+      }
+
+      if (times.length === 0) {
+        estimateText.textContent = "請選擇至少一個時段。";
+        estimateTotal.textContent = "0 元";
+        bookingSummary.textContent = `已選日期：${selectedDate}\n已選教室：${roomNames[room]}\n尚未選擇時段。`;
+        return;
+      }
+
+      let total = 0;
+      let lines = [];
+
+      times.forEach(t => {
+        const price = prices[room][t];
+        total += price;
+        lines.push(`${timeNames[t]}：${price.toLocaleString()} 元`);
+      });
+
+      estimateText.innerHTML = lines.join("<br>");
+      estimateTotal.textContent = `${total.toLocaleString()} 元`;
+
+      bookingSummary.textContent =
+`預約摘要
+日期：${selectedDate}
+教室：${roomNames[room]}
+時段：
+${times.map(t => "・" + timeNames[t]).join("\n")}
+預估費用：${total.toLocaleString()} 元
+
+提醒：此為線上試算，實際檔期需由工作人員確認。`;
+    }
+
+    function getTotalFee() {
+      const room = getSelectedRoom();
+      const times = getSelectedTimes();
+      return times.reduce((sum, t) => sum + prices[room][t], 0);
+    }
+
+    function collectFormData() {
+      return {
+        createdAt: new Date().toLocaleString("zh-TW"),
+        status: "待確認",
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        lineId: document.getElementById("lineId").value.trim(),
+        lineName: document.getElementById("lineName").value.trim(),
+        room: roomNames[getSelectedRoom()],
+        roomCode: getSelectedRoom(),
+        date: selectedDate,
+        times: getSelectedTimes().map(t => timeNames[t]).join("、"),
+        timeCodes: getSelectedTimes().join(","),
+        fee: getTotalFee(),
+        topic: document.getElementById("topic").value.trim(),
+        invoiceTitle: document.getElementById("invoiceTitle").value.trim(),
+        taxId: document.getElementById("taxId").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        bankLast5: document.getElementById("bankLast5").value.trim(),
+        note: document.getElementById("note").value.trim()
+      };
+    }
+
+    async function loadBookingsFromScript() {
+      if (!SCRIPT_URL) return;
+
+      try {
+        const res = await fetch(SCRIPT_URL + "?action=list");
+        const data = await res.json();
+
+        if (data && data.bookings) {
+          bookedData = data.bookings;
+          renderCalendar();
+          updateDisabledTimes();
+          updateEstimate();
+        }
+      } catch (error) {
+        console.log("讀取預約資料失敗，目前使用展示資料。", error);
+      }
+    }
+
+    async function submitBooking() {
+      const data = collectFormData();
+
+      if (!selectedDate) {
+        alert("請先點選月曆日期。");
+        return;
+      }
+
+      if (!data.timeCodes) {
+        alert("請至少選擇一個時段。");
+        return;
+      }
+
+      if (!data.name) {
+        alert("請填寫姓名。");
+        return;
+      }
+
+      if (!data.phone) {
+        alert("請填寫電話。");
+        return;
+      }
+
+      if (!SCRIPT_URL) {
+        alert("目前尚未連接 Google 試算表。\n\n你可以先按「複製預約摘要」，或使用備用 Google 表單。\n\n下一步需要把 Google Apps Script 網址放進 HTML 裡。");
+        return;
+      }
+
+      try {
+        const btn = document.getElementById("submitBooking");
+        btn.textContent = "送出中...";
+        btn.disabled = true;
+
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        alert("已送出預約資料！工作人員會再與您確認檔期。");
+        await loadBookingsFromScript();
+
+        btn.textContent = "送出預約資料";
+        btn.disabled = false;
+      } catch (error) {
+        alert("送出失敗，請改用備用 Google 表單或電話洽詢。");
+        document.getElementById("submitBooking").textContent = "送出預約資料";
+        document.getElementById("submitBooking").disabled = false;
+      }
+    }
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+
+    roomInputs.forEach(input => {
+      input.addEventListener("change", () => {
+        updateDisabledTimes();
+        updateEstimate();
+      });
+    });
+
+    timeInputs.forEach(input => {
+      input.addEventListener("change", updateEstimate);
+    });
+
+    document.getElementById("copySummary").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(bookingSummary.textContent);
+        alert("已複製預約摘要，可貼到 LINE 或表單備註。");
+      } catch (e) {
+        alert("複製失敗，請手動選取摘要文字複製。");
+      }
+    });
+
+    document.getElementById("submitBooking").addEventListener("click", submitBooking);
+
+    renderCalendar();
+    updateEstimate();
+    loadBookingsFromScript();
+  </script>
 
 </body>
 </html>
