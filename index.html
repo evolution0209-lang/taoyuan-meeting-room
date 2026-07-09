@@ -432,7 +432,7 @@
       margin-bottom:5px;
     }
 
-    input, textarea, select {
+    input, textarea {
       width:100%;
       border:1px solid #d0d5dd;
       border-radius:12px;
@@ -666,11 +666,8 @@
 
     @media (min-width:768px) {
       body { padding-bottom:0; }
-
       .hero { padding:92px 20px 82px; }
-
       h1 { font-size:58px; }
-
       .hero p { font-size:22px; }
 
       .hero-actions {
@@ -689,7 +686,6 @@
       }
 
       .photo-card { margin-bottom:0; }
-
       .summary-grid { grid-template-columns:repeat(4,1fr); }
 
       .price-grid {
@@ -712,13 +708,8 @@
         align-items:start;
       }
 
-      .choice-grid.time {
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .form-grid.two {
-        grid-template-columns:repeat(2,1fr);
-      }
+      .choice-grid.time { grid-template-columns:repeat(3,1fr); }
+      .form-grid.two { grid-template-columns:repeat(2,1fr); }
 
       .parking-list {
         display:grid;
@@ -760,9 +751,7 @@
         padding:2px 4px;
       }
 
-      .calendar-shell {
-        padding:10px;
-      }
+      .calendar-shell { padding:10px; }
     }
   </style>
 </head>
@@ -1279,7 +1268,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGBD2xJ10dC4C2Ca7nRdsn7-9y3lsxxx6zNajhdw-dDCc7hI2Kcb4Zt8jiwmNcK1VO/exec";
 
     const prices = {
       A: { morning: 3500, afternoon: 3500, evening: 3000 },
@@ -1297,26 +1286,7 @@
       evening: "晚上 18:00–21:00"
     };
 
-    let bookedData = {
-      "2026-07-06": [
-        { room:"A", time:"morning", status:"bookedA", label:"A早 已預約" },
-        { room:"B", time:"evening", status:"bookedB", label:"B晚 已預約" }
-      ],
-      "2026-07-09": [
-        { room:"A", time:"afternoon", status:"hold", label:"A午 暫保留" }
-      ],
-      "2026-07-13": [
-        { room:"B", time:"morning", status:"bookedB", label:"B早 已預約" },
-        { room:"B", time:"afternoon", status:"bookedB", label:"B午 已預約" }
-      ],
-      "2026-07-18": [
-        { room:"A", time:"morning", status:"internal", label:"A早 內部" },
-        { room:"A", time:"afternoon", status:"internal", label:"A午 內部" }
-      ],
-      "2026-07-25": [
-        { room:"A", time:"evening", status:"bookedA", label:"A晚 已預約" }
-      ]
-    };
+    let bookedData = {};
 
     const calendarGrid = document.getElementById("calendarGrid");
     const calendarTitle = document.getElementById("calendarTitle");
@@ -1386,6 +1356,7 @@
         const cell = document.createElement("button");
         cell.type = "button";
         cell.className = "day";
+
         if (selectedDate === dateKey) cell.classList.add("selected");
 
         const num = document.createElement("div");
@@ -1496,8 +1467,6 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
     }
 
     async function loadBookingsFromScript() {
-      if (!SCRIPT_URL) return;
-
       try {
         const res = await fetch(SCRIPT_URL + "?action=list");
         const data = await res.json();
@@ -1509,7 +1478,7 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
           updateEstimate();
         }
       } catch (error) {
-        console.log("讀取預約資料失敗，目前使用展示資料。", error);
+        console.log("讀取預約資料失敗。", error);
       }
     }
 
@@ -1536,17 +1505,12 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         return;
       }
 
-      if (!SCRIPT_URL) {
-        alert("目前尚未連接 Google 試算表。\n\n你可以先按「複製預約摘要」，或使用備用 Google 表單。\n\n下一步需要把 Google Apps Script 網址放進 HTML 裡。");
-        return;
-      }
-
       try {
         const btn = document.getElementById("submitBooking");
         btn.textContent = "送出中...";
         btn.disabled = true;
 
-        const res = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
@@ -1554,7 +1518,23 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         });
 
         alert("已送出預約資料！工作人員會再與您確認檔期。");
+
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("lineId").value = "";
+        document.getElementById("lineName").value = "";
+        document.getElementById("topic").value = "";
+        document.getElementById("invoiceTitle").value = "";
+        document.getElementById("taxId").value = "";
+        document.getElementById("address").value = "";
+        document.getElementById("bankLast5").value = "";
+        document.getElementById("note").value = "";
+
+        timeInputs.forEach(i => i.checked = false);
+
         await loadBookingsFromScript();
+        updateEstimate();
 
         btn.textContent = "送出預約資料";
         btn.disabled = false;
