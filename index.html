@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>桃園會議室租借・30人教室租借｜中平路企業培訓場地</title>
-  <meta name="description" content="桃園市桃園區中平路98號18樓，提供10人主管會議室與30人教室租借，適合主管會議、企業內訓、教育訓練、課程講座、商務活動。電話03-220-1818。">
+  <title>桃園友成教室租借｜40人大教室・10人會議室｜桃園中平路場地租借</title>
+  <meta name="description" content="桃園友成教室租借，位於桃園市桃園區中平路98號18樓，提供A案40人大教室與B案10人會議室，適合課程講座、企業內訓、主管會議、說明會。電話03-220-1818。">
 
   <style>
     * { box-sizing: border-box; }
@@ -15,7 +15,17 @@
       font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
       color: #222;
       line-height: 1.8;
-      background: #f5f2ea;
+      background: #f6f4ef;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+
+    a {
+      color: inherit;
     }
 
     .wrap {
@@ -28,13 +38,15 @@
       text-align: center;
       padding: 96px 20px;
       background:
-        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)),
-        linear-gradient(135deg, #231f20, #6b4f2a);
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url("images/大樓外觀.jpg");
+      background-size: cover;
+      background-position: center;
     }
 
     .hero h1 {
-      font-size: 42px;
-      line-height: 1.25;
+      font-size: 46px;
+      line-height: 1.22;
       margin: 0 0 18px;
       letter-spacing: 1px;
     }
@@ -47,41 +59,110 @@
     .btn {
       display: inline-block;
       background: #b8872b;
-      color: white;
-      padding: 13px 26px;
+      color: #fff;
+      padding: 13px 24px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       margin: 6px;
+      transition: .2s;
     }
 
-    .btn.dark {
-      background: #222;
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: .9;
     }
+
+    .btn.dark { background: #222; }
+    .btn.blue { background: #2786b8; }
+    .btn.red { background: #b83232; }
 
     section {
-      background: white;
-      padding: 60px 20px;
+      background: #fff;
+      padding: 64px 20px;
       margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 31px;
+      font-size: 32px;
       text-align: center;
-      margin: 0 0 32px;
       line-height: 1.35;
+      margin: 0 0 34px;
     }
 
     h3 {
-      font-size: 23px;
-      margin: 0 0 12px;
+      font-size: 24px;
       line-height: 1.35;
+      margin: 0 0 12px;
     }
 
-    .grid {
+    .lead {
+      font-size: 19px;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 30px;
+      color: #444;
+    }
+
+    .quick-nav {
+      background: #f6f4ef;
+      padding: 42px 20px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .nav-button {
+      display: block;
+      background: white;
+      border: 1px solid #e5dccb;
+      border-radius: 16px;
+      padding: 20px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(0,0,0,.05);
+      transition: .2s;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
+    }
+
+    .nav-button span {
+      display: block;
+      font-size: 21px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .nav-button small {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .nav-button.gold {
+      background: #b8872b;
+      color: white;
+    }
+
+    .nav-button.gold small {
+      color: #fff4d6;
+    }
+
+    .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      align-items: center;
     }
 
     .card {
@@ -92,26 +173,43 @@
       box-shadow: 0 8px 22px rgba(0,0,0,.04);
     }
 
-    .space {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: center;
-      margin-bottom: 52px;
+    .photo-card {
+      background: #fff;
+      border: 1px solid #e7e0d3;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0,0,0,.04);
     }
 
-    .placeholder {
-      min-height: 260px;
-      border: 2px dashed #999;
-      border-radius: 16px;
-      background: #ddd;
-      color: #666;
+    .photo-card img {
+      border-radius: 0;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .photo-card p {
+      padding: 14px 16px 18px;
+      margin: 0;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
+    }
+
+    .space-title {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .space-title.a {
+      background: #fff200;
+      color: #111;
+    }
+
+    .space-title.b {
+      background: #75c8e8;
+      color: #111;
     }
 
     .tag {
@@ -121,26 +219,55 @@
       padding: 5px 12px;
       border-radius: 999px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       margin: 0 6px 8px 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .gallery img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       background: white;
+      overflow: hidden;
+      border-radius: 12px;
     }
 
     th, td {
-      border: 1px solid #ddd;
-      padding: 14px;
+      border: 2px solid #222;
+      padding: 16px;
       text-align: center;
       vertical-align: middle;
+      font-size: 18px;
     }
 
     th {
       background: #222;
       color: white;
+    }
+
+    th.a-plan {
+      background: #fff200;
+      color: #111;
+    }
+
+    th.b-plan {
+      background: #75c8e8;
+      color: #111;
+    }
+
+    td.price {
+      font-size: 32px;
+      font-weight: 900;
     }
 
     .notice {
@@ -149,12 +276,68 @@
       padding: 20px;
       margin-top: 24px;
       border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .rules-list {
+      counter-reset: item;
+      padding-left: 0;
+      list-style: none;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .rules-list li {
+      background: #fafafa;
+      border: 1px solid #e7e0d3;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .rules-list li::before {
+      counter-increment: item;
+      content: counter(item) ". ";
+      color: #b8872b;
+      font-weight: 900;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: #fafafa;
+      border: 1px solid #e7e0d3;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .step strong {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #b8872b;
+      color: white;
+      font-size: 20px;
+      margin-bottom: 10px;
     }
 
     .contact {
       background: #222;
       color: white;
       text-align: center;
+    }
+
+    .contact h2 {
+      color: white;
     }
 
     .small {
@@ -166,17 +349,21 @@
       color: #ddd;
     }
 
-    @media (max-width: 860px) {
-      .grid, .space {
+    @media (max-width: 900px) {
+      .button-grid,
+      .grid-3,
+      .grid-2,
+      .gallery,
+      .process {
         grid-template-columns: 1fr;
       }
 
       .hero {
-        padding: 70px 20px;
+        padding: 72px 20px;
       }
 
       .hero h1 {
-        font-size: 31px;
+        font-size: 34px;
       }
 
       .hero p {
@@ -184,15 +371,16 @@
       }
 
       h2 {
-        font-size: 26px;
-      }
-
-      table {
-        font-size: 14px;
+        font-size: 27px;
       }
 
       th, td {
+        font-size: 15px;
         padding: 10px;
+      }
+
+      td.price {
+        font-size: 24px;
       }
     }
   </style>
@@ -202,179 +390,328 @@
 
   <header class="hero">
     <div class="wrap">
-      <h1>桃園會議室・30人教室租借</h1>
-      <p>位於桃園市桃園區中平路98號18樓，適合主管會議、企業內訓、講座課程與商務活動</p>
-      <a class="btn" href="tel:03-220-1818">立即來電：03-220-1818</a>
-      <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=桃園市桃園區中平路98號18樓">Google 地圖導航</a>
+      <h1>桃園友成教室租借</h1>
+      <p>40人大教室・10人會議室｜桃園市桃園區中平路98號18樓（亞洲商業大樓）</p>
+
+      <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫預約表單</a>
+      <a class="btn dark" href="tel:03-220-1818">來電洽詢：03-220-1818</a>
+      <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">查看 Google 街景</a>
     </div>
   </header>
 
-  <section>
+  <section class="quick-nav">
     <div class="wrap">
-      <h2>場地特色</h2>
+      <div class="button-grid">
+        <a href="#a-room" class="nav-button">
+          <span>A案大教室</span>
+          <small>30–40人｜早午3500・晚3000</small>
+        </a>
 
-      <div class="grid">
-        <div class="card">
-          <h3>10人主管會議室</h3>
-          <p>內有橢圓會議桌，可容納約10位。適合主管會議、策略討論、商務洽談、顧問會議與高階決策討論。</p>
-        </div>
+        <a href="#b-room" class="nav-button">
+          <span>B案會議室</span>
+          <small>8–10人｜早午晚1500</small>
+        </a>
 
-        <div class="card">
-          <h3>30人教室空間</h3>
-          <p>約30個座位，配有講台、投影設備、廣播系統與空調設備，適合企業內訓、課程講座與說明會。</p>
-        </div>
+        <a href="#price" class="nav-button">
+          <span>價目表</span>
+          <small>早上・下午・晚上三時段</small>
+        </a>
 
-        <div class="card">
-          <h3>桃園市區便利位置</h3>
-          <p>位於桃園市桃園區中平路98號18樓，適合企業客戶、講師、團隊與商務來賓安排會議或課程。</p>
-        </div>
+        <a href="#rules" class="nav-button">
+          <span>租用守則</span>
+          <small>加時、延期、清潔費說明</small>
+        </a>
+
+        <a href="#booking" class="nav-button gold">
+          <span>立即預約</span>
+          <small>填寫 Google 表單保留檔期</small>
+        </a>
+
+        <a href="#equipment" class="nav-button">
+          <span>教室設備</span>
+          <small>WiFi、桌椅、音響、麥克風、冷氣</small>
+        </a>
+
+        <a href="#location" class="nav-button">
+          <span>交通位置</span>
+          <small>中平路98號18樓</small>
+        </a>
+
+        <a href="tel:03-220-1818" class="nav-button">
+          <span>電話洽詢</span>
+          <small>03-220-1818</small>
+        </a>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <h2>空間介紹</h2>
-
-      <div class="space">
-        <div class="placeholder">
-          圖片預留：主管會議室主圖<br>
-          images/meeting-room-main.jpg
-        </div>
-
-        <div>
-          <span class="tag">約10人</span>
-          <span class="tag">橢圓會議桌</span>
-          <span class="tag">主管會議</span>
-          <h3>A 空間｜主管會議室</h3>
-          <p>本空間配有橢圓形會議桌，可容納約10位使用者。適合需要安靜、正式、專注討論的商務情境，例如主管會議、策略討論、顧問會議、面試甄選、商務簡報與專案決策會議。</p>
-          <ul>
-            <li>建議人數：約10人</li>
-            <li>桌型：橢圓會議桌</li>
-            <li>適合用途：主管會議、董事會、顧問諮詢、商務洽談</li>
-            <li>空間特色：正式、安靜、適合高階討論</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="space">
-        <div>
-          <span class="tag">約30人</span>
-          <span class="tag">講台</span>
-          <span class="tag">投影設備</span>
-          <span class="tag">廣播系統</span>
-          <h3>B 空間｜30人教室</h3>
-          <p>本空間約有30個座位，並配置講台、投影設備、廣播系統與空調設備。適合企業培訓、課程教學、產品說明會、小型講座、讀書會與內部教育訓練。</p>
-          <ul>
-            <li>建議人數：約30人</li>
-            <li>設備：講台、投影設備、廣播系統、空調</li>
-            <li>適合用途：企業內訓、講座課程、產品說明會、教育訓練</li>
-            <li>空間特色：設備完整、可快速開課、適合教學與簡報</li>
-          </ul>
-        </div>
-
-        <div class="placeholder">
-          圖片預留：30人教室主圖<br>
-          images/classroom-main.jpg
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>場地照片</h2>
-
-      <div class="grid">
-        <div class="placeholder">圖片預留<br>images/meeting-room-01.jpg</div>
-        <div class="placeholder">圖片預留<br>images/classroom-01.jpg</div>
-        <div class="placeholder">圖片預留<br>images/equipment-01.jpg</div>
-      </div>
-
-      <p class="small" style="text-align:center;margin-top:18px;">
-        之後可替換為實際場地照片：主管會議室、30人教室、講台、投影設備、廣播系統與入口環境。
+      <h2>場地總覽</h2>
+      <p class="lead">
+        適合課程講座、企業內訓、讀書會、產品說明會、商務會議與小型團隊活動。
+        場地採自助式租借，桌椅可依活動需求調整，離開前請協助復原。
       </p>
-    </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <h2>提供設備</h2>
-
-      <div class="grid">
-        <div class="card">
-          <h3>簡報設備</h3>
-          <p>提供投影設備與講台，適合簡報、課程教學、會議報告與產品說明。</p>
+      <div class="grid-3">
+        <div class="photo-card">
+          <img src="images/大樓外觀.jpg" alt="桃園友成教室大樓外觀">
+          <p>亞洲商業大樓外觀，方便來賓確認位置</p>
         </div>
 
-        <div class="card">
-          <h3>聲音設備</h3>
-          <p>配置廣播系統，適合講座、教學與需要清楚聲音傳達的活動。</p>
+        <div class="photo-card">
+          <img src="images/休息室.jpg" alt="桃園友成教室休息區">
+          <p>明亮休息交流區，適合課前報到與課後交流</p>
         </div>
 
-        <div class="card">
-          <h3>舒適環境</h3>
-          <p>具備空調設備，適合長時間會議、教育訓練與課程活動。</p>
+        <div class="photo-card">
+          <img src="images/全部合集.jpg" alt="桃園友成教室空間合集">
+          <p>A案大教室與B案會議室空間總覽</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="a-room">
     <div class="wrap">
-      <h2>租借方案</h2>
+      <div class="grid-2">
+        <div>
+          <span class="space-title a">A案｜40人大教室（30–40人）</span>
+          <h2 style="text-align:left;margin-bottom:18px;">適合課程講座、企業內訓、產品說明會</h2>
+
+          <p>
+            A案為大型教室空間，建議容納30–40人。配置投影設備、桌椅、音響、無線麥克風、冷氣與WiFi，
+            適合需要完整教學設備與較多人數的活動。
+          </p>
+
+          <span class="tag">30–40人</span>
+          <span class="tag">投影設備</span>
+          <span class="tag">無線麥克風</span>
+          <span class="tag">音響</span>
+          <span class="tag">WiFi</span>
+
+          <p style="margin-top:18px;">
+            <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 A案大教室</a>
+            <a class="btn dark" href="#price">查看價格</a>
+          </p>
+        </div>
+
+        <div>
+          <img src="images/會議2-4.jpg" alt="A案40人大教室">
+        </div>
+      </div>
+
+      <h3 style="margin-top:42px;">A案大教室照片</h3>
+      <div class="gallery">
+        <img src="images/會議2-1.jpg" alt="A案大教室座位配置">
+        <img src="images/會議2-2.jpg" alt="A案大教室講台與投影設備">
+        <img src="images/會議2-3.jpg" alt="A案大教室教學空間">
+        <img src="images/會議2-4.jpg" alt="A案大教室桌椅配置">
+      </div>
+    </div>
+  </section>
+
+  <section id="b-room">
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <img src="images/會議1-2.jpg" alt="B案10人會議室">
+        </div>
+
+        <div>
+          <span class="space-title b">B案｜10人會議室（8–10人）</span>
+          <h2 style="text-align:left;margin-bottom:18px;">適合主管會議、商務洽談、顧問會議</h2>
+
+          <p>
+            B案為10人會議室，配置長桌與舒適座椅，適合主管會議、面談、顧問討論、團隊決策與小型商務簡報。
+            空間明亮安靜，適合需要專注討論的會議情境。
+          </p>
+
+          <span class="tag">8–10人</span>
+          <span class="tag">會議長桌</span>
+          <span class="tag">白板</span>
+          <span class="tag">冷氣</span>
+          <span class="tag">安靜會議</span>
+
+          <p style="margin-top:18px;">
+            <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 B案會議室</a>
+            <a class="btn dark" href="#price">查看價格</a>
+          </p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:42px;">B案會議室照片</h3>
+      <div class="gallery">
+        <img src="images/會議1-1.jpg" alt="B案會議室桌面視角">
+        <img src="images/會議1-2.jpg" alt="B案會議室全景">
+        <img src="images/會議1-3.jpg" alt="B案會議室側面">
+        <img src="images/會議1-4.jpg" alt="B案會議室入口方向">
+        <img src="images/會議1-5.jpg" alt="B案會議室正面視角">
+        <img src="images/會議1-6.jpg" alt="B案會議室白板與窗面">
+      </div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="wrap">
+      <h2>租借費用</h2>
 
       <table>
         <thead>
           <tr>
-            <th>空間</th>
-            <th>建議人數</th>
-            <th>適合用途</th>
-            <th>上午<br>08:00-12:00</th>
-            <th>下午<br>13:00-17:00</th>
-            <th>晚上<br>18:00-22:00</th>
+            <th>時段 / 教室</th>
+            <th class="a-plan">A案 40人大教室<br>30–40人</th>
+            <th class="b-plan">B案 10人會議室<br>8–10人</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <td>主管會議室</td>
-            <td>約10人</td>
-            <td>主管會議、商務洽談、顧問會議</td>
-            <td>請洽詢</td>
-            <td>請洽詢</td>
-            <td>請洽詢</td>
+            <td><strong>早 / 午</strong><br>08:00–12:00<br>13:00–17:00</td>
+            <td class="price">3500</td>
+            <td class="price">1500</td>
           </tr>
 
           <tr>
-            <td>30人教室</td>
-            <td>約30人</td>
-            <td>企業內訓、講座、課程、說明會</td>
-            <td>請洽詢</td>
-            <td>請洽詢</td>
-            <td>請洽詢</td>
+            <td><strong>晚上</strong><br>18:00–21:00</td>
+            <td class="price">3000</td>
+            <td class="price">1500</td>
           </tr>
         </tbody>
       </table>
 
       <div class="notice">
-        <strong>備註：</strong>
-        建議採每時段4小時的租借方式。正式價格可依平日、假日、場佈需求、使用時數與設備需求調整。
-        請來電 03-220-1818 洽詢檔期與報價。
+        加時費：每半小時 500 元，未滿半小時以半小時計。
+      </div>
+
+      <p style="text-align:center;margin-top:24px;">
+        <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
+        <a class="btn dark" href="tel:03-220-1818">電話確認檔期</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="equipment">
+    <div class="wrap">
+      <h2>教室設備</h2>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>免費 WiFi</h3>
+          <p>提供免費 WiFi，方便講師、學員與會議使用者連線。</p>
+        </div>
+
+        <div class="card">
+          <h3>教學與簡報設備</h3>
+          <p>提供投影機、HDMI 線、桌椅、音響與無線麥克風。</p>
+        </div>
+
+        <div class="card">
+          <h3>舒適環境</h3>
+          <p>提供冷氣設備，適合長時間課程、會議與講座活動。</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        講師只需自備筆電即可，教室提供 HDMI 線。
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <h2>場地租用守則</h2>
+
+      <ol class="rules-list">
+        <li>教室採早 / 午 / 晚為一時段計。</li>
+        <li>加時費半小時 500 元，未滿半小時以半小時計。</li>
+        <li>請勿於桌椅上塗鴉。</li>
+        <li>投影機、無線麥克風、冷氣開關、電燈開關等電器設備，於離開前務必關閉。</li>
+        <li>預訂教室之後不可退訂，提前 7 個工作天告知，可安排延期。</li>
+        <li>教室預訂日當日，如遇政府宣布停班停課，可另安排延期。</li>
+        <li>場地租借方式為自助式，桌椅可以依照活動需求擺放，離開前請復原。</li>
+        <li>離開前請將垃圾、便當、飲料帶離教室，如有髒污或垃圾未帶走，將加收 1000 元清潔費。</li>
+      </ol>
+
+      <div class="notice">
+        以上規範如有不清楚或有特殊需求，歡迎與我們聯繫：03-220-1818。
+      </div>
+    </div>
+  </section>
+
+  <section id="booking">
+    <div class="wrap">
+      <h2>預約流程</h2>
+
+      <div class="process">
+        <div class="step">
+          <strong>1</strong>
+          <h3>選擇教室</h3>
+          <p>A案40人大教室或B案10人會議室。</p>
+        </div>
+
+        <div class="step">
+          <strong>2</strong>
+          <h3>填寫表單</h3>
+          <p>留下姓名、電話、LINE、日期、時段與活動主題。</p>
+        </div>
+
+        <div class="step">
+          <strong>3</strong>
+          <h3>確認檔期</h3>
+          <p>我們會依日期、時段與需求確認是否可預約。</p>
+        </div>
+
+        <div class="step">
+          <strong>4</strong>
+          <h3>完成預約</h3>
+          <p>確認後再依說明完成匯款與保留檔期。</p>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:30px;">
+        <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫 Google 預約表單</a>
+      </p>
+
+      <div class="notice">
+        請預約租借的朋友先填寫表單資訊，以利保留權益及安排規劃。
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <h2>交通與位置</h2>
+      <h2>匯款資訊</h2>
 
       <div class="card">
-        <p><strong>地址：</strong>桃園市桃園區中平路98號18樓</p>
-        <p><strong>電話：</strong>03-220-1818</p>
-        <p><strong>交通說明：</strong>位於桃園市區，適合企業會議、教育訓練、課程講座與商務洽談使用。</p>
-        <p><strong>停車資訊：</strong>建議來賓可使用周邊收費停車場，實際停車位置可於預約時確認。</p>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=桃園市桃園區中平路98號18樓">開啟 Google 地圖</a>
+        <p><strong>戶名：</strong>中成不動產股份有限公司</p>
+        <p><strong>銀行：</strong>永豐銀行（807）南桃園分行</p>
+        <p><strong>帳號：</strong>185-001-0018098-6</p>
+        <p><strong>提醒：</strong>請先填寫預約表單並確認檔期後，再依指示匯款。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="wrap">
+      <h2>交通與位置</h2>
+
+      <div class="grid-2">
+        <div>
+          <img src="images/大樓外觀.jpg" alt="亞洲商業大樓外觀">
+        </div>
+
+        <div class="card">
+          <p><strong>場地名稱：</strong>桃園友成教室</p>
+          <p><strong>地址：</strong>桃園市桃園區中平路98號18樓（亞洲商業大樓）</p>
+          <p><strong>電話：</strong>03-220-1818</p>
+          <p><strong>教室聯絡人：</strong>0938-560-333</p>
+          <p><strong>街景查看：</strong>可點擊下方按鈕查看大樓周邊環境，方便來賓確認入口。</p>
+
+          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">查看 Google 街景</a>
+
+          <a class="btn dark" href="tel:03-220-1818">立即來電</a>
+        </div>
       </div>
     </div>
   </section>
@@ -385,15 +722,17 @@
       <p>請提供使用日期、時段、人數、用途與設備需求，我們將協助確認空間是否合適。</p>
 
       <p>
-        <strong>地址：</strong>桃園市桃園區中平路98號18樓<br>
-        <strong>電話：</strong>03-220-1818
+        <strong>桃園友成教室</strong><br>
+        桃園市桃園區中平路98號18樓（亞洲商業大樓）<br>
+        電話：03-220-1818｜教室聯絡人：0938-560-333
       </p>
 
+      <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
       <a class="btn" href="tel:03-220-1818">立即來電</a>
-      <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=桃園市桃園區中平路98號18樓">Google 地圖導航</a>
+      <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">Google 街景導航</a>
 
       <p class="small" style="margin-top:20px;">
-        桃園會議室租借｜桃園教室租借｜企業內訓場地｜主管會議室｜30人課程教室
+        桃園教室租借｜桃園會議室租借｜企業內訓場地｜課程講座場地｜40人大教室｜10人會議室
       </p>
     </div>
   </section>
