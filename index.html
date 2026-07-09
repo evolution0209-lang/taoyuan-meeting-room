@@ -10,101 +10,204 @@
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --navy: #133c55;
+      --blue: #1597c8;
+      --sky: #75c8e8;
+      --yellow: #ffe600;
+      --orange: #f28c28;
+      --red: #d93636;
+      --green: #16a085;
+      --purple: #7251b5;
+      --cream: #fff8e8;
+      --light: #f6f8fb;
+      --dark: #1f2933;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --gold: #c8a65a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
       color: #222;
       line-height: 1.8;
-      background: #f6f4ef;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-      border-radius: 16px;
+      background: #fff;
     }
 
     a { color: inherit; }
 
+    img {
+      width: 100%;
+      display: block;
+    }
+
     .wrap {
-      width: min(1120px, 92%);
+      width: min(1160px, 92%);
       margin: auto;
     }
 
+    .topbar {
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .topbar .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
     .hero {
-      color: white;
+      color: #fff;
       text-align: center;
-      padding: 96px 20px;
+      padding: 108px 20px 96px;
       background:
-        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)),
+        linear-gradient(135deg, rgba(19,60,85,.9), rgba(217,54,54,.55)),
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.38)),
         url("大樓外觀.jpg");
       background-size: cover;
       background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      bottom: -88px;
+      width: 120%;
+      height: 140px;
+      background: #fff8e8;
+      border-radius: 50% 50% 0 0;
+      opacity: .96;
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: #111;
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.22);
     }
 
     .hero h1 {
-      font-size: 46px;
-      line-height: 1.22;
+      font-size: clamp(40px, 5.2vw, 68px);
+      line-height: 1.12;
       margin: 0 0 18px;
       letter-spacing: 1px;
+      text-shadow: 0 5px 18px rgba(0,0,0,.35);
     }
 
     .hero p {
-      font-size: 20px;
-      margin: 0 0 28px;
+      font-size: clamp(17px, 2vw, 23px);
+      margin: 0 0 30px;
+      font-weight: 800;
+      text-shadow: 0 3px 12px rgba(0,0,0,.35);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 820px;
+      margin: 28px auto 0;
+    }
+
+    .hero-stat {
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.38);
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 900;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 24px;
+      color: var(--yellow);
     }
 
     .btn {
       display: inline-block;
-      background: #b8872b;
-      color: #fff;
-      padding: 13px 24px;
-      border-radius: 8px;
+      padding: 14px 24px;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: 800;
-      margin: 6px;
-      transition: .2s;
+      font-weight: 900;
+      margin: 7px;
+      color: #fff;
+      background: var(--orange);
+      box-shadow: 0 10px 22px rgba(0,0,0,.16);
+      transition: .22s;
+      border: none;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      opacity: .9;
+      filter: brightness(1.05);
     }
 
-    .btn.dark { background: #222; }
-    .btn.blue { background: #2786b8; }
-    .btn.red { background: #b83232; }
+    .btn.red { background: var(--red); }
+    .btn.blue { background: var(--blue); }
+    .btn.dark { background: var(--dark); }
+    .btn.green { background: var(--green); }
+    .btn.purple { background: var(--purple); }
+
+    .btn.yellow {
+      background: var(--yellow);
+      color: #111;
+    }
 
     section {
-      background: #fff;
-      padding: 64px 20px;
-      margin-bottom: 10px;
+      padding: 72px 20px;
+    }
+
+    .section-cream { background: var(--cream); }
+    .section-white { background: #fff; }
+    .section-light { background: var(--light); }
+    .section-blue {
+      background: linear-gradient(135deg, #e8f8ff, #ffffff);
     }
 
     h2 {
-      font-size: 32px;
+      font-size: clamp(30px, 3.3vw, 42px);
+      line-height: 1.28;
       text-align: center;
-      line-height: 1.35;
-      margin: 0 0 34px;
+      margin: 0 0 16px;
+      color: var(--dark);
     }
 
-    h3 {
-      font-size: 24px;
-      line-height: 1.35;
-      margin: 0 0 12px;
-    }
-
-    .lead {
-      font-size: 19px;
+    .sub {
       text-align: center;
-      max-width: 820px;
-      margin: 0 auto 30px;
-      color: #444;
+      max-width: 880px;
+      margin: 0 auto 38px;
+      color: var(--muted);
+      font-size: 18px;
     }
 
     .quick-nav {
-      background: #f6f4ef;
-      padding: 42px 20px;
+      padding: 46px 20px;
+      background: var(--cream);
+      position: relative;
+      z-index: 3;
     }
 
     .button-grid {
@@ -115,18 +218,19 @@
 
     .nav-button {
       display: block;
-      background: white;
-      border: 1px solid #e5dccb;
-      border-radius: 16px;
+      background: #fff;
+      border: 2px solid transparent;
+      border-radius: 18px;
       padding: 20px;
       text-decoration: none;
-      box-shadow: 0 8px 22px rgba(0,0,0,.05);
-      transition: .2s;
+      box-shadow: 0 10px 26px rgba(31,41,51,.08);
+      transition: .22s;
+      min-height: 112px;
     }
 
     .nav-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.08);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(31,41,51,.13);
     }
 
     .nav-button span {
@@ -137,16 +241,24 @@
     }
 
     .nav-button small {
-      color: #666;
-      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
     }
 
-    .nav-button.gold {
-      background: #b8872b;
+    .nav-button.a { border-color: var(--yellow); }
+    .nav-button.b { border-color: var(--sky); }
+    .nav-button.price { border-color: var(--orange); }
+    .nav-button.rule { border-color: var(--purple); }
+    .nav-button.parking { border-color: var(--green); }
+
+    .nav-button.booking {
+      background: linear-gradient(135deg, var(--red), var(--orange));
       color: white;
     }
 
-    .nav-button.gold small { color: #fff4d6; }
+    .nav-button.booking small {
+      color: #fff2dc;
+    }
 
     .grid-3 {
       display: grid;
@@ -157,24 +269,35 @@
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
+      gap: 34px;
       align-items: center;
     }
 
     .card {
-      background: #fafafa;
-      border: 1px solid #e7e0d3;
-      border-radius: 16px;
-      padding: 26px;
-      box-shadow: 0 8px 22px rgba(0,0,0,.04);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 10px 26px rgba(31,41,51,.07);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--navy);
     }
 
     .photo-card {
       background: #fff;
-      border: 1px solid #e7e0d3;
-      border-radius: 16px;
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 8px 22px rgba(0,0,0,.04);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 26px rgba(31,41,51,.08);
+      transition: .22s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-3px);
     }
 
     .photo-card img {
@@ -184,9 +307,52 @@
     }
 
     .photo-card p {
-      padding: 14px 16px 18px;
       margin: 0;
-      font-weight: 700;
+      padding: 15px 18px 20px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+
+    .intro-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .intro-item {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      border-top: 7px solid var(--blue);
+      box-shadow: 0 8px 22px rgba(31,41,51,.06);
+    }
+
+    .intro-item:nth-child(2) { border-top-color: var(--orange); }
+    .intro-item:nth-child(3) { border-top-color: var(--green); }
+    .intro-item:nth-child(4) { border-top-color: var(--purple); }
+
+    .intro-item strong {
+      display: block;
+      font-size: 26px;
+      color: var(--red);
+    }
+
+    .room-block {
+      border-radius: 32px;
+      padding: 36px;
+      box-shadow: 0 12px 36px rgba(31,41,51,.08);
+    }
+
+    .room-a {
+      background: linear-gradient(135deg, #fffde1, #fff7ad);
+      border: 3px solid var(--yellow);
+    }
+
+    .room-b {
+      background: linear-gradient(135deg, #e5f8ff, #c8efff);
+      border: 3px solid var(--sky);
     }
 
     .space-title {
@@ -199,23 +365,29 @@
     }
 
     .space-title.a {
-      background: #fff200;
+      background: var(--yellow);
       color: #111;
     }
 
     .space-title.b {
-      background: #75c8e8;
+      background: var(--sky);
       color: #111;
+    }
+
+    .room-block h2 {
+      text-align: left;
+      margin-bottom: 18px;
     }
 
     .tag {
       display: inline-block;
-      background: #f1e4ca;
-      color: #714b0d;
-      padding: 5px 12px;
+      background: #fff;
+      color: var(--navy);
+      border: 1px solid rgba(15,76,129,.18);
+      padding: 6px 13px;
       border-radius: 999px;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 900;
       margin: 0 6px 8px 0;
     }
 
@@ -223,23 +395,35 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
+      margin-top: 22px;
     }
 
     .gallery img {
       aspect-ratio: 4 / 3;
       object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(31,41,51,.08);
+    }
+
+    .price-wrap {
+      background: linear-gradient(135deg, #ffffff, #f4faff);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(31,41,51,.08);
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
+      min-width: 680px;
       border-collapse: collapse;
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
     }
 
     th, td {
-      border: 2px solid #222;
+      border: 2px solid #111;
       padding: 16px;
       text-align: center;
       vertical-align: middle;
@@ -247,33 +431,44 @@
     }
 
     th {
-      background: #222;
+      background: var(--dark);
       color: white;
+      font-weight: 900;
     }
 
     th.a-plan {
-      background: #fff200;
+      background: var(--yellow);
       color: #111;
     }
 
     th.b-plan {
-      background: #75c8e8;
+      background: var(--sky);
       color: #111;
     }
 
     td.price {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 900;
+      color: var(--red);
     }
 
     .notice {
-      background: #fff7e6;
-      border-left: 5px solid #b8872b;
+      background: #fff6db;
+      border-left: 7px solid var(--orange);
       padding: 20px;
       margin-top: 24px;
-      border-radius: 8px;
-      font-weight: 700;
+      border-radius: 12px;
+      font-weight: 800;
+      color: #42300b;
     }
+
+    .equipment-card {
+      text-align: center;
+      border-top: 7px solid var(--blue);
+    }
+
+    .equipment-card:nth-child(2) { border-top-color: var(--orange); }
+    .equipment-card:nth-child(3) { border-top-color: var(--green); }
 
     .rules-list {
       counter-reset: item;
@@ -284,19 +479,56 @@
     }
 
     .rules-list li {
-      background: #fafafa;
-      border: 1px solid #e7e0d3;
-      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 8px solid var(--purple);
+      border-radius: 14px;
       padding: 14px 18px;
-      margin-bottom: 10px;
-      font-weight: 700;
+      margin-bottom: 12px;
+      font-weight: 800;
+      box-shadow: 0 6px 18px rgba(31,41,51,.05);
     }
 
     .rules-list li::before {
       counter-increment: item;
       content: counter(item) ". ";
-      color: #b8872b;
+      color: var(--red);
       font-weight: 900;
+    }
+
+    .parking-image {
+      max-width: 980px;
+      margin: 0 auto;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 34px rgba(31,41,51,.1);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .parking-image img {
+      border-radius: 0;
+    }
+
+    .parking-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .parking-card {
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(31,41,51,.06);
+      border-top: 7px solid var(--green);
+    }
+
+    .parking-card h3 {
+      margin-top: 0;
+      color: var(--navy);
     }
 
     .process {
@@ -306,73 +538,122 @@
     }
 
     .step {
-      background: #fafafa;
-      border: 1px solid #e7e0d3;
-      border-radius: 16px;
-      padding: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
       text-align: center;
+      box-shadow: 0 10px 24px rgba(31,41,51,.07);
     }
 
     .step strong {
       display: inline-flex;
-      width: 42px;
-      height: 42px;
+      width: 46px;
+      height: 46px;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: #b8872b;
+      background: linear-gradient(135deg, var(--blue), var(--navy));
       color: white;
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .bank-card {
+      background: linear-gradient(135deg, #fff, #fff4db);
+      border: 2px solid #ffe1a1;
+    }
+
+    .location-card {
+      border-top: 8px solid var(--blue);
     }
 
     .contact {
-      background: #222;
+      background:
+        linear-gradient(135deg, rgba(19,60,85,.95), rgba(31,41,51,.96)),
+        url("休息室.jpg");
+      background-size: cover;
+      background-position: center;
       color: white;
       text-align: center;
     }
 
-    .contact h2 { color: white; }
+    .contact h2 {
+      color: white;
+    }
+
+    .contact .sub {
+      color: #e8eef5;
+    }
 
     .small {
-      color: #666;
+      color: var(--muted);
       font-size: 15px;
     }
 
-    .contact .small { color: #ddd; }
+    .contact .small {
+      color: #dbe7f3;
+    }
 
-    @media (max-width: 900px) {
+    .floating-booking {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff;
+      padding: 15px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      border: 3px solid rgba(255,255,255,.9);
+      transition: .2s;
+    }
+
+    .floating-booking:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.05);
+    }
+
+    @media (max-width: 940px) {
       .button-grid,
       .grid-3,
       .grid-2,
       .gallery,
-      .process {
+      .process,
+      .intro-strip,
+      .parking-cards,
+      .hero-stats {
         grid-template-columns: 1fr;
       }
 
+      .topbar .wrap {
+        display: block;
+        text-align: center;
+      }
+
       .hero {
-        padding: 72px 20px;
+        padding: 82px 20px 78px;
       }
 
-      .hero h1 {
-        font-size: 34px;
+      .room-block {
+        padding: 24px;
       }
 
-      .hero p {
-        font-size: 17px;
+      table {
+        min-width: 620px;
       }
 
-      h2 {
-        font-size: 27px;
-      }
-
-      th, td {
-        font-size: 15px;
-        padding: 10px;
-      }
-
-      td.price {
-        font-size: 24px;
+      .floating-booking {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        justify-content: center;
+        padding: 14px 16px;
       }
     }
   </style>
@@ -380,41 +661,56 @@
 
 <body>
 
+  <div class="topbar">
+    <div class="wrap">
+      <div>桃園友成教室｜中平路98號18樓</div>
+      <div>預約洽詢：03-220-1818｜教室聯絡人：0938-560-333</div>
+    </div>
+  </div>
+
   <header class="hero">
     <div class="wrap">
+      <div class="hero-badge">桃園中平路・企業內訓・課程講座・會議場地</div>
       <h1>桃園友成教室租借</h1>
       <p>40人大教室・10人會議室｜桃園市桃園區中平路98號18樓（亞洲商業大樓）</p>
 
-      <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫預約表單</a>
-      <a class="btn dark" href="tel:03-220-1818">來電洽詢：03-220-1818</a>
+      <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫預約表單</a>
+      <a class="btn yellow" href="#price">查看租借費用</a>
+      <a class="btn dark" href="tel:03-220-1818">來電洽詢</a>
       <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">查看 Google 街景</a>
+
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>A案</strong>40人大教室</div>
+        <div class="hero-stat"><strong>B案</strong>10人會議室</div>
+        <div class="hero-stat"><strong>設備</strong>WiFi・投影・音響</div>
+      </div>
     </div>
   </header>
 
   <section class="quick-nav">
     <div class="wrap">
       <div class="button-grid">
-        <a href="#a-room" class="nav-button">
+        <a href="#a-room" class="nav-button a">
           <span>A案大教室</span>
           <small>30–40人｜早午3500・晚3000</small>
         </a>
 
-        <a href="#b-room" class="nav-button">
+        <a href="#b-room" class="nav-button b">
           <span>B案會議室</span>
           <small>8–10人｜早午晚1500</small>
         </a>
 
-        <a href="#price" class="nav-button">
+        <a href="#price" class="nav-button price">
           <span>價目表</span>
           <small>早上・下午・晚上三時段</small>
         </a>
 
-        <a href="#rules" class="nav-button">
+        <a href="#rules" class="nav-button rule">
           <span>租用守則</span>
           <small>加時、延期、清潔費說明</small>
         </a>
 
-        <a href="#booking" class="nav-button gold">
+        <a href="#booking" class="nav-button booking">
           <span>立即預約</span>
           <small>填寫 Google 表單保留檔期</small>
         </a>
@@ -424,23 +720,23 @@
           <small>WiFi、桌椅、音響、麥克風、冷氣</small>
         </a>
 
+        <a href="#parking" class="nav-button parking">
+          <span>停車資訊</span>
+          <small>周邊停車場參考</small>
+        </a>
+
         <a href="#location" class="nav-button">
           <span>交通位置</span>
           <small>中平路98號18樓</small>
-        </a>
-
-        <a href="tel:03-220-1818" class="nav-button">
-          <span>電話洽詢</span>
-          <small>03-220-1818</small>
         </a>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="section-white">
     <div class="wrap">
       <h2>場地總覽</h2>
-      <p class="lead">
+      <p class="sub">
         適合課程講座、企業內訓、讀書會、產品說明會、商務會議與小型團隊活動。
         場地採自助式租借，桌椅可依活動需求調整，離開前請協助復原。
       </p>
@@ -461,158 +757,187 @@
           <p>A案大教室與B案會議室空間總覽</p>
         </div>
       </div>
+
+      <div class="intro-strip">
+        <div class="intro-item">
+          <strong>30–40人</strong>
+          A案大教室
+        </div>
+        <div class="intro-item">
+          <strong>8–10人</strong>
+          B案會議室
+        </div>
+        <div class="intro-item">
+          <strong>3時段</strong>
+          早・午・晚
+        </div>
+        <div class="intro-item">
+          <strong>自助式</strong>
+          桌椅可調整
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="a-room">
+  <section id="a-room" class="section-cream">
     <div class="wrap">
-      <div class="grid-2">
-        <div>
-          <span class="space-title a">A案｜40人大教室（30–40人）</span>
-          <h2 style="text-align:left;margin-bottom:18px;">適合課程講座、企業內訓、產品說明會</h2>
+      <div class="room-block room-a">
+        <div class="grid-2">
+          <div>
+            <span class="space-title a">A案｜40人大教室（30–40人）</span>
+            <h2>適合課程講座、企業內訓、產品說明會</h2>
 
-          <p>
-            A案為大型教室空間，建議容納30–40人。配置投影設備、桌椅、音響、無線麥克風、冷氣與WiFi，
-            適合需要完整教學設備與較多人數的活動。
-          </p>
+            <p>
+              A案為大型教室空間，建議容納30–40人。配置投影設備、桌椅、音響、無線麥克風、冷氣與 WiFi，
+              適合需要完整教學設備與較多人數的活動。
+            </p>
 
-          <span class="tag">30–40人</span>
-          <span class="tag">投影設備</span>
-          <span class="tag">無線麥克風</span>
-          <span class="tag">音響</span>
-          <span class="tag">WiFi</span>
+            <span class="tag">30–40人</span>
+            <span class="tag">投影設備</span>
+            <span class="tag">無線麥克風</span>
+            <span class="tag">音響</span>
+            <span class="tag">WiFi</span>
+            <span class="tag">HDMI 線</span>
 
-          <p style="margin-top:18px;">
-            <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 A案大教室</a>
-            <a class="btn dark" href="#price">查看價格</a>
-          </p>
+            <p style="margin-top:18px;">
+              <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 A案大教室</a>
+              <a class="btn dark" href="#price">查看價格</a>
+            </p>
+          </div>
+
+          <div>
+            <img src="會議2-4.jpg" alt="A案40人大教室">
+          </div>
         </div>
 
-        <div>
-          <img src="會議2-4.jpg" alt="A案40人大教室">
+        <h3 style="margin-top:42px;">A案大教室照片</h3>
+        <div class="gallery">
+          <img src="會議2-1.jpg" alt="A案大教室座位配置">
+          <img src="會議2-2.jpg" alt="A案大教室講台與投影設備">
+          <img src="會議2-3.jpg" alt="A案大教室教學空間">
+          <img src="會議2-4.jpg" alt="A案大教室桌椅配置">
         </div>
-      </div>
-
-      <h3 style="margin-top:42px;">A案大教室照片</h3>
-      <div class="gallery">
-        <img src="會議2-1.jpg" alt="A案大教室座位配置">
-        <img src="會議2-2.jpg" alt="A案大教室講台與投影設備">
-        <img src="會議2-3.jpg" alt="A案大教室教學空間">
-        <img src="會議2-4.jpg" alt="A案大教室桌椅配置">
       </div>
     </div>
   </section>
 
-  <section id="b-room">
+  <section id="b-room" class="section-white">
     <div class="wrap">
-      <div class="grid-2">
-        <div>
-          <img src="會議1-2.jpg" alt="B案10人會議室">
+      <div class="room-block room-b">
+        <div class="grid-2">
+          <div>
+            <img src="會議1-2.jpg" alt="B案10人會議室">
+          </div>
+
+          <div>
+            <span class="space-title b">B案｜10人會議室（8–10人）</span>
+            <h2>適合主管會議、商務洽談、顧問會議</h2>
+
+            <p>
+              B案為10人會議室，配置長桌與舒適座椅，適合主管會議、面談、顧問討論、團隊決策與小型商務簡報。
+              空間明亮安靜，適合需要專注討論的會議情境。
+            </p>
+
+            <span class="tag">8–10人</span>
+            <span class="tag">會議長桌</span>
+            <span class="tag">白板</span>
+            <span class="tag">冷氣</span>
+            <span class="tag">安靜會議</span>
+
+            <p style="margin-top:18px;">
+              <a class="btn blue" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 B案會議室</a>
+              <a class="btn dark" href="#price">查看價格</a>
+            </p>
+          </div>
         </div>
 
-        <div>
-          <span class="space-title b">B案｜10人會議室（8–10人）</span>
-          <h2 style="text-align:left;margin-bottom:18px;">適合主管會議、商務洽談、顧問會議</h2>
-
-          <p>
-            B案為10人會議室，配置長桌與舒適座椅，適合主管會議、面談、顧問討論、團隊決策與小型商務簡報。
-            空間明亮安靜，適合需要專注討論的會議情境。
-          </p>
-
-          <span class="tag">8–10人</span>
-          <span class="tag">會議長桌</span>
-          <span class="tag">白板</span>
-          <span class="tag">冷氣</span>
-          <span class="tag">安靜會議</span>
-
-          <p style="margin-top:18px;">
-            <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">預約 B案會議室</a>
-            <a class="btn dark" href="#price">查看價格</a>
-          </p>
+        <h3 style="margin-top:42px;">B案會議室照片</h3>
+        <div class="gallery">
+          <img src="會議1-1.jpg" alt="B案會議室桌面視角">
+          <img src="會議1-2.jpg" alt="B案會議室全景">
+          <img src="會議1-3.jpg" alt="B案會議室側面">
+          <img src="會議1-4.jpg" alt="B案會議室入口方向">
+          <img src="會議1-5.jpg" alt="B案會議室正面視角">
+          <img src="會議1-6.jpg" alt="B案會議室白板與窗面">
         </div>
-      </div>
-
-      <h3 style="margin-top:42px;">B案會議室照片</h3>
-      <div class="gallery">
-        <img src="會議1-1.jpg" alt="B案會議室桌面視角">
-        <img src="會議1-2.jpg" alt="B案會議室全景">
-        <img src="會議1-3.jpg" alt="B案會議室側面">
-        <img src="會議1-4.jpg" alt="B案會議室入口方向">
-        <img src="會議1-5.jpg" alt="B案會議室正面視角">
-        <img src="會議1-6.jpg" alt="B案會議室白板與窗面">
       </div>
     </div>
   </section>
 
-  <section id="price">
+  <section id="price" class="section-light">
     <div class="wrap">
       <h2>租借費用</h2>
+      <p class="sub">教室採早 / 午 / 晚為一時段計。若需加時，每半小時 500 元。</p>
 
-      <table>
-        <thead>
-          <tr>
-            <th>時段 / 教室</th>
-            <th class="a-plan">A案 40人大教室<br>30–40人</th>
-            <th class="b-plan">B案 10人會議室<br>8–10人</th>
-          </tr>
-        </thead>
+      <div class="price-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時段 / 教室</th>
+              <th class="a-plan">A案 40人大教室<br>30–40人</th>
+              <th class="b-plan">B案 10人會議室<br>8–10人</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td><strong>早 / 午</strong><br>08:00–12:00<br>13:00–17:00</td>
-            <td class="price">3500</td>
-            <td class="price">1500</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><strong>早 / 午</strong><br>08:00–12:00<br>13:00–17:00</td>
+              <td class="price">3500</td>
+              <td class="price">1500</td>
+            </tr>
 
-          <tr>
-            <td><strong>晚上</strong><br>18:00–21:00</td>
-            <td class="price">3000</td>
-            <td class="price">1500</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <td><strong>晚上</strong><br>18:00–21:00</td>
+              <td class="price">3000</td>
+              <td class="price">1500</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="notice">
         加時費：每半小時 500 元，未滿半小時以半小時計。
       </div>
 
       <p style="text-align:center;margin-top:24px;">
-        <a class="btn" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
+        <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
         <a class="btn dark" href="tel:03-220-1818">電話確認檔期</a>
       </p>
     </div>
   </section>
 
-  <section id="equipment">
+  <section id="equipment" class="section-white">
     <div class="wrap">
       <h2>教室設備</h2>
+      <p class="sub">設備應有盡有，講師只需自備筆電即可，教室提供 HDMI 線。</p>
 
       <div class="grid-3">
-        <div class="card">
+        <div class="card equipment-card">
           <h3>免費 WiFi</h3>
           <p>提供免費 WiFi，方便講師、學員與會議使用者連線。</p>
         </div>
 
-        <div class="card">
+        <div class="card equipment-card">
           <h3>教學與簡報設備</h3>
           <p>提供投影機、HDMI 線、桌椅、音響與無線麥克風。</p>
         </div>
 
-        <div class="card">
+        <div class="card equipment-card">
           <h3>舒適環境</h3>
           <p>提供冷氣設備，適合長時間課程、會議與講座活動。</p>
         </div>
       </div>
 
       <div class="notice">
-        講師只需自備筆電即可，教室提供 HDMI 線。
+        WIFI（免費提供）、桌椅、音響、無線麥克風、冷氣。講師只需自備筆電即可。
       </div>
     </div>
   </section>
 
-  <section id="rules">
+  <section id="rules" class="section-cream">
     <div class="wrap">
       <h2>場地租用守則</h2>
+      <p class="sub">預約前請先確認以下規範，保障雙方權益。</p>
 
       <ol class="rules-list">
         <li>教室採早 / 午 / 晚為一時段計。</li>
@@ -631,9 +956,45 @@
     </div>
   </section>
 
-  <section id="booking">
+  <section id="parking" class="section-blue">
+    <div class="wrap">
+      <h2>周邊停車資訊</h2>
+      <p class="sub">開車前來的講師、學員與來賓，可參考以下周邊停車場。實際車位與收費方式請以現場公告為準。</p>
+
+      <div class="parking-image">
+        <img src="停車資訊.png" alt="桃園友成教室周邊停車資訊">
+      </div>
+
+      <div class="parking-cards">
+        <div class="parking-card">
+          <h3>桃園市立游泳池停車場</h3>
+          <p>📍 桃園市桃園區中山里中平路34-82號</p>
+          <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=桃園市立游泳池停車場 桃園市桃園區中山里中平路34-82號">開啟地圖</a>
+        </div>
+
+        <div class="parking-card">
+          <h3>力揚宏昌六街停車場</h3>
+          <p>📍 桃園市桃園區泰昌八街＆宏昌六街</p>
+          <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=力揚宏昌六街停車場 桃園市桃園區泰昌八街 宏昌六街">開啟地圖</a>
+        </div>
+
+        <div class="parking-card">
+          <h3>城市車旅停車場 桃園宏昌一站</h3>
+          <p>📍 桃園市桃園區中原里中平路123號</p>
+          <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=城市車旅停車場 桃園宏昌一站 桃園市桃園區中原里中平路123號">開啟地圖</a>
+        </div>
+      </div>
+
+      <div class="notice">
+        停車場資訊僅供參考，實際距離、車位、費率與營業時間請以現場或 Google 地圖資訊為準。
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="section-white">
     <div class="wrap">
       <h2>預約流程</h2>
+      <p class="sub">請先填寫預約表單，以利保留權益及安排規劃。</p>
 
       <div class="process">
         <div class="step">
@@ -664,18 +1025,14 @@
       <p style="text-align:center;margin-top:30px;">
         <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">立即填寫 Google 預約表單</a>
       </p>
-
-      <div class="notice">
-        請預約租借的朋友先填寫表單資訊，以利保留權益及安排規劃。
-      </div>
     </div>
   </section>
 
-  <section>
+  <section class="section-light">
     <div class="wrap">
       <h2>匯款資訊</h2>
 
-      <div class="card">
+      <div class="card bank-card">
         <p><strong>戶名：</strong>中成不動產股份有限公司</p>
         <p><strong>銀行：</strong>永豐銀行（807）南桃園分行</p>
         <p><strong>帳號：</strong>185-001-0018098-6</p>
@@ -684,23 +1041,23 @@
     </div>
   </section>
 
-  <section id="location">
+  <section id="location" class="section-white">
     <div class="wrap">
       <h2>交通與位置</h2>
 
       <div class="grid-2">
         <div>
-          <img src="大樓外觀.jpg" alt="亞洲商業大樓外觀">
+          <img src="大樓外觀.jpg" alt="亞洲商業大樓外觀" style="border-radius:22px; box-shadow:0 12px 30px rgba(31,41,51,.1);">
         </div>
 
-        <div class="card">
-          <p><strong>場地名稱：</strong>桃園友成教室</p>
+        <div class="card location-card">
+          <h3>桃園友成教室</h3>
           <p><strong>地址：</strong>桃園市桃園區中平路98號18樓（亞洲商業大樓）</p>
           <p><strong>電話：</strong>03-220-1818</p>
           <p><strong>教室聯絡人：</strong>0938-560-333</p>
           <p><strong>街景查看：</strong>可點擊下方按鈕查看大樓周邊環境，方便來賓確認入口。</p>
 
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">查看 Google 街景</a>
+          <a class="btn blue" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">查看 Google 街景</a>
 
           <a class="btn dark" href="tel:03-220-1818">立即來電</a>
         </div>
@@ -711,7 +1068,7 @@
   <section class="contact">
     <div class="wrap">
       <h2>立即詢問租借檔期</h2>
-      <p>請提供使用日期、時段、人數、用途與設備需求，我們將協助確認空間是否合適。</p>
+      <p class="sub">請提供使用日期、時段、人數、用途與設備需求，我們將協助確認空間是否合適。</p>
 
       <p>
         <strong>桃園友成教室</strong><br>
@@ -720,6 +1077,7 @@
       </p>
 
       <a class="btn red" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">填寫預約表單</a>
+      <a class="btn yellow" href="#price">查看費用</a>
       <a class="btn" href="tel:03-220-1818">立即來電</a>
       <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/@24.9875507,121.292804,3a,75y,276.9h,105.3t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDa65W45AE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FABJJf51j5bJirHBRe-ZVlX65SicG6DJJ0Gq6nxLHC3JSfo0YsdQT55ryy43TjOxnUPQ0uunH_ff5YJo1jPF7JMyPoNeHHR3LY4_49E_OqZgfsNM7x6OQYWpo2RtbCmRbcWKcAUWXwhMP6Q%3Dw900-h600-k-no-pi-15.29706700215499-ya108.77382735685728-ro0-fo100!7i5376!8i2688?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D">Google 街景導航</a>
 
@@ -728,6 +1086,10 @@
       </p>
     </div>
   </section>
+
+  <a class="floating-booking" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">
+    📩 教室租借預約表單
+  </a>
 
 </body>
 </html>
