@@ -140,9 +140,6 @@
     .quick {
       background:var(--cream);
       padding:18px 14px;
-      position:sticky;
-      top:0;
-      z-index:20;
       box-shadow:0 4px 14px rgba(0,0,0,.05);
     }
 
@@ -170,7 +167,6 @@
     .cream { background:var(--cream); }
     .light { background:var(--light); }
     .bluebg { background:linear-gradient(135deg,#e8f8ff,#fff); }
-    .darkbg { background:linear-gradient(135deg,#123c55,#1f2933); color:#fff; }
 
     h2 {
       font-size:29px;
@@ -180,17 +176,13 @@
       color:var(--dark);
     }
 
-    .darkbg h2 { color:#fff; }
-
     .sub {
       text-align:center;
       color:var(--muted);
       font-size:16px;
       margin:0 auto 24px;
-      max-width:760px;
+      max-width:780px;
     }
-
-    .darkbg .sub { color:#e8eef5; }
 
     .card {
       background:white;
@@ -206,6 +198,28 @@
       font-size:22px;
       color:var(--navy);
       line-height:1.3;
+    }
+
+    .photo-card {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      margin-bottom:16px;
+      box-shadow:0 8px 20px rgba(31,41,51,.07);
+    }
+
+    .photo-card img {
+      border-radius:0;
+      aspect-ratio:4 / 3;
+      object-fit:cover;
+    }
+
+    .photo-card p {
+      margin:0;
+      padding:14px 16px 17px;
+      font-weight:900;
+      color:var(--dark);
     }
 
     .intro-strip {
@@ -234,28 +248,6 @@
       color:var(--red);
       font-size:24px;
       line-height:1.25;
-    }
-
-    .photo-card {
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      overflow:hidden;
-      margin-bottom:16px;
-      box-shadow:0 8px 20px rgba(31,41,51,.07);
-    }
-
-    .photo-card img {
-      border-radius:0;
-      aspect-ratio:4 / 3;
-      object-fit:cover;
-    }
-
-    .photo-card p {
-      margin:0;
-      padding:14px 16px 17px;
-      font-weight:900;
-      color:var(--dark);
     }
 
     .room-a {
@@ -330,6 +322,55 @@
       padding:12px 14px;
       margin-bottom:10px;
       font-weight:800;
+    }
+
+    .terms-grid {
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .term-card {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 8px 20px rgba(31,41,51,.06);
+      border-top:7px solid var(--orange);
+    }
+
+    .term-card:nth-child(2) { border-top-color:var(--red); }
+    .term-card:nth-child(3) { border-top-color:var(--green); }
+    .term-card:nth-child(4) { border-top-color:var(--purple); }
+
+    .term-card h3 {
+      margin:0 0 8px;
+      color:var(--navy);
+      font-size:20px;
+    }
+
+    .refund-table {
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(31,41,51,.06);
+      margin-top:16px;
+    }
+
+    .refund-table th,
+    .refund-table td {
+      border:1px solid #e4e7ec;
+      padding:12px;
+      text-align:left;
+      font-weight:800;
+      font-size:15px;
+    }
+
+    .refund-table th {
+      background:var(--navy);
+      color:#fff;
     }
 
     .parking-img {
@@ -589,6 +630,24 @@
       resize:vertical;
     }
 
+    .agree-box {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:#fff7e6;
+      border:1px solid #ffd38a;
+      border-radius:14px;
+      padding:12px;
+      margin-top:14px;
+      font-weight:900;
+      color:#5a3d06;
+    }
+
+    .agree-box input {
+      width:auto;
+      margin-top:6px;
+    }
+
     .contact {
       background:
         linear-gradient(135deg, rgba(18,60,85,.96), rgba(31,41,51,.96)),
@@ -647,9 +706,7 @@
       body { padding-bottom:0; }
 
       .hero { padding:100px 20px 88px; }
-
       h1 { font-size:58px; }
-
       .hero p { font-size:22px; }
 
       .hero-actions {
@@ -659,7 +716,13 @@
         gap:8px;
       }
 
-      .quick-grid { grid-template-columns:repeat(7,1fr); }
+      .quick {
+        position:sticky;
+        top:0;
+        z-index:20;
+      }
+
+      .quick-grid { grid-template-columns:repeat(8,1fr); }
 
       .overview-grid {
         display:grid;
@@ -668,7 +731,6 @@
       }
 
       .photo-card { margin-bottom:0; }
-
       .intro-strip { grid-template-columns:repeat(4,1fr); }
 
       .price-grid {
@@ -690,6 +752,10 @@
         display:grid;
         grid-template-columns:repeat(3,1fr);
         gap:18px;
+      }
+
+      .terms-grid {
+        grid-template-columns:repeat(4,1fr);
       }
 
       .parking-list {
@@ -717,10 +783,6 @@
     }
 
     @media (max-width:520px) {
-      .quick {
-        position:static;
-      }
-
       .day {
         min-height:74px;
         padding:5px;
@@ -761,12 +823,13 @@
     <div class="wrap">
       <div class="quick-grid">
         <a href="#overview">場地總覽</a>
-        <a href="#a-room">A案大教室</a>
-        <a href="#b-room">B案會議室</a>
+        <a href="#a-room">A案</a>
+        <a href="#b-room">B案</a>
         <a href="#price">價目表</a>
-        <a href="#rules">租用守則</a>
-        <a href="#parking">停車資訊</a>
-        <a href="#booking">線上預約</a>
+        <a href="#terms">退費條款</a>
+        <a href="#rules">守則</a>
+        <a href="#parking">停車</a>
+        <a href="#booking">預約</a>
       </div>
     </div>
   </nav>
@@ -945,6 +1008,72 @@
     </div>
   </section>
 
+  <section id="terms" class="bluebg">
+    <div class="wrap">
+      <h2>取消、延期與違約條款</h2>
+      <p class="sub">
+        為避免爭議，請於預約前確認以下條款。線上送出資料不代表預約完成，需經工作人員確認檔期與付款後，才算正式保留。
+      </p>
+
+      <div class="terms-grid">
+        <div class="term-card">
+          <h3>預約成立</h3>
+          <p>線上送出資料為「待確認」。經工作人員確認檔期並完成付款或雙方確認保留後，始成立正式預約。</p>
+        </div>
+
+        <div class="term-card">
+          <h3>取消退費</h3>
+          <p>以使用日前一日往前計算通知日。退款以實際已收場租費為基準，不含已實際發生之第三方手續費或匯費。</p>
+        </div>
+
+        <div class="term-card">
+          <h3>延期規則</h3>
+          <p>使用日前7日以上通知，可免費延期一次；延期需於原使用日起3個月內使用，並以現有空檔為準。</p>
+        </div>
+
+        <div class="term-card">
+          <h3>違規責任</h3>
+          <p>場地、設備、家具若因故意或過失毀損，承租方應負修復、清潔或重置費用。</p>
+        </div>
+      </div>
+
+      <table class="refund-table">
+        <thead>
+          <tr>
+            <th>通知取消時間</th>
+            <th>退款 / 處理方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>使用日前7日以上通知</td>
+            <td>已付場租費全額退費，或免費延期一次。</td>
+          </tr>
+          <tr>
+            <td>使用日前4日至6日通知</td>
+            <td>退還已付場租費50%，或視檔期協助延期一次。</td>
+          </tr>
+          <tr>
+            <td>使用日前1日至3日通知</td>
+            <td>退還已付場租費30%；若已產生人力、設備或特殊準備成本，得先扣除實際成本。</td>
+          </tr>
+          <tr>
+            <td>使用當日取消、未到場、未通知</td>
+            <td>已付場租費不退還。</td>
+          </tr>
+          <tr>
+            <td>政府公告停班停課、重大天災、不可抗力</td>
+            <td>可免費延期一次；若雙方無法協議新日期，退還未使用之已付場租費。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="time-note">
+        違約金與扣款以補償實際檔期空置、行政處理、人力安排、設備準備與清潔成本為目的；若個案有特殊情形，雙方得另行協議。以上條款建議作為網站揭露與預約條件，若要作為正式契約，建議再交由律師確認。
+      </div>
+    </div>
+  </section>
+
   <section id="rules" class="cream">
     <div class="wrap">
       <h2>場地租用守則</h2>
@@ -953,12 +1082,12 @@
       <ul class="rules">
         <li>教室採早 / 午 / 晚為一時段計。</li>
         <li>加時費半小時 500 元，未滿半小時以半小時計。</li>
-        <li>請勿於桌椅上塗鴉。</li>
+        <li>請勿於桌椅、牆面、地板、設備上塗鴉、黏貼或破壞。</li>
         <li>投影機、無線麥克風、冷氣、電燈等設備，離開前務必關閉。</li>
-        <li>預訂教室之後不可退訂，提前 7 個工作天告知，可安排延期。</li>
-        <li>教室預訂日當日，如遇政府宣布停班停課，可另安排延期。</li>
         <li>場地租借方式為自助式，桌椅可依活動需求擺放，離開前請復原。</li>
         <li>離開前請將垃圾、便當、飲料帶離，如有髒污或垃圾未帶走，將加收 1000 元清潔費。</li>
+        <li>禁止違法活動、危險物品、明火、賭博、吸毒、暴力、妨害安寧或其他違反公序良俗之行為。</li>
+        <li>若承租方違反法令或本守則，場地方得立即停止使用，已付費用不予退還；若造成損害，承租方應負賠償責任。</li>
       </ul>
     </div>
   </section>
@@ -1141,6 +1270,11 @@
               <label class="form-label" for="note">備註</label>
               <textarea id="note" placeholder="可填寫人數、設備需求、特殊需求"></textarea>
             </div>
+
+            <label class="agree-box">
+              <input id="agreeTerms" type="checkbox">
+              <span>我已閱讀並同意「取消、延期與違約條款」及「場地租用守則」，並了解送出資料後仍需由工作人員確認檔期才算完成保留。</span>
+            </label>
           </div>
         </div>
 
@@ -1368,6 +1502,12 @@
 ${times.map(t => "・" + timeNames[t]).join("\n")}
 預估費用：${total.toLocaleString()} 元
 
+取消退費重點：
+・使用日前7日以上通知：全額退費或延期一次
+・使用日前4至6日通知：退50%
+・使用日前1至3日通知：退30%
+・當日取消或未到：不退費
+
 提醒：此為線上試算，實際檔期需由工作人員確認。`;
     }
 
@@ -1397,7 +1537,8 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         taxId: document.getElementById("taxId").value.trim(),
         address: document.getElementById("address").value.trim(),
         bankLast5: document.getElementById("bankLast5").value.trim(),
-        note: document.getElementById("note").value.trim()
+        note: document.getElementById("note").value.trim(),
+        agreeTerms: document.getElementById("agreeTerms").checked ? "是" : "否"
       };
     }
 
@@ -1440,6 +1581,11 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         return;
       }
 
+      if (!document.getElementById("agreeTerms").checked) {
+        alert("請先勾選同意取消、延期與違約條款及場地租用守則。");
+        return;
+      }
+
       try {
         const btn = document.getElementById("submitBooking");
         btn.textContent = "送出中...";
@@ -1465,6 +1611,7 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         document.getElementById("address").value = "";
         document.getElementById("bankLast5").value = "";
         document.getElementById("note").value = "";
+        document.getElementById("agreeTerms").checked = false;
 
         timeInputs.forEach(i => i.checked = false);
 
