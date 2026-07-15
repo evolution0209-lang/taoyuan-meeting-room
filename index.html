@@ -48,6 +48,7 @@
       transition:.2s;border:0;cursor:pointer
     }
     .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
     .btn.red{background:var(--red)}.btn.blue{background:var(--blue)}.btn.dark{background:var(--dark)}
     .btn.green{background:var(--green)}.btn.yellow{background:var(--yellow);color:#111}
     .quick{background:var(--cream);padding:18px 14px;box-shadow:0 4px 14px rgba(0,0,0,.05)}
@@ -269,17 +270,14 @@
           <img src="大樓外觀.jpg" alt="亞洲商業大樓外觀">
           <p>大樓外觀｜方便來賓確認位置</p>
         </div>
-
         <div class="photo-card">
           <img src="休息室.jpg" alt="友成商務空間休息區">
           <p>休息交流區｜適合報到與課後交流</p>
         </div>
-
         <div class="photo-card">
           <img src="會議2-9.jpg" alt="A案40人大教室空間總覽">
           <p>A案｜40人大教室完整桌椅配置</p>
         </div>
-
         <div class="photo-card">
           <img src="會議1-2.jpg" alt="B案10人會議室空間總覽">
           <p>B案｜10人會議室商務會議空間</p>
@@ -302,32 +300,16 @@
 
       <div class="card room-a">
         <div class="room-layout">
-          <div>
-            <img src="會議2-9.jpg" alt="A案40人大教室完整空間">
-          </div>
-
+          <div><img src="會議2-9.jpg" alt="A案40人大教室完整空間"></div>
           <div>
             <h3>大型課程與企業內訓首選</h3>
-            <p>
-              A案為 30–40 人大教室空間，桌椅配置完整，適合企業內訓、課程講座、產品說明會與大型商務簡報。
-              現場提供投影設備、白板、桌椅、音響、無線麥克風、冷氣與 WiFi，講師只需自備筆電即可。
-            </p>
-
-            <span class="tag">30–40人</span>
-            <span class="tag">企業內訓</span>
-            <span class="tag">課程講座</span>
-            <span class="tag">投影設備</span>
-            <span class="tag">投影幕</span>
-            <span class="tag">白板</span>
-            <span class="tag">音響</span>
-            <span class="tag">無線麥克風</span>
-            <span class="tag">WiFi</span>
-            <span class="tag">HDMI 線</span>
-
+            <p>A案為 30–40 人大教室空間，桌椅配置完整，適合企業內訓、課程講座、產品說明會與大型商務簡報。現場提供投影設備、白板、桌椅、音響、無線麥克風、冷氣與 WiFi，講師只需自備筆電即可。</p>
+            <span class="tag">30–40人</span><span class="tag">企業內訓</span><span class="tag">課程講座</span>
+            <span class="tag">投影設備</span><span class="tag">投影幕</span><span class="tag">白板</span>
+            <span class="tag">音響</span><span class="tag">無線麥克風</span><span class="tag">WiFi</span><span class="tag">HDMI 線</span>
             <a class="btn red" style="margin-top:12px;width:100%;" href="#booking">預約 A案大教室</a>
           </div>
         </div>
-
         <div class="gallery">
           <img src="會議2-9.jpg" alt="A案40人大教室完整桌椅配置" loading="lazy">
           <img src="會議2-8.jpg" alt="A案40人大教室寬敞空間" loading="lazy">
@@ -346,31 +328,16 @@
 
       <div class="card room-b">
         <div class="room-layout">
-          <div>
-            <img src="會議1-2.jpg" alt="B案10人會議室完整空間">
-          </div>
-
+          <div><img src="會議1-2.jpg" alt="B案10人會議室完整空間"></div>
           <div>
             <h3>安靜、明亮、適合決策討論</h3>
-            <p>
-              B案為 8–10 人商務會議室，配置大型會議桌、舒適座椅與白板，
-              適合主管會議、商務洽談、顧問討論、面談、團隊決策與小型簡報。
-            </p>
-
-            <span class="tag">8–10人</span>
-            <span class="tag">商務會議</span>
-            <span class="tag">主管會議</span>
-            <span class="tag">顧問討論</span>
-            <span class="tag">大型會議桌</span>
-            <span class="tag">舒適座椅</span>
-            <span class="tag">白板</span>
-            <span class="tag">冷氣</span>
-            <span class="tag">安靜會議</span>
-
+            <p>B案為 8–10 人商務會議室，配置大型會議桌、舒適座椅與白板，適合主管會議、商務洽談、顧問討論、面談、團隊決策與小型簡報。</p>
+            <span class="tag">8–10人</span><span class="tag">商務會議</span><span class="tag">主管會議</span>
+            <span class="tag">顧問討論</span><span class="tag">大型會議桌</span><span class="tag">舒適座椅</span>
+            <span class="tag">白板</span><span class="tag">冷氣</span><span class="tag">安靜會議</span>
             <a class="btn blue" style="margin-top:12px;width:100%;" href="#booking">預約 B案會議室</a>
           </div>
         </div>
-
         <div class="gallery">
           <img src="會議1-2.jpg" alt="B案10人會議室完整桌椅配置" loading="lazy">
           <img src="會議1-3.jpg" alt="B案10人會議室側面空間" loading="lazy">
@@ -386,7 +353,6 @@
     <div class="wrap">
       <h2>租借費用</h2>
       <p class="sub">教室採早 / 午 / 晚為一時段計。若需加時，每半小時 500 元。</p>
-
       <div class="price-grid">
         <div class="card price-card">
           <h3>A案｜40人大教室</h3>
@@ -394,19 +360,16 @@
           <div class="price-big">早 / 午 3500 元</div>
           <div class="price-big">晚上 3000 元</div>
         </div>
-
         <div class="card price-card">
           <h3>B案｜10人會議室</h3>
           <p>適合主管會議、商務洽談、顧問會議。</p>
           <div class="price-big">早 / 午 / 晚 1500 元</div>
         </div>
       </div>
-
       <div class="time-note">
         時段：早上 08:00–12:00｜下午 13:00–17:00｜晚上 18:00–21:00<br>
         加時費：每半小時 500 元，未滿半小時以半小時計。
       </div>
-
       <a class="btn red" style="margin-top:16px;width:100%;" href="#booking">查看可預約時段並試算費用</a>
     </div>
   </section>
@@ -415,22 +378,11 @@
     <div class="wrap">
       <h2>教室設備</h2>
       <p class="sub">設備應有盡有，講師只需自備筆電即可。</p>
-
       <div class="equipment-grid">
-        <div class="card">
-          <h3>網路與基本設備</h3>
-          <p>提供免費 WiFi、桌椅、冷氣，適合長時間課程與會議使用。</p>
-        </div>
-        <div class="card">
-          <h3>教學簡報設備</h3>
-          <p>提供投影設備、投影幕、白板、HDMI 線，方便講師簡報與課程進行。</p>
-        </div>
-        <div class="card">
-          <h3>音響與麥克風</h3>
-          <p>提供音響與無線麥克風，適合講座、說明會與企業內訓。</p>
-        </div>
+        <div class="card"><h3>網路與基本設備</h3><p>提供免費 WiFi、桌椅、冷氣，適合長時間課程與會議使用。</p></div>
+        <div class="card"><h3>教學簡報設備</h3><p>提供投影設備、投影幕、白板、HDMI 線，方便講師簡報與課程進行。</p></div>
+        <div class="card"><h3>音響與麥克風</h3><p>提供音響與無線麥克風，適合講座、說明會與企業內訓。</p></div>
       </div>
-
       <div class="time-note">WIFI（免費提供）、桌椅、音響、無線麥克風、冷氣、HDMI 線。講師只需自備筆電即可。</div>
     </div>
   </section>
@@ -441,58 +393,24 @@
       <p class="sub">為避免爭議，請於預約前確認以下條款。線上送出資料不代表預約完成，需經工作人員確認檔期與付款後，才算正式保留。</p>
 
       <div class="terms-grid">
-        <div class="term-card">
-          <h3>預約成立</h3>
-          <p>線上送出資料為「待確認」。經工作人員確認檔期並完成付款或雙方確認保留後，始成立正式預約。</p>
-        </div>
-        <div class="term-card">
-          <h3>取消不退費</h3>
-          <p>正式預約成立後，如因承租方因素取消、臨時不到場或未依約使用，已付場租費不予退還。</p>
-        </div>
-        <div class="term-card">
-          <h3>可協助擇日延期</h3>
-          <p>若承租方需更改日期，請盡早通知。場地方可依實際空檔協助擇日延期一次，但不保證原條件、原時段或指定日期一定可安排。</p>
-        </div>
-        <div class="term-card">
-          <h3>違規責任</h3>
-          <p>場地、設備、家具若因故意或過失毀損，承租方應負修復、清潔或重置費用。</p>
-        </div>
+        <div class="term-card"><h3>預約成立</h3><p>線上送出資料為「待確認」。經工作人員確認檔期並完成付款或雙方確認保留後，始成立正式預約。</p></div>
+        <div class="term-card"><h3>取消不退費</h3><p>正式預約成立後，如因承租方因素取消、臨時不到場或未依約使用，已付場租費不予退還。</p></div>
+        <div class="term-card"><h3>可協助擇日延期</h3><p>若承租方需更改日期，請盡早通知。場地方可依實際空檔協助擇日延期一次，但不保證原條件、原時段或指定日期一定可安排。</p></div>
+        <div class="term-card"><h3>違規責任</h3><p>場地、設備、家具若因故意或過失毀損，承租方應負修復、清潔或重置費用。</p></div>
       </div>
 
       <table class="refund-table">
-        <thead>
-          <tr>
-            <th>情況</th>
-            <th>處理方式</th>
-          </tr>
-        </thead>
+        <thead><tr><th>情況</th><th>處理方式</th></tr></thead>
         <tbody>
-          <tr>
-            <td>正式預約成立後，承租方取消</td>
-            <td>不退還已付場租費；可視實際檔期協助擇日延期一次。</td>
-          </tr>
-          <tr>
-            <td>使用日前7日以上通知需改期</td>
-            <td>可優先協助擇日延期一次；延期日期以場地方可提供之空檔為準。</td>
-          </tr>
-          <tr>
-            <td>使用日前1日至6日通知需改期</td>
-            <td>可視現場排程、人力與檔期狀況協助延期；若無合適檔期，已付費用不退還。</td>
-          </tr>
-          <tr>
-            <td>使用當日取消、未到場、未通知</td>
-            <td>視同放棄使用，已付場租費不退還，亦不保證可延期。</td>
-          </tr>
-          <tr>
-            <td>政府公告停班停課、重大天災、不可抗力</td>
-            <td>可協助免費延期一次，延期日期以雙方協議與實際空檔為準。</td>
-          </tr>
+          <tr><td>正式預約成立後，承租方取消</td><td>不退還已付場租費；可視實際檔期協助擇日延期一次。</td></tr>
+          <tr><td>使用日前7日以上通知需改期</td><td>可優先協助擇日延期一次；延期日期以場地方可提供之空檔為準。</td></tr>
+          <tr><td>使用日前1日至6日通知需改期</td><td>可視現場排程、人力與檔期狀況協助延期；若無合適檔期，已付費用不退還。</td></tr>
+          <tr><td>使用當日取消、未到場、未通知</td><td>視同放棄使用，已付場租費不退還，亦不保證可延期。</td></tr>
+          <tr><td>政府公告停班停課、重大天災、不可抗力</td><td>可協助免費延期一次，延期日期以雙方協議與實際空檔為準。</td></tr>
         </tbody>
       </table>
 
-      <div class="time-note">
-        本場地採預約保留制，預約成立後即保留檔期並排除其他租借需求，因此取消不退費。若需異動日期，場地方可協助擇日延期，但仍以實際空檔與雙方確認為準。
-      </div>
+      <div class="time-note">本場地採預約保留制，預約成立後即保留檔期並排除其他租借需求，因此取消不退費。若需異動日期，場地方可協助擇日延期，但仍以實際空檔與雙方確認為準。</div>
     </div>
   </section>
 
@@ -517,7 +435,6 @@
     <div class="wrap">
       <h2>周邊停車資訊</h2>
       <p class="sub">開車前來的講師、學員與來賓，可參考以下周邊停車場。</p>
-
       <img class="parking-img" src="停車資訊.png" alt="友成商務空間周邊停車資訊" loading="lazy">
 
       <div class="parking-list">
@@ -526,11 +443,13 @@
           <p>📍 桃園市桃園區中山里中平路34-82號</p>
           <a class="btn blue" style="width:100%;" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=桃園市立游泳池停車場 桃園市桃園區中山里中平路34-82號">開啟地圖</a>
         </div>
+
         <div class="card">
           <h3>力揚宏昌六街停車場</h3>
           <p>📍 桃園市桃園區泰昌八街＆宏昌六街</p>
           <a class="btn blue" style="width:100%;" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=力揚宏昌六街停車場 桃園市桃園區泰昌八街 宏昌六街">開啟地圖</a>
         </div>
+
         <div class="card">
           <h3>城市車旅停車場 桃園宏昌一站</h3>
           <p>📍 桃園市桃園區中原里中平路123號</p>
@@ -547,9 +466,7 @@
       <h2>交通與位置</h2>
 
       <div class="location-grid">
-        <div>
-          <img src="大樓外觀.jpg" alt="亞洲商業大樓外觀" loading="lazy">
-        </div>
+        <div><img src="大樓外觀.jpg" alt="亞洲商業大樓外觀" loading="lazy"></div>
 
         <div class="card">
           <h3>友成商務空間</h3>
@@ -592,6 +509,7 @@
 
             <div class="field" style="box-shadow:none;margin-bottom:12px;">
               <h3>1. 選擇教室</h3>
+
               <div class="choice-grid">
                 <div class="choice">
                   <input type="radio" name="room" id="roomA" value="A" checked>
@@ -607,6 +525,7 @@
 
             <div class="field" style="box-shadow:none;margin-bottom:0;">
               <h3>2. 選擇時段</h3>
+
               <div class="choice-grid time">
                 <div class="choice">
                   <input type="checkbox" name="time" id="morning" value="morning">
@@ -671,8 +590,8 @@
               </div>
 
               <div>
-                <label class="form-label" for="bankLast5">匯款後五碼 *</label>
-                <input id="bankLast5" type="text" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" placeholder="請輸入匯款帳號後五碼，必填">
+                <label class="form-label" for="bankLast5">匯款後五碼（選填）</label>
+                <input id="bankLast5" type="text" placeholder="完成匯款後可填寫，尚未匯款可留白">
               </div>
 
               <div>
@@ -701,6 +620,7 @@
 
           <button class="btn green" style="width:100%;margin-top:12px;" type="button" id="copySummary">複製預約摘要</button>
           <button class="btn red" style="width:100%;margin-top:10px;" type="button" id="submitBooking">送出預約資料</button>
+
           <a class="btn blue" style="width:100%;margin-top:10px;" href="https://forms.gle/5xXiBYeGmSQNxHbU7" target="_blank" rel="noopener">備用：前往 Google 表單</a>
 
           <p style="font-size:13px;color:#667085;margin-bottom:0;">提醒：送出表單不代表預約完成，需由工作人員確認檔期後才算保留。</p>
@@ -721,6 +641,7 @@
           電話：03-220-1818<br>
           教室聯絡人：0938-560-333
         </p>
+
         <p>建議先於頁面上選擇日期與時段，送出後我們會協助確認。</p>
       </div>
 
@@ -741,8 +662,16 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGBD2xJ10dC4C2Ca7nRdsn7-9y3lsxxx6zNajhdw-dDCc7hI2Kcb4Zt8jiwmNcK1VO/exec";
 
     const prices = {
-      A: { morning: 3500, afternoon: 3500, evening: 3000 },
-      B: { morning: 1500, afternoon: 1500, evening: 1500 }
+      A: {
+        morning: 3500,
+        afternoon: 3500,
+        evening: 3000
+      },
+      B: {
+        morning: 1500,
+        afternoon: 1500,
+        evening: 1500
+      }
     };
 
     const roomNames = {
@@ -768,13 +697,13 @@
     const roomInputs = document.querySelectorAll("input[name='room']");
     const timeInputs = document.querySelectorAll("input[name='time']");
 
-    let today = new Date();
+    const today = new Date();
     let currentYear = today.getFullYear();
     let currentMonth = today.getMonth();
     let selectedDate = null;
 
-    function pad(n) {
-      return String(n).padStart(2, "0");
+    function pad(number) {
+      return String(number).padStart(2, "0");
     }
 
     function toDateKey(year, month, day) {
@@ -786,7 +715,9 @@
     }
 
     function getSelectedTimes() {
-      return Array.from(timeInputs).filter(i => i.checked && !i.disabled).map(i => i.value);
+      return Array.from(timeInputs)
+        .filter(input => input.checked && !input.disabled)
+        .map(input => input.value);
     }
 
     function statusClass(status) {
@@ -801,11 +732,12 @@
       calendarGrid.innerHTML = "";
 
       const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
-      weekdays.forEach(w => {
-        const el = document.createElement("div");
-        el.className = "weekday";
-        el.textContent = w;
-        calendarGrid.appendChild(el);
+
+      weekdays.forEach(weekday => {
+        const element = document.createElement("div");
+        element.className = "weekday";
+        element.textContent = weekday;
+        calendarGrid.appendChild(element);
       });
 
       calendarTitle.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
@@ -815,7 +747,7 @@
       const startWeekday = firstDay.getDay();
       const daysInMonth = lastDay.getDate();
 
-      for (let i = 0; i < startWeekday; i++) {
+      for (let index = 0; index < startWeekday; index++) {
         const empty = document.createElement("div");
         empty.className = "day muted";
         calendarGrid.appendChild(empty);
@@ -823,28 +755,33 @@
 
       for (let day = 1; day <= daysInMonth; day++) {
         const dateKey = toDateKey(currentYear, currentMonth, day);
+
         const cell = document.createElement("button");
         cell.type = "button";
         cell.className = "day";
 
-        if (selectedDate === dateKey) cell.classList.add("selected");
+        if (selectedDate === dateKey) {
+          cell.classList.add("selected");
+        }
 
-        const num = document.createElement("div");
-        num.className = "date-num";
-        num.textContent = day;
-        cell.appendChild(num);
+        const dateNumber = document.createElement("div");
+        dateNumber.className = "date-num";
+        dateNumber.textContent = day;
+        cell.appendChild(dateNumber);
 
         const bookings = bookedData[dateKey] || [];
-        bookings.forEach(b => {
+
+        bookings.forEach(booking => {
           const pill = document.createElement("span");
-          pill.className = `slot-pill ${statusClass(b.status)}`;
-          pill.textContent = b.label;
+          pill.className = `slot-pill ${statusClass(booking.status)}`;
+          pill.textContent = booking.label;
           cell.appendChild(pill);
         });
 
         cell.addEventListener("click", () => {
           selectedDate = dateKey;
           selectedDateText.textContent = dateKey;
+
           renderCalendar();
           updateDisabledTimes();
           updateEstimate();
@@ -859,9 +796,16 @@
       const bookings = selectedDate ? (bookedData[selectedDate] || []) : [];
 
       timeInputs.forEach(input => {
-        const blocked = bookings.some(b => b.room === room && b.time === input.value);
+        const blocked = bookings.some(booking =>
+          booking.room === room &&
+          booking.time === input.value
+        );
+
         input.disabled = blocked;
-        if (blocked) input.checked = false;
+
+        if (blocked) {
+          input.checked = false;
+        }
       });
     }
 
@@ -879,17 +823,25 @@
       if (times.length === 0) {
         estimateText.textContent = "請選擇至少一個時段。";
         estimateTotal.textContent = "0 元";
-        bookingSummary.textContent = `已選日期：${selectedDate}\n已選教室：${roomNames[room]}\n尚未選擇時段。`;
+
+        bookingSummary.textContent =
+`已選日期：${selectedDate}
+已選教室：${roomNames[room]}
+尚未選擇時段。`;
+
         return;
       }
 
       let total = 0;
-      let lines = [];
+      const lines = [];
 
-      times.forEach(t => {
-        const price = prices[room][t];
+      times.forEach(time => {
+        const price = prices[room][time];
         total += price;
-        lines.push(`${timeNames[t]}：${price.toLocaleString()} 元`);
+
+        lines.push(
+          `${timeNames[time]}：${price.toLocaleString()} 元`
+        );
       });
 
       estimateText.innerHTML = lines.join("<br>");
@@ -900,7 +852,7 @@
 日期：${selectedDate}
 教室：${roomNames[room]}
 時段：
-${times.map(t => "・" + timeNames[t]).join("\n")}
+${times.map(time => "・" + timeNames[time]).join("\n")}
 預估總金額：${total.toLocaleString()} 元
 
 取消與延期重點：
@@ -915,41 +867,64 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
     function getTotalFee() {
       const room = getSelectedRoom();
       const times = getSelectedTimes();
-      return times.reduce((sum, t) => sum + prices[room][t], 0);
+
+      return times.reduce((sum, time) => {
+        return sum + prices[room][time];
+      }, 0);
     }
 
     function collectFormData() {
       return {
         createdAt: new Date().toLocaleString("zh-TW"),
         status: "待確認",
+
         name: document.getElementById("name").value.trim(),
         email: document.getElementById("email").value.trim(),
         phone: document.getElementById("phone").value.trim(),
+
         lineId: document.getElementById("lineId").value.trim(),
         lineName: document.getElementById("lineName").value.trim(),
+
         room: roomNames[getSelectedRoom()],
         roomCode: getSelectedRoom(),
+
         date: selectedDate,
-        times: getSelectedTimes().map(t => timeNames[t]).join("、"),
+
+        times: getSelectedTimes()
+          .map(time => timeNames[time])
+          .join("、"),
+
         timeCodes: getSelectedTimes().join(","),
+
         fee: getTotalFee(),
+
         topic: document.getElementById("topic").value.trim(),
+
         invoiceTitle: document.getElementById("invoiceTitle").value.trim(),
         taxId: document.getElementById("taxId").value.trim(),
         address: document.getElementById("address").value.trim(),
+
         bankLast5: document.getElementById("bankLast5").value.trim(),
+
         note: document.getElementById("note").value.trim(),
-        agreeTerms: document.getElementById("agreeTerms").checked ? "是" : "否"
+
+        agreeTerms: document.getElementById("agreeTerms").checked
+          ? "是"
+          : "否"
       };
     }
 
     async function loadBookingsFromScript() {
       try {
-        const res = await fetch(SCRIPT_URL + "?action=list");
-        const data = await res.json();
+        const response = await fetch(
+          SCRIPT_URL + "?action=list"
+        );
+
+        const data = await response.json();
 
         if (data && data.bookings) {
           bookedData = data.bookings;
+
           renderCalendar();
           updateDisabledTimes();
           updateEstimate();
@@ -982,16 +957,6 @@ ${times.map(t => "・" + timeNames[t]).join("\n")}
         return;
       }
 
-      if (!data.bankLast5) {
-        alert("請填寫匯款後五碼。");
-        return;
-      }
-
-      if (!/^\\d{5}$/.test(data.bankLast5)) {
-        alert("匯款後五碼必須是 5 位數字。");
-        return;
-      }
-
       if (!document.getElementById("agreeTerms").checked) {
         alert("請先勾選同意取消、延期與違約條款及場地租用守則。");
         return;
@@ -1009,11 +974,11 @@ Line 暱稱：${data.lineName || "未填寫"}
 預約日期：${data.date}
 教室：${data.room}
 時段：
-${data.times.split("、").map(t => "・" + t).join("\n")}
+${data.times.split("、").map(time => "・" + time).join("\n")}
 
 活動主題：${data.topic || "未填寫"}
 預估總金額：${Number(data.fee).toLocaleString()} 元
-匯款後五碼：${data.bankLast5}
+匯款後五碼：${data.bankLast5 || "未填寫"}
 
 提醒：
 送出後若日期、時段或資料有誤，請直接聯繫工作人員協助修改。
@@ -1027,62 +992,76 @@ ${data.times.split("、").map(t => "・" + t).join("\n")}
         return;
       }
 
+      const button = document.getElementById("submitBooking");
+
       try {
-        const btn = document.getElementById("submitBooking");
-        btn.textContent = "送出中...";
-        btn.disabled = true;
+        button.textContent = "送出中...";
+        button.disabled = true;
 
         await fetch(SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify(data)
         });
 
         alert("已送出預約資料！系統將寄出 Email 通知，工作人員會再與您確認檔期。");
 
-        document.getElementById("name").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("lineId").value = "";
-        document.getElementById("lineName").value = "";
-        document.getElementById("topic").value = "";
-        document.getElementById("invoiceTitle").value = "";
-        document.getElementById("taxId").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("bankLast5").value = "";
-        document.getElementById("note").value = "";
+        [
+          "name",
+          "phone",
+          "email",
+          "lineId",
+          "lineName",
+          "topic",
+          "invoiceTitle",
+          "taxId",
+          "address",
+          "bankLast5",
+          "note"
+        ].forEach(id => {
+          document.getElementById(id).value = "";
+        });
+
         document.getElementById("agreeTerms").checked = false;
 
-        timeInputs.forEach(i => i.checked = false);
+        timeInputs.forEach(input => {
+          input.checked = false;
+        });
 
         await loadBookingsFromScript();
         updateEstimate();
 
-        btn.textContent = "送出預約資料";
-        btn.disabled = false;
       } catch (error) {
         alert("送出失敗，請改用備用 Google 表單或電話洽詢。");
-        document.getElementById("submitBooking").textContent = "送出預約資料";
-        document.getElementById("submitBooking").disabled = false;
+
+      } finally {
+        button.textContent = "送出預約資料";
+        button.disabled = false;
       }
     }
 
     document.getElementById("prevMonth").addEventListener("click", () => {
       currentMonth--;
+
       if (currentMonth < 0) {
         currentMonth = 11;
         currentYear--;
       }
+
       renderCalendar();
     });
 
     document.getElementById("nextMonth").addEventListener("click", () => {
       currentMonth++;
+
       if (currentMonth > 11) {
         currentMonth = 0;
         currentYear++;
       }
+
       renderCalendar();
     });
 
@@ -1099,14 +1078,21 @@ ${data.times.split("、").map(t => "・" + t).join("\n")}
 
     document.getElementById("copySummary").addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText(bookingSummary.textContent);
+        await navigator.clipboard.writeText(
+          bookingSummary.textContent
+        );
+
         alert("已複製預約摘要，可貼到 LINE 或表單備註。");
-      } catch (e) {
+
+      } catch (error) {
         alert("複製失敗，請手動選取摘要文字複製。");
       }
     });
 
-    document.getElementById("submitBooking").addEventListener("click", submitBooking);
+    document.getElementById("submitBooking").addEventListener(
+      "click",
+      submitBooking
+    );
 
     renderCalendar();
     updateEstimate();
