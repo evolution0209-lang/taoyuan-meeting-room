@@ -13,12 +13,13 @@
   <style>
     :root {
       --primary: #17324d;
-      --primary-2: #28557b;
+      --primary-light: #28557b;
       --gold: #d4a72c;
       --success: #15803d;
       --warning: #b45309;
       --danger: #b91c1c;
       --info: #0369a1;
+      --purple: #6d28d9;
       --bg: #f3f6f9;
       --card: #ffffff;
       --text: #172033;
@@ -66,17 +67,17 @@
 
     .header {
       background:
-        linear-gradient(135deg, var(--primary), var(--primary-2));
+        linear-gradient(135deg, var(--primary), var(--primary-light));
       color: white;
       padding:
-        calc(24px + env(safe-area-inset-top))
-        18px
-        24px;
+        calc(22px + env(safe-area-inset-top))
+        16px
+        22px;
       box-shadow: var(--shadow);
     }
 
     .header-inner {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: auto;
       display: flex;
       justify-content: space-between;
@@ -105,18 +106,50 @@
     }
 
     .container {
-      max-width: 1280px;
-      margin: 22px auto;
-      padding: 0 16px 50px;
+      max-width: 1320px;
+      margin: 20px auto;
+      padding: 0 15px 50px;
     }
 
     .notice {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       padding: 14px 16px;
       background: #fff8e6;
       color: #6b4c00;
       border: 1px solid #f3d58c;
       border-radius: 12px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .tab-button {
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 900;
+    }
+
+    .tab-button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .tab-page {
+      display: none;
+    }
+
+    .tab-page.active {
+      display: block;
     }
 
     .stats {
@@ -146,19 +179,13 @@
       font-weight: 900;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(390px, 0.9fr) minmax(480px, 1.1fr);
-      gap: 18px;
-      align-items: start;
-    }
-
     .panel {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
+      margin-bottom: 18px;
     }
 
     .panel-header {
@@ -198,6 +225,10 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 13px;
+    }
+
+    .form-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .field {
@@ -242,8 +273,35 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--primary-2);
+      border-color: var(--primary-light);
       box-shadow: 0 0 0 3px rgba(40, 85, 123, 0.12);
+    }
+
+    input[readonly] {
+      background: #f5f7fa;
+      color: #475467;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .search-message {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .search-message.success {
+      color: var(--success);
+      font-weight: 800;
+    }
+
+    .search-message.error {
+      color: var(--danger);
+      font-weight: 800;
     }
 
     .ratio-box {
@@ -296,6 +354,14 @@
       color: #166534;
     }
 
+    .contract-box {
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px solid #ddd6fe;
+      border-radius: 13px;
+      background: #faf5ff;
+    }
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -325,6 +391,11 @@
     .badge-info {
       background: #e0f2fe;
       color: #075985;
+    }
+
+    .badge-purple {
+      background: #ede9fe;
+      color: #5b21b6;
     }
 
     .badge-neutral {
@@ -381,6 +452,11 @@
       color: white;
     }
 
+    .btn-purple {
+      background: var(--purple);
+      color: white;
+    }
+
     .btn-small {
       padding: 7px 10px;
       font-size: 13px;
@@ -393,27 +469,31 @@
       width: 100%;
     }
 
-    .case-list {
+    .case-list,
+    .admin-list {
       display: grid;
       gap: 12px;
       padding: 16px;
     }
 
-    .case-card {
+    .case-card,
+    .admin-card {
       border: 1px solid var(--border);
       border-radius: 14px;
       background: white;
       padding: 15px;
     }
 
-    .case-top {
+    .case-top,
+    .admin-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
     }
 
-    .case-title {
+    .case-title,
+    .admin-title {
       margin: 0;
       color: var(--primary);
       font-size: 18px;
@@ -446,8 +526,9 @@
       color: #7c2d12;
     }
 
-    .case-meta {
-      margin-top: 8px;
+    .case-meta,
+    .admin-meta {
+      margin-top: 6px;
       color: var(--muted);
       font-size: 13px;
     }
@@ -476,7 +557,8 @@
       font-weight: 900;
     }
 
-    .case-details {
+    .case-details,
+    .admin-details {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 6px 14px;
@@ -484,11 +566,8 @@
       font-size: 14px;
     }
 
-    .case-details strong {
-      color: #344054;
-    }
-
-    .case-actions {
+    .case-actions,
+    .admin-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
@@ -499,6 +578,13 @@
       padding: 45px 20px;
       color: var(--muted);
       text-align: center;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: start;
     }
 
     .modal {
@@ -565,12 +651,16 @@
       text-align: center;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     @media (max-width: 980px) {
       .stats {
         grid-template-columns: repeat(3, 1fr);
       }
 
-      .layout {
+      .admin-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -581,8 +671,10 @@
       }
 
       .form-grid,
+      .form-grid.three,
       .toolbar,
-      .case-details {
+      .case-details,
+      .admin-details {
         grid-template-columns: 1fr;
       }
 
@@ -591,6 +683,10 @@
       }
 
       .case-money {
+        grid-template-columns: 1fr;
+      }
+
+      .search-row {
         grid-template-columns: 1fr;
       }
 
@@ -605,7 +701,8 @@
       }
 
       .actions .btn,
-      .case-actions .btn {
+      .case-actions .btn,
+      .admin-actions .btn {
         width: 100%;
       }
 
@@ -613,7 +710,8 @@
         align-items: flex-start;
       }
 
-      .case-top {
+      .case-top,
+      .admin-top {
         align-items: center;
       }
     }
@@ -625,7 +723,7 @@
     <div class="header-inner">
       <div>
         <h1>斡旋回報系統</h1>
-        <p>斡旋回報、80% 啟動判定、期限管理與順位排序</p>
+        <p>物件帶入、正式斡旋判定、順位管理與契約變更紀錄</p>
       </div>
 
       <div class="threshold-pill">
@@ -636,186 +734,214 @@
 
   <main class="container">
     <div class="notice">
-      <strong>流程規則：</strong>
-      斡旋金額達到開價 80% 時，自動啟動正式斡旋流程並進入順位。
-      同一物件先依達價率高低排序，達價率相同時，依正式送件時間先後排序。
+      <strong>使用流程：</strong>
+      先到「後台設定」建立人員與物件資料。業務輸入物件編號或網址後，
+      系統會自動帶入物件、人員與開價。達到開價 80% 時，案件自動進入正式順位。
     </div>
 
-    <section class="stats">
-      <div class="stat-card">
-        <div class="stat-label">全部案件</div>
-        <div class="stat-number" id="statTotal">0</div>
-      </div>
+    <nav class="tabs">
+      <button
+        type="button"
+        class="tab-button active"
+        data-tab="reportPage"
+      >
+        斡旋回報
+      </button>
 
-      <div class="stat-card">
-        <div class="stat-label">正式斡旋</div>
-        <div class="stat-number" id="statFormal">0</div>
-      </div>
+      <button
+        type="button"
+        class="tab-button"
+        data-tab="casePage"
+      >
+        案件與順位
+      </button>
 
-      <div class="stat-card">
-        <div class="stat-label">未達 80%</div>
-        <div class="stat-number" id="statBelow">0</div>
-      </div>
+      <button
+        type="button"
+        class="tab-button"
+        data-tab="adminPage"
+      >
+        後台設定
+      </button>
+    </nav>
 
-      <div class="stat-card">
-        <div class="stat-label">議價處理中</div>
-        <div class="stat-number" id="statActive">0</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-label">已成交</div>
-        <div class="stat-number" id="statClosed">0</div>
-      </div>
-    </section>
-
-    <div class="layout">
-      <section class="panel">
+    <!-- 斡旋回報 -->
+    <section class="tab-page active" id="reportPage">
+      <div class="panel">
         <div class="panel-header">
           <h2 id="formTitle">新增斡旋回報</h2>
-          <span class="badge badge-info" id="formModeBadge">新增模式</span>
+          <span class="badge badge-info" id="formModeBadge">
+            新增模式
+          </span>
         </div>
 
         <div class="panel-body">
           <form id="offerForm">
             <input type="hidden" id="editId">
 
-            <h3 class="section-title">一、回報時間與期限</h3>
+            <h3 class="section-title">一、搜尋物件</h3>
+
+            <div class="form-grid">
+              <div class="field full">
+                <label class="required" for="propertySearch">
+                  物件編號或物件網址
+                </label>
+
+                <div class="search-row">
+                  <input
+                    type="text"
+                    id="propertySearch"
+                    placeholder="輸入物件編號，或貼上物件網址"
+                  >
+
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    id="searchPropertyButton"
+                  >
+                    搜尋並帶入
+                  </button>
+                </div>
+
+                <div
+                  class="search-message"
+                  id="propertySearchMessage"
+                >
+                  請先到後台建立物件資料。
+                </div>
+              </div>
+            </div>
+
+            <h3 class="section-title">二、回報時間與期限</h3>
 
             <div class="form-grid">
               <div class="field">
-                <label class="required" for="reportDate">回報日期</label>
+                <label class="required" for="reportDate">
+                  回報日期
+                </label>
                 <input type="date" id="reportDate" required>
               </div>
 
               <div class="field">
-                <label class="required" for="reportTime">正式送件時間</label>
+                <label class="required" for="reportTime">
+                  正式送件時間
+                </label>
                 <input type="time" id="reportTime" required>
               </div>
 
               <div class="field">
-                <label class="required" for="expiryDate">斡旋期限日期</label>
+                <label class="required" for="expiryDate">
+                  斡旋期限日期
+                </label>
                 <input type="date" id="expiryDate" required>
               </div>
 
               <div class="field">
-                <label class="required" for="expiryTime">斡旋期限時間</label>
+                <label class="required" for="expiryTime">
+                  斡旋期限時間
+                </label>
                 <input type="time" id="expiryTime" required>
               </div>
 
               <div class="field">
-                <label class="required" for="storeName">回報門店</label>
-                <input
-                  type="text"
-                  id="storeName"
-                  placeholder="例如：桃園總店"
-                  required
-                >
+                <label class="required" for="storeName">
+                  回報門店
+                </label>
+                <select id="storeName" required>
+                  <option value="">請選擇門店</option>
+                </select>
               </div>
 
               <div class="field">
-                <label class="required" for="reporterName">回報業務</label>
-                <input
-                  type="text"
-                  id="reporterName"
-                  placeholder="輸入業務姓名"
-                  required
-                >
+                <label class="required" for="reporterName">
+                  回報業務
+                </label>
+                <select id="reporterName" required>
+                  <option value="">請選擇回報業務</option>
+                </select>
               </div>
             </div>
 
-            <h3 class="section-title">二、物件資料</h3>
+            <h3 class="section-title">三、物件資料</h3>
 
             <div class="form-grid">
               <div class="field">
-                <label class="required" for="propertyId">物件編號</label>
-                <input
-                  type="text"
-                  id="propertyId"
-                  placeholder="公司物件編號"
-                  required
-                >
+                <label class="required" for="propertyId">
+                  物件編號
+                </label>
+                <input type="text" id="propertyId" required>
               </div>
 
               <div class="field">
-                <label for="property591Id">59188 物件編號</label>
-                <input
-                  type="text"
-                  id="property591Id"
-                  placeholder="輸入 59188 編號"
-                >
+                <label for="property591Id">
+                  59188 物件編號
+                </label>
+                <input type="text" id="property591Id">
               </div>
 
               <div class="field full">
-                <label class="required" for="propertyName">物件名稱</label>
-                <input
-                  type="text"
-                  id="propertyName"
-                  placeholder="例如：○○社區三房平車"
-                  required
-                >
+                <label class="required" for="propertyName">
+                  物件名稱
+                </label>
+                <input type="text" id="propertyName" required>
               </div>
 
               <div class="field full">
-                <label class="required" for="propertyAddress">物件地址</label>
-                <input
-                  type="text"
-                  id="propertyAddress"
-                  placeholder="輸入物件地址"
-                  required
-                >
+                <label class="required" for="propertyAddress">
+                  物件地址
+                </label>
+                <input type="text" id="propertyAddress" required>
               </div>
 
               <div class="field full">
-                <label for="property591Url">59188 物件連結</label>
-                <input
-                  type="url"
-                  id="property591Url"
-                  placeholder="https://..."
-                >
+                <label for="property591Url">
+                  物件網址
+                </label>
+                <input type="url" id="property591Url">
               </div>
             </div>
 
-            <h3 class="section-title">三、相關人員</h3>
+            <h3 class="section-title">四、相關人員</h3>
 
             <div class="form-grid">
               <div class="field">
-                <label for="listingStore">物件所屬門店</label>
-                <input
-                  type="text"
-                  id="listingStore"
-                  placeholder="例如：中正店"
-                >
+                <label for="listingStore">
+                  物件所屬門店
+                </label>
+                <select id="listingStore">
+                  <option value="">請選擇門店</option>
+                </select>
               </div>
 
               <div class="field">
-                <label for="listingManager">該店主管</label>
-                <input
-                  type="text"
-                  id="listingManager"
-                  placeholder="主管姓名"
-                >
+                <label for="listingManager">
+                  該店主管
+                </label>
+                <select id="listingManager">
+                  <option value="">請選擇主管</option>
+                </select>
               </div>
 
               <div class="field">
-                <label for="developerName">開發業務</label>
-                <input
-                  type="text"
-                  id="developerName"
-                  placeholder="開發業務姓名"
-                >
+                <label for="developerName">
+                  開發業務
+                </label>
+                <select id="developerName">
+                  <option value="">請選擇開發業務</option>
+                </select>
               </div>
 
               <div class="field">
-                <label for="salesName">銷售業務</label>
-                <input
-                  type="text"
-                  id="salesName"
-                  placeholder="銷售業務姓名"
-                >
+                <label for="salesName">
+                  銷售業務
+                </label>
+                <select id="salesName">
+                  <option value="">請選擇銷售業務</option>
+                </select>
               </div>
             </div>
 
-            <h3 class="section-title">四、金額與正式斡旋判定</h3>
+            <h3 class="section-title">五、金額與正式斡旋判定</h3>
 
             <div class="form-grid">
               <div class="field">
@@ -828,7 +954,6 @@
                   min="0"
                   step="0.01"
                   inputmode="decimal"
-                  placeholder="例如：2000"
                   required
                 >
               </div>
@@ -843,7 +968,6 @@
                   min="0"
                   step="0.01"
                   inputmode="decimal"
-                  placeholder="例如：1600"
                   required
                 >
               </div>
@@ -853,7 +977,9 @@
               <div class="ratio-head">
                 <div>
                   <div class="stat-label">斡旋達價率</div>
-                  <div class="ratio-number" id="ratioValue">0.00%</div>
+                  <div class="ratio-number" id="ratioValue">
+                    0.00%
+                  </div>
                 </div>
 
                 <span
@@ -865,7 +991,10 @@
               </div>
 
               <div class="progress">
-                <div class="progress-bar" id="progressBar"></div>
+                <div
+                  class="progress-bar"
+                  id="progressBar"
+                ></div>
               </div>
 
               <div
@@ -876,11 +1005,13 @@
               </div>
             </div>
 
-            <h3 class="section-title">五、買方與交易條件</h3>
+            <h3 class="section-title">六、買方與交易條件</h3>
 
             <div class="form-grid">
               <div class="field">
-                <label for="buyerCode">買方姓名／代碼</label>
+                <label for="buyerCode">
+                  買方姓名／代碼
+                </label>
                 <input
                   type="text"
                   id="buyerCode"
@@ -889,7 +1020,9 @@
               </div>
 
               <div class="field">
-                <label for="paymentMethod">付款方式</label>
+                <label for="paymentMethod">
+                  付款方式
+                </label>
                 <select id="paymentMethod">
                   <option value="貸款">貸款</option>
                   <option value="現金">現金</option>
@@ -899,7 +1032,9 @@
               </div>
 
               <div class="field">
-                <label for="loanRatio">預計貸款成數</label>
+                <label for="loanRatio">
+                  預計貸款成數
+                </label>
                 <select id="loanRatio">
                   <option value="">未填寫</option>
                   <option value="不貸款">不貸款</option>
@@ -912,7 +1047,9 @@
               </div>
 
               <div class="field">
-                <label for="needSellHouse">是否需先售屋</label>
+                <label for="needSellHouse">
+                  是否需先售屋
+                </label>
                 <select id="needSellHouse">
                   <option value="否">否</option>
                   <option value="是">是</option>
@@ -921,37 +1058,156 @@
               </div>
 
               <div class="field">
-                <label for="signingDate">預計簽約日期</label>
+                <label for="signingDate">
+                  預計簽約日期
+                </label>
                 <input type="date" id="signingDate">
               </div>
 
               <div class="field">
-                <label for="handoverDate">預計交屋日期</label>
+                <label for="handoverDate">
+                  預計交屋日期
+                </label>
                 <input type="date" id="handoverDate">
               </div>
 
               <div class="field full">
-                <label for="specialConditions">特殊條件</label>
+                <label for="specialConditions">
+                  特殊條件
+                </label>
                 <textarea
                   id="specialConditions"
-                  placeholder="例如：貸款不足解除、需先售屋、指定交屋日期等"
+                  placeholder="例如：貸款不足解除、先售屋、指定交屋日期等"
                 ></textarea>
               </div>
 
               <div class="field full">
-                <label for="remarks">主管備註／案件說明</label>
+                <label for="remarks">
+                  主管備註／案件說明
+                </label>
                 <textarea
                   id="remarks"
-                  placeholder="輸入屋主態度、議價策略或其他重要說明"
+                  placeholder="輸入屋主態度、議價策略或重要說明"
                 ></textarea>
               </div>
             </div>
 
-            <h3 class="section-title">六、案件狀態</h3>
+            <h3 class="section-title">七、契約變更內容</h3>
+
+            <div class="contract-box">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="hasContractChange">
+                    是否有契約變更
+                  </label>
+
+                  <select id="hasContractChange">
+                    <option value="無">無</option>
+                    <option value="有">有</option>
+                  </select>
+                </div>
+
+                <div class="field contract-change-field hidden">
+                  <label for="contractChangeType">
+                    契約變更類型
+                  </label>
+
+                  <select id="contractChangeType">
+                    <option value="">請選擇變更類型</option>
+                    <option value="斡旋金額變更">
+                      斡旋金額變更
+                    </option>
+                    <option value="付款方式變更">
+                      付款方式變更
+                    </option>
+                    <option value="貸款條件變更">
+                      貸款條件變更
+                    </option>
+                    <option value="簽約日期變更">
+                      簽約日期變更
+                    </option>
+                    <option value="交屋日期變更">
+                      交屋日期變更
+                    </option>
+                    <option value="附帶條件變更">
+                      附帶條件變更
+                    </option>
+                    <option value="標的物內容變更">
+                      標的物內容變更
+                    </option>
+                    <option value="服務費變更">
+                      服務費變更
+                    </option>
+                    <option value="其他">
+                      其他
+                    </option>
+                  </select>
+                </div>
+
+                <div class="field full contract-change-field hidden">
+                  <label for="contractOriginalContent">
+                    變更前內容
+                  </label>
+
+                  <textarea
+                    id="contractOriginalContent"
+                    placeholder="請輸入原契約內容"
+                  ></textarea>
+                </div>
+
+                <div class="field full contract-change-field hidden">
+                  <label for="contractNewContent">
+                    變更後內容
+                  </label>
+
+                  <textarea
+                    id="contractNewContent"
+                    placeholder="請輸入變更後內容"
+                  ></textarea>
+                </div>
+
+                <div class="field full contract-change-field hidden">
+                  <label for="contractChangeReason">
+                    變更原因
+                  </label>
+
+                  <textarea
+                    id="contractChangeReason"
+                    placeholder="請說明變更原因"
+                  ></textarea>
+                </div>
+
+                <div class="field contract-change-field hidden">
+                  <label for="contractConfirmedBy">
+                    確認人
+                  </label>
+
+                  <select id="contractConfirmedBy">
+                    <option value="">請選擇確認人</option>
+                  </select>
+                </div>
+
+                <div class="field contract-change-field hidden">
+                  <label for="contractChangeDate">
+                    確認日期
+                  </label>
+
+                  <input
+                    type="date"
+                    id="contractChangeDate"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <h3 class="section-title">八、案件狀態</h3>
 
             <div class="form-grid">
               <div class="field">
-                <label for="caseStatus">目前狀態</label>
+                <label for="caseStatus">
+                  目前狀態
+                </label>
+
                 <select id="caseStatus">
                   <option value="一般出價">一般出價</option>
                   <option value="正式斡旋">正式斡旋</option>
@@ -966,7 +1222,10 @@
               </div>
 
               <div class="field">
-                <label for="priorityNote">順位補充說明</label>
+                <label for="priorityNote">
+                  順位補充說明
+                </label>
+
                 <input
                   type="text"
                   id="priorityNote"
@@ -976,7 +1235,10 @@
             </div>
 
             <div class="actions">
-              <button type="submit" class="btn btn-primary">
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >
                 儲存斡旋回報
               </button>
 
@@ -998,9 +1260,39 @@
             </div>
           </form>
         </div>
+      </div>
+    </section>
+
+    <!-- 案件與順位 -->
+    <section class="tab-page" id="casePage">
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-label">全部案件</div>
+          <div class="stat-number" id="statTotal">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">正式斡旋</div>
+          <div class="stat-number" id="statFormal">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">未達 80%</div>
+          <div class="stat-number" id="statBelow">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">議價處理中</div>
+          <div class="stat-number" id="statActive">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">已成交</div>
+          <div class="stat-number" id="statClosed">0</div>
+        </div>
       </section>
 
-      <section class="panel">
+      <div class="panel">
         <div class="panel-header">
           <h2>案件與順位</h2>
 
@@ -1045,23 +1337,297 @@
         <div class="empty" id="emptyState">
           尚無斡旋回報資料
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- 後台設定 -->
+    <section class="tab-page" id="adminPage">
+      <div class="admin-grid">
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <h2 id="staffFormTitle">新增人員</h2>
+            </div>
+
+            <div class="panel-body">
+              <form id="staffForm">
+                <input type="hidden" id="staffEditId">
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="required" for="staffName">
+                      姓名
+                    </label>
+                    <input type="text" id="staffName" required>
+                  </div>
+
+                  <div class="field">
+                    <label class="required" for="staffStore">
+                      門店
+                    </label>
+                    <input
+                      type="text"
+                      id="staffStore"
+                      placeholder="例如：桃園總店"
+                      required
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label class="required" for="staffRole">
+                      職務
+                    </label>
+
+                    <select id="staffRole" required>
+                      <option value="">請選擇職務</option>
+                      <option value="業務">業務</option>
+                      <option value="開發">開發</option>
+                      <option value="銷售">銷售</option>
+                      <option value="主管">主管</option>
+                      <option value="行政">行政</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="staffActive">
+                      是否啟用
+                    </label>
+
+                    <select id="staffActive">
+                      <option value="是">是</option>
+                      <option value="否">否</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                  >
+                    儲存人員
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="resetStaffButton"
+                  >
+                    清除
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>人員名單</h2>
+            </div>
+
+            <div class="admin-list" id="staffList"></div>
+
+            <div class="empty" id="staffEmpty">
+              尚未建立人員資料
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <h2 id="propertyFormTitle">新增物件</h2>
+            </div>
+
+            <div class="panel-body">
+              <form id="propertyForm">
+                <input type="hidden" id="propertyEditId">
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="required" for="adminPropertyId">
+                      物件編號
+                    </label>
+
+                    <input
+                      type="text"
+                      id="adminPropertyId"
+                      required
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label for="adminProperty591Id">
+                      59188 編號
+                    </label>
+
+                    <input
+                      type="text"
+                      id="adminProperty591Id"
+                    >
+                  </div>
+
+                  <div class="field full">
+                    <label class="required" for="adminPropertyName">
+                      物件名稱
+                    </label>
+
+                    <input
+                      type="text"
+                      id="adminPropertyName"
+                      required
+                    >
+                  </div>
+
+                  <div class="field full">
+                    <label class="required" for="adminPropertyAddress">
+                      物件地址
+                    </label>
+
+                    <input
+                      type="text"
+                      id="adminPropertyAddress"
+                      required
+                    >
+                  </div>
+
+                  <div class="field full">
+                    <label for="adminPropertyUrl">
+                      物件網址
+                    </label>
+
+                    <input
+                      type="url"
+                      id="adminPropertyUrl"
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label class="required" for="adminAskingPrice">
+                      開價（萬元）
+                    </label>
+
+                    <input
+                      type="number"
+                      id="adminAskingPrice"
+                      min="0"
+                      step="0.01"
+                      required
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label for="adminListingStore">
+                      所屬門店
+                    </label>
+
+                    <select id="adminListingStore">
+                      <option value="">請選擇門店</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="adminDeveloperName">
+                      開發業務
+                    </label>
+
+                    <select id="adminDeveloperName">
+                      <option value="">請選擇開發業務</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="adminSalesName">
+                      銷售業務
+                    </label>
+
+                    <select id="adminSalesName">
+                      <option value="">請選擇銷售業務</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="adminListingManager">
+                      該店主管
+                    </label>
+
+                    <select id="adminListingManager">
+                      <option value="">請選擇主管</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="adminPropertyActive">
+                      是否啟用
+                    </label>
+
+                    <select id="adminPropertyActive">
+                      <option value="是">是</option>
+                      <option value="否">否</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                  >
+                    儲存物件
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="resetPropertyButton"
+                  >
+                    清除
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>物件資料庫</h2>
+            </div>
+
+            <div class="admin-list" id="propertyList"></div>
+
+            <div class="empty" id="propertyEmpty">
+              尚未建立物件資料
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="footer">
-      此單頁版本資料儲存在目前瀏覽器。不同手機或電腦不會自動共用資料。
+      此版本的後台、人員、物件與案件資料儲存在目前瀏覽器。
+      不同手機或電腦尚未共用資料。
     </div>
   </main>
 
+  <!-- LINE 預覽 -->
   <div class="modal" id="lineModal">
     <div class="modal-card">
       <div class="modal-header">
         <h3>LINE 回報內容</h3>
-        <button class="close-button" id="closeModalButton">×</button>
+
+        <button
+          class="close-button"
+          id="closeModalButton"
+        >
+          ×
+        </button>
       </div>
 
       <div class="modal-body">
-        <div class="line-preview" id="linePreview"></div>
+        <div
+          class="line-preview"
+          id="linePreview"
+        ></div>
 
         <div class="actions">
           <button
@@ -1087,79 +1653,114 @@
   <script>
     "use strict";
 
-    const STORAGE_KEY = "offerReportSystem_mobile_v2";
+    const CASE_STORAGE_KEY = "offerReportCases_v4";
+    const STAFF_STORAGE_KEY = "offerReportStaff_v4";
+    const PROPERTY_STORAGE_KEY = "offerReportProperties_v4";
+
     const FORMAL_THRESHOLD = 80;
 
-    let cases = loadCases();
+    let cases = loadArray(CASE_STORAGE_KEY);
+    let staff = loadArray(STAFF_STORAGE_KEY);
+    let properties = loadArray(PROPERTY_STORAGE_KEY);
     let currentLineText = "";
 
-    const form = document.getElementById("offerForm");
-    const editIdInput = document.getElementById("editId");
-
-    const askingPriceInput =
-      document.getElementById("askingPrice");
-
-    const offerAmountInput =
-      document.getElementById("offerAmount");
-
-    const ratioValue =
-      document.getElementById("ratioValue");
-
-    const progressBar =
-      document.getElementById("progressBar");
-
-    const processBadge =
-      document.getElementById("processBadge");
-
-    const thresholdMessage =
-      document.getElementById("thresholdMessage");
-
-    const searchInput =
-      document.getElementById("searchInput");
-
-    const statusFilter =
-      document.getElementById("statusFilter");
-
-    const thresholdFilter =
-      document.getElementById("thresholdFilter");
-
-    const caseList =
-      document.getElementById("caseList");
-
-    const emptyState =
-      document.getElementById("emptyState");
-
-    const lineModal =
-      document.getElementById("lineModal");
-
-    const linePreview =
-      document.getElementById("linePreview");
+    const offerForm = document.getElementById("offerForm");
+    const staffForm = document.getElementById("staffForm");
+    const propertyForm = document.getElementById("propertyForm");
 
     initialize();
 
     function initialize() {
+      bindTabs();
+      bindEvents();
       setDefaultDateTime();
+      refreshAllDropdowns();
       updateRatioDisplay();
+      toggleContractChangeFields();
       renderAll();
+    }
 
-      askingPriceInput.addEventListener(
-        "input",
-        updateRatioDisplay
+    function bindTabs() {
+      document
+        .querySelectorAll(".tab-button")
+        .forEach(button => {
+          button.addEventListener("click", () => {
+            const tabId = button.dataset.tab;
+
+            document
+              .querySelectorAll(".tab-button")
+              .forEach(item => {
+                item.classList.remove("active");
+              });
+
+            document
+              .querySelectorAll(".tab-page")
+              .forEach(page => {
+                page.classList.remove("active");
+              });
+
+            button.classList.add("active");
+            document
+              .getElementById(tabId)
+              .classList.add("active");
+          });
+        });
+    }
+
+    function openTab(tabId) {
+      const button = document.querySelector(
+        `.tab-button[data-tab="${tabId}"]`
       );
 
-      offerAmountInput.addEventListener(
-        "input",
-        updateRatioDisplay
-      );
+      if (button) {
+        button.click();
+      }
+    }
 
-      form.addEventListener(
-        "submit",
-        handleSubmit
-      );
+    function bindEvents() {
+      document
+        .getElementById("askingPrice")
+        .addEventListener("input", updateRatioDisplay);
+
+      document
+        .getElementById("offerAmount")
+        .addEventListener("input", updateRatioDisplay);
+
+      document
+        .getElementById("hasContractChange")
+        .addEventListener(
+          "change",
+          toggleContractChangeFields
+        );
+
+      document
+        .getElementById("searchPropertyButton")
+        .addEventListener("click", searchProperty);
+
+      document
+        .getElementById("propertySearch")
+        .addEventListener("keydown", event => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            searchProperty();
+          }
+        });
+
+      offerForm.addEventListener("submit", saveOfferCase);
+      staffForm.addEventListener("submit", saveStaff);
+      propertyForm.addEventListener("submit", saveProperty);
 
       document
         .getElementById("resetButton")
-        .addEventListener("click", resetForm);
+        .addEventListener("click", resetOfferForm);
+
+      document
+        .getElementById("resetStaffButton")
+        .addEventListener("click", resetStaffForm);
+
+      document
+        .getElementById("resetPropertyButton")
+        .addEventListener("click", resetPropertyForm);
 
       document
         .getElementById("previewLineButton")
@@ -1181,26 +1782,25 @@
         .getElementById("closeModalButton2")
         .addEventListener("click", closeModal);
 
-      searchInput.addEventListener(
-        "input",
-        renderCases
-      );
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", renderCases);
 
-      statusFilter.addEventListener(
-        "change",
-        renderCases
-      );
+      document
+        .getElementById("statusFilter")
+        .addEventListener("change", renderCases);
 
-      thresholdFilter.addEventListener(
-        "change",
-        renderCases
-      );
+      document
+        .getElementById("thresholdFilter")
+        .addEventListener("change", renderCases);
 
-      lineModal.addEventListener("click", event => {
-        if (event.target === lineModal) {
-          closeModal();
-        }
-      });
+      document
+        .getElementById("lineModal")
+        .addEventListener("click", event => {
+          if (event.target.id === "lineModal") {
+            closeModal();
+          }
+        });
     }
 
     function setDefaultDateTime() {
@@ -1209,17 +1809,11 @@
         now.getTime() + 24 * 60 * 60 * 1000
       );
 
-      document.getElementById("reportDate").value =
-        dateValue(now);
-
-      document.getElementById("reportTime").value =
-        timeValue(now);
-
-      document.getElementById("expiryDate").value =
-        dateValue(expiry);
-
-      document.getElementById("expiryTime").value =
-        timeValue(expiry);
+      setValue("reportDate", dateValue(now));
+      setValue("reportTime", timeValue(now));
+      setValue("expiryDate", dateValue(expiry));
+      setValue("expiryTime", timeValue(expiry));
+      setValue("contractChangeDate", dateValue(now));
     }
 
     function dateValue(date) {
@@ -1247,6 +1841,20 @@
       return `${hours}:${minutes}`;
     }
 
+    function valueOf(id, trim = false) {
+      const element = document.getElementById(id);
+      const value = element ? element.value : "";
+      return trim ? value.trim() : value;
+    }
+
+    function setValue(id, value) {
+      const element = document.getElementById(id);
+
+      if (element) {
+        element.value = value ?? "";
+      }
+    }
+
     function calculateRatio(askingPrice, offerAmount) {
       if (!askingPrice || askingPrice <= 0) {
         return 0;
@@ -1257,21 +1865,30 @@
 
     function updateRatioDisplay() {
       const askingPrice =
-        Number(askingPriceInput.value) || 0;
+        Number(valueOf("askingPrice")) || 0;
 
       const offerAmount =
-        Number(offerAmountInput.value) || 0;
+        Number(valueOf("offerAmount")) || 0;
 
       const ratio =
         calculateRatio(askingPrice, offerAmount);
 
-      ratioValue.textContent =
+      document.getElementById("ratioValue").textContent =
         `${ratio.toFixed(2)}%`;
 
-      progressBar.style.width =
+      document.getElementById("progressBar").style.width =
         `${Math.min(Math.max(ratio, 0), 100)}%`;
 
-      const status =
+      const progressBar =
+        document.getElementById("progressBar");
+
+      const processBadge =
+        document.getElementById("processBadge");
+
+      const thresholdMessage =
+        document.getElementById("thresholdMessage");
+
+      const caseStatus =
         document.getElementById("caseStatus");
 
       if (ratio >= FORMAL_THRESHOLD) {
@@ -1289,8 +1906,8 @@
         thresholdMessage.textContent =
           "已達開價 80%，案件將進入正式斡旋順位。";
 
-        if (status.value === "一般出價") {
-          status.value = "正式斡旋";
+        if (caseStatus.value === "一般出價") {
+          caseStatus.value = "正式斡旋";
         }
       } else {
         progressBar.style.background = "#b45309";
@@ -1307,76 +1924,258 @@
         thresholdMessage.textContent =
           "尚未達到開價 80%，不進入正式斡旋順位。";
 
-        if (status.value === "正式斡旋") {
-          status.value = "一般出價";
+        if (caseStatus.value === "正式斡旋") {
+          caseStatus.value = "一般出價";
         }
       }
     }
 
-    function handleSubmit(event) {
-      event.preventDefault();
+    function toggleContractChangeFields() {
+      const show =
+        valueOf("hasContractChange") === "有";
 
-      const data = collectFormData();
+      document
+        .querySelectorAll(".contract-change-field")
+        .forEach(field => {
+          field.classList.toggle("hidden", !show);
+        });
+    }
 
-      if (!validateCase(data)) {
-        return;
-      }
+    function refreshAllDropdowns() {
+      const activeStaff =
+        staff.filter(item => item.active === "是");
 
-      const editId = editIdInput.value;
+      const stores = [
+        ...new Set(
+          activeStaff
+            .map(item => item.store)
+            .filter(Boolean)
+        )
+      ].sort();
 
-      if (editId) {
-        const index =
-          cases.findIndex(item => item.id === editId);
+      fillSelect(
+        "storeName",
+        stores,
+        "請選擇門店"
+      );
 
-        if (index !== -1) {
-          data.id = editId;
-          data.createdAt = cases[index].createdAt;
-          data.updatedAt = new Date().toISOString();
-          cases[index] = data;
-        }
-      } else {
-        data.id =
-          "CASE-" +
-          Date.now() +
-          "-" +
-          Math.random().toString(36).slice(2, 7);
+      fillSelect(
+        "listingStore",
+        stores,
+        "請選擇門店"
+      );
 
-        data.createdAt =
-          new Date().toISOString();
+      fillSelect(
+        "adminListingStore",
+        stores,
+        "請選擇門店"
+      );
 
-        data.updatedAt =
-          data.createdAt;
+      fillStaffSelect(
+        "reporterName",
+        activeStaff,
+        "請選擇回報業務"
+      );
 
-        cases.push(data);
-      }
+      fillStaffSelect(
+        "developerName",
+        activeStaff.filter(item =>
+          ["開發", "業務"].includes(item.role)
+        ),
+        "請選擇開發業務"
+      );
 
-      saveCases();
-      renderAll();
-      resetForm();
+      fillStaffSelect(
+        "salesName",
+        activeStaff.filter(item =>
+          ["銷售", "業務"].includes(item.role)
+        ),
+        "請選擇銷售業務"
+      );
 
-      alert(
-        data.isFormal
-          ? "已儲存，案件已進入正式斡旋順位。"
-          : "已儲存，目前未達正式斡旋門檻。"
+      fillStaffSelect(
+        "listingManager",
+        activeStaff.filter(
+          item => item.role === "主管"
+        ),
+        "請選擇主管"
+      );
+
+      fillStaffSelect(
+        "contractConfirmedBy",
+        activeStaff,
+        "請選擇確認人"
+      );
+
+      fillStaffSelect(
+        "adminDeveloperName",
+        activeStaff.filter(item =>
+          ["開發", "業務"].includes(item.role)
+        ),
+        "請選擇開發業務"
+      );
+
+      fillStaffSelect(
+        "adminSalesName",
+        activeStaff.filter(item =>
+          ["銷售", "業務"].includes(item.role)
+        ),
+        "請選擇銷售業務"
+      );
+
+      fillStaffSelect(
+        "adminListingManager",
+        activeStaff.filter(
+          item => item.role === "主管"
+        ),
+        "請選擇主管"
       );
     }
 
-    function collectFormData() {
+    function fillSelect(id, values, placeholder) {
+      const select = document.getElementById(id);
+
+      if (!select) {
+        return;
+      }
+
+      const currentValue = select.value;
+
+      select.innerHTML =
+        `<option value="">${escapeHtml(placeholder)}</option>`;
+
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+
+      if (
+        currentValue &&
+        values.includes(currentValue)
+      ) {
+        select.value = currentValue;
+      }
+    }
+
+    function fillStaffSelect(
+      id,
+      people,
+      placeholder
+    ) {
+      const select = document.getElementById(id);
+
+      if (!select) {
+        return;
+      }
+
+      const currentValue = select.value;
+
+      select.innerHTML =
+        `<option value="">${escapeHtml(placeholder)}</option>`;
+
+      people
+        .sort((a, b) =>
+          a.name.localeCompare(b.name, "zh-Hant")
+        )
+        .forEach(person => {
+          const option = document.createElement("option");
+          option.value = person.name;
+          option.textContent =
+            `${person.name}｜${person.store}｜${person.role}`;
+
+          select.appendChild(option);
+        });
+
+      if (
+        currentValue &&
+        people.some(person => person.name === currentValue)
+      ) {
+        select.value = currentValue;
+      }
+    }
+
+    function searchProperty() {
+      const keyword =
+        valueOf("propertySearch", true);
+
+      const message =
+        document.getElementById("propertySearchMessage");
+
+      if (!keyword) {
+        message.className = "search-message error";
+        message.textContent =
+          "請輸入物件編號或物件網址。";
+        return;
+      }
+
+      const normalizedKeyword =
+        normalizeUrl(keyword).toLowerCase();
+
+      const property = properties.find(item => {
+        const idMatch =
+          String(item.propertyId || "")
+            .toLowerCase() === keyword.toLowerCase();
+
+        const numberMatch =
+          String(item.property591Id || "")
+            .toLowerCase() === keyword.toLowerCase();
+
+        const urlMatch =
+          item.url &&
+          normalizeUrl(item.url).toLowerCase() ===
+            normalizedKeyword;
+
+        return (
+          item.active === "是" &&
+          (idMatch || numberMatch || urlMatch)
+        );
+      });
+
+      if (!property) {
+        message.className = "search-message error";
+        message.textContent =
+          "查無此物件，請先到後台新增或確認編號及網址。";
+        return;
+      }
+
+      setValue("propertyId", property.propertyId);
+      setValue("property591Id", property.property591Id);
+      setValue("propertyName", property.name);
+      setValue("propertyAddress", property.address);
+      setValue("property591Url", property.url);
+      setValue("askingPrice", property.askingPrice);
+      setValue("listingStore", property.store);
+      setValue("developerName", property.developer);
+      setValue("salesName", property.sales);
+      setValue("listingManager", property.manager);
+
+      updateRatioDisplay();
+
+      message.className = "search-message success";
+      message.textContent =
+        `已帶入：${property.name}`;
+    }
+
+    function normalizeUrl(url) {
+      return String(url || "")
+        .trim()
+        .replace(/\/+$/, "");
+    }
+
+    function collectOfferData() {
       const askingPrice =
-        Number(
-          document.getElementById("askingPrice").value
-        ) || 0;
+        Number(valueOf("askingPrice")) || 0;
 
       const offerAmount =
-        Number(
-          document.getElementById("offerAmount").value
-        ) || 0;
+        Number(valueOf("offerAmount")) || 0;
 
       const ratio =
         calculateRatio(askingPrice, offerAmount);
 
       let caseStatus =
-        document.getElementById("caseStatus").value;
+        valueOf("caseStatus");
 
       if (
         ratio >= FORMAL_THRESHOLD &&
@@ -1393,79 +2192,63 @@
       }
 
       return {
-        reportDate:
-          valueOf("reportDate"),
+        reportDate: valueOf("reportDate"),
+        reportTime: valueOf("reportTime"),
+        expiryDate: valueOf("expiryDate"),
+        expiryTime: valueOf("expiryTime"),
 
-        reportTime:
-          valueOf("reportTime"),
+        storeName: valueOf("storeName"),
+        reporterName: valueOf("reporterName"),
 
-        expiryDate:
-          valueOf("expiryDate"),
+        propertyId: valueOf("propertyId", true),
+        property591Id: valueOf("property591Id", true),
+        propertyName: valueOf("propertyName", true),
+        propertyAddress: valueOf("propertyAddress", true),
+        property591Url: valueOf("property591Url", true),
 
-        expiryTime:
-          valueOf("expiryTime"),
-
-        storeName:
-          valueOf("storeName", true),
-
-        reporterName:
-          valueOf("reporterName", true),
-
-        propertyId:
-          valueOf("propertyId", true),
-
-        property591Id:
-          valueOf("property591Id", true),
-
-        propertyName:
-          valueOf("propertyName", true),
-
-        propertyAddress:
-          valueOf("propertyAddress", true),
-
-        property591Url:
-          valueOf("property591Url", true),
-
-        listingStore:
-          valueOf("listingStore", true),
-
-        listingManager:
-          valueOf("listingManager", true),
-
-        developerName:
-          valueOf("developerName", true),
-
-        salesName:
-          valueOf("salesName", true),
+        listingStore: valueOf("listingStore"),
+        listingManager: valueOf("listingManager"),
+        developerName: valueOf("developerName"),
+        salesName: valueOf("salesName"),
 
         askingPrice,
         offerAmount,
         ratio,
         isFormal: ratio >= FORMAL_THRESHOLD,
 
-        buyerCode:
-          valueOf("buyerCode", true),
-
-        paymentMethod:
-          valueOf("paymentMethod"),
-
-        loanRatio:
-          valueOf("loanRatio"),
-
-        needSellHouse:
-          valueOf("needSellHouse"),
-
-        signingDate:
-          valueOf("signingDate"),
-
-        handoverDate:
-          valueOf("handoverDate"),
+        buyerCode: valueOf("buyerCode", true),
+        paymentMethod: valueOf("paymentMethod"),
+        loanRatio: valueOf("loanRatio"),
+        needSellHouse: valueOf("needSellHouse"),
+        signingDate: valueOf("signingDate"),
+        handoverDate: valueOf("handoverDate"),
 
         specialConditions:
           valueOf("specialConditions", true),
 
         remarks:
           valueOf("remarks", true),
+
+        hasContractChange:
+          valueOf("hasContractChange"),
+
+        contractChangeType:
+          valueOf("contractChangeType"),
+
+        contractOriginalContent:
+          valueOf("contractOriginalContent", true),
+
+        contractNewContent:
+          valueOf("contractNewContent", true),
+
+        contractChangeReason:
+          valueOf("contractChangeReason", true),
+
+        contractConfirmedBy:
+          valueOf("contractConfirmedBy"),
+
+        contractChangeDate:
+          valueOf("contractChangeDate"),
 
         caseStatus,
 
@@ -1474,14 +2257,22 @@
       };
     }
 
-    function valueOf(id, trim = false) {
-      const value =
-        document.getElementById(id).value;
+    function validateOffer(data) {
+      if (!data.propertyId) {
+        alert("請輸入物件編號。");
+        return false;
+      }
 
-      return trim ? value.trim() : value;
-    }
+      if (!data.propertyName) {
+        alert("請輸入物件名稱。");
+        return false;
+      }
 
-    function validateCase(data) {
+      if (!data.storeName || !data.reporterName) {
+        alert("請選擇回報門店與回報業務。");
+        return false;
+      }
+
       if (data.askingPrice <= 0) {
         alert("請輸入正確的物件開價。");
         return false;
@@ -1502,17 +2293,394 @@
           `${data.expiryDate}T${data.expiryTime}`
         );
 
+      if (
+        Number.isNaN(reportDateTime.getTime()) ||
+        Number.isNaN(expiryDateTime.getTime())
+      ) {
+        alert("請確認送件日期與期限。");
+        return false;
+      }
+
       if (expiryDateTime <= reportDateTime) {
         alert("斡旋期限必須晚於正式送件時間。");
         return false;
       }
 
+      if (data.hasContractChange === "有") {
+        if (!data.contractChangeType) {
+          alert("請選擇契約變更類型。");
+          return false;
+        }
+
+        if (
+          !data.contractOriginalContent ||
+          !data.contractNewContent
+        ) {
+          alert("請輸入契約變更前與變更後內容。");
+          return false;
+        }
+      }
+
       return true;
     }
+
+    function saveOfferCase(event) {
+      event.preventDefault();
+
+      const data = collectOfferData();
+
+      if (!validateOffer(data)) {
+        return;
+      }
+
+      const editId = valueOf("editId");
+
+      if (editId) {
+        const index =
+          cases.findIndex(item => item.id === editId);
+
+        if (index !== -1) {
+          data.id = editId;
+          data.createdAt = cases[index].createdAt;
+          data.updatedAt = new Date().toISOString();
+          cases[index] = data;
+        }
+      } else {
+        data.id =
+          "CASE-" +
+          Date.now() +
+          "-" +
+          Math.random().toString(36).slice(2, 7);
+
+        data.createdAt = new Date().toISOString();
+        data.updatedAt = data.createdAt;
+
+        cases.push(data);
+      }
+
+      saveArray(CASE_STORAGE_KEY, cases);
+      renderAll();
+      resetOfferForm();
+
+      alert(
+        data.isFormal
+          ? "已儲存，案件已進入正式斡旋順位。"
+          : "已儲存，目前尚未達正式斡旋門檻。"
+      );
+
+      openTab("casePage");
+    }
+
+    function resetOfferForm() {
+      offerForm.reset();
+
+      setValue("editId", "");
+      setValue("propertySearch", "");
+
+      document.getElementById("formTitle").textContent =
+        "新增斡旋回報";
+
+      document.getElementById("formModeBadge").textContent =
+        "新增模式";
+
+      document.getElementById("formModeBadge").className =
+        "badge badge-info";
+
+      document.getElementById(
+        "propertySearchMessage"
+      ).className = "search-message";
+
+      document.getElementById(
+        "propertySearchMessage"
+      ).textContent = "請先到後台建立物件資料。";
+
+      setDefaultDateTime();
+      setValue("caseStatus", "一般出價");
+      setValue("hasContractChange", "無");
+
+      refreshAllDropdowns();
+      toggleContractChangeFields();
+      updateRatioDisplay();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function saveStaff(event) {
+      event.preventDefault();
+
+      const name = valueOf("staffName", true);
+      const store = valueOf("staffStore", true);
+      const role = valueOf("staffRole");
+      const active = valueOf("staffActive");
+      const editId = valueOf("staffEditId");
+
+      if (!name || !store || !role) {
+        alert("請填寫姓名、門店與職務。");
+        return;
+      }
+
+      const duplicate = staff.some(item =>
+        item.name === name &&
+        item.store === store &&
+        item.id !== editId
+      );
+
+      if (duplicate) {
+        alert("同一門店已存在同名人員。");
+        return;
+      }
+
+      const data = {
+        id:
+          editId ||
+          "STAFF-" +
+          Date.now() +
+          "-" +
+          Math.random().toString(36).slice(2, 6),
+
+        name,
+        store,
+        role,
+        active
+      };
+
+      if (editId) {
+        const index =
+          staff.findIndex(item => item.id === editId);
+
+        if (index !== -1) {
+          staff[index] = data;
+        }
+      } else {
+        staff.push(data);
+      }
+
+      saveArray(STAFF_STORAGE_KEY, staff);
+      resetStaffForm();
+      refreshAllDropdowns();
+      renderStaff();
+      renderProperties();
+
+      alert("人員資料已儲存。");
+    }
+
+    function resetStaffForm() {
+      staffForm.reset();
+      setValue("staffEditId", "");
+      setValue("staffActive", "是");
+
+      document.getElementById(
+        "staffFormTitle"
+      ).textContent = "新增人員";
+    }
+
+    window.editStaff = function (id) {
+      const item =
+        staff.find(person => person.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      setValue("staffEditId", item.id);
+      setValue("staffName", item.name);
+      setValue("staffStore", item.store);
+      setValue("staffRole", item.role);
+      setValue("staffActive", item.active);
+
+      document.getElementById(
+        "staffFormTitle"
+      ).textContent = "修改人員";
+
+      openTab("adminPage");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
+
+    window.deleteStaff = function (id) {
+      const item =
+        staff.find(person => person.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      if (!confirm(`確定刪除「${item.name}」嗎？`)) {
+        return;
+      }
+
+      staff =
+        staff.filter(person => person.id !== id);
+
+      saveArray(STAFF_STORAGE_KEY, staff);
+      refreshAllDropdowns();
+      renderStaff();
+      renderProperties();
+    };
+
+    function saveProperty(event) {
+      event.preventDefault();
+
+      const editId = valueOf("propertyEditId");
+
+      const data = {
+        id:
+          editId ||
+          "PROPERTY-" +
+          Date.now() +
+          "-" +
+          Math.random().toString(36).slice(2, 6),
+
+        propertyId:
+          valueOf("adminPropertyId", true),
+
+        property591Id:
+          valueOf("adminProperty591Id", true),
+
+        name:
+          valueOf("adminPropertyName", true),
+
+        address:
+          valueOf("adminPropertyAddress", true),
+
+        url:
+          valueOf("adminPropertyUrl", true),
+
+        askingPrice:
+          Number(valueOf("adminAskingPrice")) || 0,
+
+        store:
+          valueOf("adminListingStore"),
+
+        developer:
+          valueOf("adminDeveloperName"),
+
+        sales:
+          valueOf("adminSalesName"),
+
+        manager:
+          valueOf("adminListingManager"),
+
+        active:
+          valueOf("adminPropertyActive")
+      };
+
+      if (
+        !data.propertyId ||
+        !data.name ||
+        !data.address ||
+        data.askingPrice <= 0
+      ) {
+        alert("請填寫物件編號、名稱、地址與正確開價。");
+        return;
+      }
+
+      const duplicate =
+        properties.some(item =>
+          item.propertyId === data.propertyId &&
+          item.id !== editId
+        );
+
+      if (duplicate) {
+        alert("此物件編號已存在。");
+        return;
+      }
+
+      if (editId) {
+        const index =
+          properties.findIndex(item => item.id === editId);
+
+        if (index !== -1) {
+          properties[index] = data;
+        }
+      } else {
+        properties.push(data);
+      }
+
+      saveArray(PROPERTY_STORAGE_KEY, properties);
+      resetPropertyForm();
+      renderProperties();
+
+      alert("物件資料已儲存。");
+    }
+
+    function resetPropertyForm() {
+      propertyForm.reset();
+      setValue("propertyEditId", "");
+      setValue("adminPropertyActive", "是");
+
+      document.getElementById(
+        "propertyFormTitle"
+      ).textContent = "新增物件";
+
+      refreshAllDropdowns();
+    }
+
+    window.editProperty = function (id) {
+      const item =
+        properties.find(property => property.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      refreshAllDropdowns();
+
+      setValue("propertyEditId", item.id);
+      setValue("adminPropertyId", item.propertyId);
+      setValue("adminProperty591Id", item.property591Id);
+      setValue("adminPropertyName", item.name);
+      setValue("adminPropertyAddress", item.address);
+      setValue("adminPropertyUrl", item.url);
+      setValue("adminAskingPrice", item.askingPrice);
+      setValue("adminListingStore", item.store);
+      setValue("adminDeveloperName", item.developer);
+      setValue("adminSalesName", item.sales);
+      setValue("adminListingManager", item.manager);
+      setValue("adminPropertyActive", item.active);
+
+      document.getElementById(
+        "propertyFormTitle"
+      ).textContent = "修改物件";
+
+      openTab("adminPage");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
+
+    window.deleteProperty = function (id) {
+      const item =
+        properties.find(property => property.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      if (!confirm(`確定刪除「${item.name}」嗎？`)) {
+        return;
+      }
+
+      properties =
+        properties.filter(property => property.id !== id);
+
+      saveArray(PROPERTY_STORAGE_KEY, properties);
+      renderProperties();
+    };
 
     function renderAll() {
       renderStats();
       renderCases();
+      renderStaff();
+      renderProperties();
     }
 
     function renderStats() {
@@ -1594,13 +2762,13 @@
 
     function getFilteredCases() {
       const keyword =
-        searchInput.value.trim().toLowerCase();
+        valueOf("searchInput", true).toLowerCase();
 
       const status =
-        statusFilter.value;
+        valueOf("statusFilter");
 
       const threshold =
-        thresholdFilter.value;
+        valueOf("thresholdFilter");
 
       return cases
         .filter(item => {
@@ -1613,7 +2781,8 @@
             item.reporterName,
             item.developerName,
             item.salesName,
-            item.listingManager
+            item.listingManager,
+            item.buyerCode
           ]
             .join(" ")
             .toLowerCase();
@@ -1658,10 +2827,17 @@
     }
 
     function renderCases() {
+      const caseList =
+        document.getElementById("caseList");
+
+      const emptyState =
+        document.getElementById("emptyState");
+
       const rankMap = getRankMap();
       const filtered = getFilteredCases();
 
       caseList.innerHTML = "";
+
       emptyState.style.display =
         filtered.length ? "none" : "block";
 
@@ -1681,15 +2857,22 @@
           ? `<span class="badge badge-success">正式斡旋</span>`
           : `<span class="badge badge-warning">未達 80%</span>`;
 
+        const contractBadge =
+          item.hasContractChange === "有"
+            ? `<span class="badge badge-purple">有契約變更</span>`
+            : "";
+
         const statusClass =
           getStatusBadgeClass(item.caseStatus);
 
         const linkHtml =
           item.property591Url
-            ? `<a href="${escapeAttribute(
-                item.property591Url
-              )}" target="_blank" rel="noopener">
-                開啟 59188 物件
+            ? `<a
+                href="${escapeAttribute(item.property591Url)}"
+                target="_blank"
+                rel="noopener"
+              >
+                開啟物件網址
               </a>`
             : "";
 
@@ -1775,7 +2958,7 @@
             </div>
 
             <div>
-              <strong>付款：</strong>
+              <strong>付款條件：</strong>
               ${escapeHtml(item.paymentMethod || "-")}
               ／${escapeHtml(item.loanRatio || "-")}
             </div>
@@ -1786,8 +2969,29 @@
             </div>
           </div>
 
+          ${
+            item.hasContractChange === "有"
+              ? `
+                <div class="contract-box">
+                  <strong>契約變更：</strong>
+                  ${escapeHtml(item.contractChangeType || "-")}
+                  <br>
+                  <strong>變更前：</strong>
+                  ${escapeHtml(item.contractOriginalContent || "-")}
+                  <br>
+                  <strong>變更後：</strong>
+                  ${escapeHtml(item.contractNewContent || "-")}
+                  <br>
+                  <strong>確認人：</strong>
+                  ${escapeHtml(item.contractConfirmedBy || "-")}
+                </div>
+              `
+              : ""
+          }
+
           <div class="case-actions">
             ${formalBadge}
+            ${contractBadge}
 
             <span class="badge ${statusClass}">
               ${escapeHtml(item.caseStatus)}
@@ -1827,6 +3031,442 @@
 
         caseList.appendChild(card);
       });
+    }
+
+    function renderStaff() {
+      const list =
+        document.getElementById("staffList");
+
+      const empty =
+        document.getElementById("staffEmpty");
+
+      list.innerHTML = "";
+
+      empty.style.display =
+        staff.length ? "none" : "block";
+
+      staff
+        .slice()
+        .sort((a, b) =>
+          a.store.localeCompare(b.store, "zh-Hant")
+        )
+        .forEach(item => {
+          const card =
+            document.createElement("article");
+
+          card.className = "admin-card";
+
+          card.innerHTML = `
+            <div class="admin-top">
+              <div>
+                <h3 class="admin-title">
+                  ${escapeHtml(item.name)}
+                </h3>
+
+                <div class="admin-meta">
+                  ${escapeHtml(item.store)}
+                  ｜${escapeHtml(item.role)}
+                </div>
+              </div>
+
+              <span class="badge ${
+                item.active === "是"
+                  ? "badge-success"
+                  : "badge-neutral"
+              }">
+                ${item.active === "是" ? "啟用" : "停用"}
+              </span>
+            </div>
+
+            <div class="admin-actions">
+              <button
+                class="btn btn-secondary btn-small"
+                onclick="editStaff('${item.id}')"
+              >
+                修改
+              </button>
+
+              <button
+                class="btn btn-danger btn-small"
+                onclick="deleteStaff('${item.id}')"
+              >
+                刪除
+              </button>
+            </div>
+          `;
+
+          list.appendChild(card);
+        });
+    }
+
+    function renderProperties() {
+      const list =
+        document.getElementById("propertyList");
+
+      const empty =
+        document.getElementById("propertyEmpty");
+
+      list.innerHTML = "";
+
+      empty.style.display =
+        properties.length ? "none" : "block";
+
+      properties
+        .slice()
+        .sort((a, b) =>
+          a.propertyId.localeCompare(
+            b.propertyId,
+            "zh-Hant"
+          )
+        )
+        .forEach(item => {
+          const card =
+            document.createElement("article");
+
+          card.className = "admin-card";
+
+          card.innerHTML = `
+            <div class="admin-top">
+              <div>
+                <h3 class="admin-title">
+                  ${escapeHtml(item.name)}
+                </h3>
+
+                <div class="admin-meta">
+                  編號：${escapeHtml(item.propertyId)}
+                  ｜59188：${escapeHtml(item.property591Id || "-")}
+                </div>
+
+                <div class="admin-meta">
+                  ${escapeHtml(item.address)}
+                </div>
+              </div>
+
+              <span class="badge ${
+                item.active === "是"
+                  ? "badge-success"
+                  : "badge-neutral"
+              }">
+                ${item.active === "是" ? "啟用" : "停用"}
+              </span>
+            </div>
+
+            <div class="admin-details">
+              <div>
+                <strong>開價：</strong>
+                ${formatMoney(item.askingPrice)} 萬
+              </div>
+
+              <div>
+                <strong>門店：</strong>
+                ${escapeHtml(item.store || "-")}
+              </div>
+
+              <div>
+                <strong>開發：</strong>
+                ${escapeHtml(item.developer || "-")}
+              </div>
+
+              <div>
+                <strong>銷售：</strong>
+                ${escapeHtml(item.sales || "-")}
+              </div>
+
+              <div>
+                <strong>主管：</strong>
+                ${escapeHtml(item.manager || "-")}
+              </div>
+            </div>
+
+            <div class="admin-actions">
+              <button
+                class="btn btn-secondary btn-small"
+                onclick="editProperty('${item.id}')"
+              >
+                修改
+              </button>
+
+              <button
+                class="btn btn-danger btn-small"
+                onclick="deleteProperty('${item.id}')"
+              >
+                刪除
+              </button>
+            </div>
+          `;
+
+          list.appendChild(card);
+        });
+    }
+
+    window.editCase = function (id) {
+      const item =
+        cases.find(caseItem => caseItem.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      refreshAllDropdowns();
+
+      const fields = [
+        "reportDate",
+        "reportTime",
+        "expiryDate",
+        "expiryTime",
+        "storeName",
+        "reporterName",
+        "propertyId",
+        "property591Id",
+        "propertyName",
+        "propertyAddress",
+        "property591Url",
+        "listingStore",
+        "listingManager",
+        "developerName",
+        "salesName",
+        "askingPrice",
+        "offerAmount",
+        "buyerCode",
+        "paymentMethod",
+        "loanRatio",
+        "needSellHouse",
+        "signingDate",
+        "handoverDate",
+        "specialConditions",
+        "remarks",
+        "hasContractChange",
+        "contractChangeType",
+        "contractOriginalContent",
+        "contractNewContent",
+        "contractChangeReason",
+        "contractConfirmedBy",
+        "contractChangeDate",
+        "caseStatus",
+        "priorityNote"
+      ];
+
+      fields.forEach(fieldId => {
+        setValue(fieldId, item[fieldId]);
+      });
+
+      setValue("editId", item.id);
+      setValue("propertySearch", item.propertyId);
+
+      document.getElementById("formTitle").textContent =
+        "修改斡旋回報";
+
+      document.getElementById("formModeBadge").textContent =
+        "修改模式";
+
+      document.getElementById("formModeBadge").className =
+        "badge badge-warning";
+
+      toggleContractChangeFields();
+      updateRatioDisplay();
+      openTab("reportPage");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
+
+    window.deleteCase = function (id) {
+      const item =
+        cases.find(caseItem => caseItem.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      if (
+        !confirm(
+          `確定刪除「${item.propertyName}」的斡旋回報嗎？`
+        )
+      ) {
+        return;
+      }
+
+      cases =
+        cases.filter(caseItem => caseItem.id !== id);
+
+      saveArray(CASE_STORAGE_KEY, cases);
+      renderAll();
+    };
+
+    window.cycleStatus = function (id) {
+      const item =
+        cases.find(caseItem => caseItem.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      const options = item.isFormal
+        ? [
+            "正式斡旋",
+            "議價中",
+            "待主管回覆",
+            "待屋主回覆",
+            "已成交",
+            "已退斡",
+            "已到期",
+            "已取消"
+          ]
+        : [
+            "一般出價",
+            "待主管回覆",
+            "已取消",
+            "已到期"
+          ];
+
+      const currentIndex =
+        options.indexOf(item.caseStatus);
+
+      item.caseStatus =
+        options[
+          currentIndex === -1
+            ? 0
+            : (currentIndex + 1) % options.length
+        ];
+
+      item.updatedAt = new Date().toISOString();
+
+      saveArray(CASE_STORAGE_KEY, cases);
+      renderAll();
+    };
+
+    function previewCurrentFormLine() {
+      const data = collectOfferData();
+
+      currentLineText =
+        buildLineMessage(data);
+
+      document.getElementById(
+        "linePreview"
+      ).textContent = currentLineText;
+
+      document
+        .getElementById("lineModal")
+        .classList.add("show");
+    }
+
+    window.showCaseLine = function (id) {
+      const item =
+        cases.find(caseItem => caseItem.id === id);
+
+      if (!item) {
+        return;
+      }
+
+      const rank =
+        getRankMap()[id];
+
+      currentLineText =
+        buildLineMessage(item, rank);
+
+      document.getElementById(
+        "linePreview"
+      ).textContent = currentLineText;
+
+      document
+        .getElementById("lineModal")
+        .classList.add("show");
+    };
+
+    function buildLineMessage(data, rank = null) {
+      const title = data.isFormal
+        ? "【正式斡旋啟動】"
+        : "【一般出價回報】";
+
+      const rankText = rank
+        ? `目前順位：第 ${rank} 順位`
+        : data.isFormal
+          ? "目前順位：儲存後由系統排序"
+          : "目前順位：未達 80%，不列入正式順位";
+
+      const lines = [
+        title,
+        "",
+        `物件：${data.propertyName || "-"}`,
+        `物件編號：${data.propertyId || "-"}`,
+        `59188 編號：${data.property591Id || "-"}`,
+        `地址：${data.propertyAddress || "-"}`,
+        "",
+        `開價：${formatMoney(data.askingPrice)} 萬`,
+        `斡旋金額：${formatMoney(data.offerAmount)} 萬`,
+        `達價率：${Number(data.ratio || 0).toFixed(2)}%`,
+        rankText,
+        "",
+        `回報門店：${data.storeName || "-"}`,
+        `回報業務：${data.reporterName || "-"}`,
+        `開發業務：${data.developerName || "-"}`,
+        `銷售業務：${data.salesName || "-"}`,
+        `該店主管：${data.listingManager || "-"}`,
+        "",
+        `正式送件：${data.reportDate || "-"} ${data.reportTime || ""}`,
+        `斡旋期限：${data.expiryDate || "-"} ${data.expiryTime || ""}`,
+        `目前狀態：${data.caseStatus || "-"}`,
+        "",
+        `付款方式：${data.paymentMethod || "-"}`,
+        `貸款成數：${data.loanRatio || "-"}`,
+        `是否需先售屋：${data.needSellHouse || "-"}`,
+        `預計簽約：${data.signingDate || "-"}`,
+        `預計交屋：${data.handoverDate || "-"}`,
+        "",
+        `特殊條件：${data.specialConditions || "無"}`,
+        `備註：${data.remarks || "無"}`,
+        "",
+        `契約變更：${data.hasContractChange || "無"}`
+      ];
+
+      if (data.hasContractChange === "有") {
+        lines.push(
+          `變更類型：${data.contractChangeType || "-"}`,
+          `變更前內容：${data.contractOriginalContent || "-"}`,
+          `變更後內容：${data.contractNewContent || "-"}`,
+          `變更原因：${data.contractChangeReason || "-"}`,
+          `確認人：${data.contractConfirmedBy || "-"}`,
+          `確認日期：${data.contractChangeDate || "-"}`
+        );
+      }
+
+      if (data.property591Url) {
+        lines.push(
+          "",
+          `物件網址：${data.property591Url}`
+        );
+      }
+
+      return lines.join("\n");
+    }
+
+    function closeModal() {
+      document
+        .getElementById("lineModal")
+        .classList.remove("show");
+    }
+
+    async function copyLineText() {
+      try {
+        await navigator.clipboard.writeText(
+          currentLineText
+        );
+
+        alert("LINE 回報文字已複製。");
+      } catch (error) {
+        const textArea =
+          document.createElement("textarea");
+
+        textArea.value = currentLineText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+
+        alert("LINE 回報文字已複製。");
+      }
     }
 
     function getStatusBadgeClass(status) {
@@ -1882,271 +3522,6 @@
       return `約 ${Math.ceil(hours / 24)} 天`;
     }
 
-    function resetForm() {
-      form.reset();
-      editIdInput.value = "";
-
-      document.getElementById("formTitle").textContent =
-        "新增斡旋回報";
-
-      document.getElementById("formModeBadge").textContent =
-        "新增模式";
-
-      document.getElementById("formModeBadge").className =
-        "badge badge-info";
-
-      setDefaultDateTime();
-
-      document.getElementById("caseStatus").value =
-        "一般出價";
-
-      updateRatioDisplay();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-    window.editCase = function (id) {
-      const item =
-        cases.find(caseItem => caseItem.id === id);
-
-      if (!item) return;
-
-      const fields = [
-        "reportDate",
-        "reportTime",
-        "expiryDate",
-        "expiryTime",
-        "storeName",
-        "reporterName",
-        "propertyId",
-        "property591Id",
-        "propertyName",
-        "propertyAddress",
-        "property591Url",
-        "listingStore",
-        "listingManager",
-        "developerName",
-        "salesName",
-        "askingPrice",
-        "offerAmount",
-        "buyerCode",
-        "paymentMethod",
-        "loanRatio",
-        "needSellHouse",
-        "signingDate",
-        "handoverDate",
-        "specialConditions",
-        "remarks",
-        "caseStatus",
-        "priorityNote"
-      ];
-
-      fields.forEach(idName => {
-        const element =
-          document.getElementById(idName);
-
-        if (element) {
-          element.value =
-            item[idName] ?? "";
-        }
-      });
-
-      editIdInput.value = item.id;
-
-      document.getElementById("formTitle").textContent =
-        "修改斡旋回報";
-
-      document.getElementById("formModeBadge").textContent =
-        "修改模式";
-
-      document.getElementById("formModeBadge").className =
-        "badge badge-warning";
-
-      updateRatioDisplay();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
-
-    window.deleteCase = function (id) {
-      const item =
-        cases.find(caseItem => caseItem.id === id);
-
-      if (!item) return;
-
-      const confirmed =
-        confirm(
-          `確定刪除「${item.propertyName}」的斡旋回報嗎？`
-        );
-
-      if (!confirmed) return;
-
-      cases =
-        cases.filter(
-          caseItem => caseItem.id !== id
-        );
-
-      saveCases();
-      renderAll();
-    };
-
-    window.cycleStatus = function (id) {
-      const item =
-        cases.find(caseItem => caseItem.id === id);
-
-      if (!item) return;
-
-      const options = item.isFormal
-        ? [
-            "正式斡旋",
-            "議價中",
-            "待主管回覆",
-            "待屋主回覆",
-            "已成交",
-            "已退斡",
-            "已到期",
-            "已取消"
-          ]
-        : [
-            "一般出價",
-            "待主管回覆",
-            "已取消",
-            "已到期"
-          ];
-
-      const currentIndex =
-        options.indexOf(item.caseStatus);
-
-      item.caseStatus =
-        options[
-          currentIndex === -1
-            ? 0
-            : (currentIndex + 1) % options.length
-        ];
-
-      item.updatedAt =
-        new Date().toISOString();
-
-      saveCases();
-      renderAll();
-    };
-
-    function previewCurrentFormLine() {
-      const data = collectFormData();
-
-      currentLineText =
-        buildLineMessage(data);
-
-      linePreview.textContent =
-        currentLineText;
-
-      lineModal.classList.add("show");
-    }
-
-    window.showCaseLine = function (id) {
-      const item =
-        cases.find(caseItem => caseItem.id === id);
-
-      if (!item) return;
-
-      const rank =
-        getRankMap()[id];
-
-      currentLineText =
-        buildLineMessage(item, rank);
-
-      linePreview.textContent =
-        currentLineText;
-
-      lineModal.classList.add("show");
-    };
-
-    function buildLineMessage(data, rank = null) {
-      const title = data.isFormal
-        ? "【正式斡旋啟動】"
-        : "【一般出價回報】";
-
-      const rankText = rank
-        ? `目前順位：第 ${rank} 順位`
-        : data.isFormal
-          ? "目前順位：儲存後由系統排序"
-          : "目前順位：未達 80%，不列入正式順位";
-
-      const lines = [
-        title,
-        "",
-        `物件：${data.propertyName || "-"}`,
-        `物件編號：${data.propertyId || "-"}`,
-        `59188 編號：${data.property591Id || "-"}`,
-        `地址：${data.propertyAddress || "-"}`,
-        "",
-        `開價：${formatMoney(data.askingPrice)} 萬`,
-        `斡旋金額：${formatMoney(data.offerAmount)} 萬`,
-        `達價率：${Number(data.ratio || 0).toFixed(2)}%`,
-        rankText,
-        "",
-        `回報門店：${data.storeName || "-"}`,
-        `回報業務：${data.reporterName || "-"}`,
-        `開發業務：${data.developerName || "-"}`,
-        `銷售業務：${data.salesName || "-"}`,
-        `該店主管：${data.listingManager || "-"}`,
-        "",
-        `正式送件：${data.reportDate || "-"} ${data.reportTime || ""}`,
-        `斡旋期限：${data.expiryDate || "-"} ${data.expiryTime || ""}`,
-        `目前狀態：${data.caseStatus || "-"}`,
-        "",
-        `付款方式：${data.paymentMethod || "-"}`,
-        `貸款成數：${data.loanRatio || "-"}`,
-        `是否需先售屋：${data.needSellHouse || "-"}`,
-        `預計簽約：${data.signingDate || "-"}`,
-        `預計交屋：${data.handoverDate || "-"}`,
-        "",
-        `特殊條件：${data.specialConditions || "無"}`,
-        `備註：${data.remarks || "無"}`
-      ];
-
-      if (data.property591Url) {
-        lines.push(
-          "",
-          `59188：${data.property591Url}`
-        );
-      }
-
-      return lines.join("\n");
-    }
-
-    function closeModal() {
-      lineModal.classList.remove("show");
-    }
-
-    async function copyLineText() {
-      try {
-        await navigator.clipboard.writeText(
-          currentLineText
-        );
-
-        alert("LINE 回報文字已複製。");
-      } catch (error) {
-        const textArea =
-          document.createElement("textarea");
-
-        textArea.value =
-          currentLineText;
-
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        textArea.remove();
-
-        alert("LINE 回報文字已複製。");
-      }
-    }
-
     function exportCSV() {
       if (!cases.length) {
         alert("目前沒有可匯出的案件。");
@@ -2168,7 +3543,7 @@
         "59188物件編號",
         "物件名稱",
         "物件地址",
-        "59188連結",
+        "物件網址",
         "物件所屬門店",
         "該店主管",
         "開發業務",
@@ -2185,6 +3560,13 @@
         "預計交屋日期",
         "特殊條件",
         "備註",
+        "契約變更",
+        "變更類型",
+        "變更前內容",
+        "變更後內容",
+        "變更原因",
+        "確認人",
+        "確認日期",
         "案件狀態",
         "順位補充"
       ];
@@ -2219,6 +3601,13 @@
         item.handoverDate,
         item.specialConditions,
         item.remarks,
+        item.hasContractChange,
+        item.contractChangeType,
+        item.contractOriginalContent,
+        item.contractNewContent,
+        item.contractChangeReason,
+        item.contractConfirmedBy,
+        item.contractChangeDate,
         item.caseStatus,
         item.priorityNote
       ]);
@@ -2269,17 +3658,17 @@
         );
     }
 
-    function saveCases() {
+    function saveArray(key, value) {
       localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(cases)
+        key,
+        JSON.stringify(value)
       );
     }
 
-    function loadCases() {
+    function loadArray(key) {
       try {
         const stored =
-          localStorage.getItem(STORAGE_KEY);
+          localStorage.getItem(key);
 
         if (!stored) {
           return [];
@@ -2293,7 +3682,7 @@
           : [];
       } catch (error) {
         console.error(
-          "讀取案件資料失敗",
+          `讀取 ${key} 失敗`,
           error
         );
 
