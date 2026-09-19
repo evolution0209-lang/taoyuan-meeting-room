@@ -1,3994 +1,1853 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1,viewport-fit=cover"
-  >
-  <meta name="theme-color" content="#123c55">
-
-  <title>斡旋回報系統</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --navy: #123c55;
-      --blue: #1597c8;
-      --green: #16815f;
-      --orange: #f28c28;
-      --red: #d93636;
-      --purple: #7251b5;
-      --light: #f5f7fa;
-      --white: #ffffff;
-      --dark: #1f2933;
-      --muted: #667085;
-      --line: #e4e7ec;
-      --shadow: 0 8px 22px rgba(31, 41, 51, 0.08);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding-bottom: 78px;
-      color: var(--dark);
-      background: var(--light);
-      font-family:
-        Arial,
-        "Noto Sans TC",
-        "Microsoft JhengHei",
-        sans-serif;
-      line-height: 1.6;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .wrap {
-      width: min(100% - 28px, 1180px);
-      margin: auto;
-    }
-
-    .topbar {
-      padding: 9px 14px;
-      color: white;
-      background: #0b293d;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .hero {
-      padding: 42px 14px 38px;
-      color: white;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(18, 60, 85, 0.98),
-          rgba(21, 151, 200, 0.86)
-        );
-      text-align: center;
-    }
-
-    .hero h1 {
-      margin: 0 0 8px;
-      font-size: clamp(30px, 6vw, 48px);
-    }
-
-    .hero p {
-      margin: 0;
-      color: rgba(255, 255, 255, 0.85);
-      font-weight: 800;
-    }
-
-    .backend-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-top: 15px;
-      padding: 7px 12px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      background: var(--orange);
-      border-radius: 50%;
-    }
-
-    .status-dot.online {
-      background: #43e88f;
-    }
-
-    .tabs-shell {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 10px 0;
-      background: rgba(255, 255, 255, 0.97);
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 5px 16px rgba(31, 41, 51, 0.06);
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-    }
-
-    .tab-button {
-      flex: 0 0 auto;
-      padding: 10px 15px;
-      color: var(--navy);
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-weight: 900;
-    }
-
-    .tab-button.active {
-      color: white;
-      background: var(--navy);
-      border-color: var(--navy);
-    }
-
-    main {
-      padding: 20px 0 42px;
-    }
-
-    .tab-page {
-      display: none;
-    }
-
-    .tab-page.active {
-      display: block;
-    }
-
-    .notice {
-      margin-bottom: 16px;
-      padding: 14px 16px;
-      color: #654600;
-      background: #fff7db;
-      border: 1px solid #f5d77c;
-      border-radius: 14px;
-      font-weight: 800;
-    }
-
-    .panel {
-      margin-bottom: 18px;
-      overflow: hidden;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 16px 18px;
-      background: #f8fafc;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .panel-head h2 {
-      margin: 0;
-      color: var(--navy);
-      font-size: 21px;
-    }
-
-    .panel-body {
-      padding: 18px;
-    }
-
-    .section-title {
-      margin: 25px 0 12px;
-      padding-left: 10px;
-      color: var(--navy);
-      border-left: 5px solid var(--orange);
-      font-size: 18px;
-    }
-
-    .section-title:first-child {
-      margin-top: 0;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 13px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      color: #344054;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    label.required::after {
-      content: " *";
-      color: var(--red);
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      min-height: 45px;
-      padding: 11px 12px;
-      color: var(--dark);
-      background: white;
-      border: 1px solid #d0d5dd;
-      border-radius: 12px;
-      outline: none;
-    }
-
-    textarea {
-      min-height: 92px;
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(21, 151, 200, 0.12);
-    }
-
-    .search-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 9px;
-    }
-
-    .message {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .message.success {
-      color: var(--green);
-      font-weight: 900;
-    }
-
-    .message.error {
-      color: var(--red);
-      font-weight: 900;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 11px 15px;
-      color: white;
-      background: var(--navy);
-      border: 0;
-      border-radius: 12px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .btn.blue {
-      background: var(--blue);
-    }
-
-    .btn.green {
-      background: var(--green);
-    }
-
-    .btn.orange {
-      background: var(--orange);
-    }
-
-    .btn.red {
-      background: var(--red);
-    }
-
-    .btn.gray {
-      color: var(--navy);
-      background: #e8eef4;
-    }
-
-    .btn.small {
-      padding: 7px 10px;
-      font-size: 13px;
-    }
-
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 22px;
-    }
-
-    .ratio-card {
-      margin-top: 15px;
-      padding: 16px;
-      background: linear-gradient(135deg, #f8fbff, #ffffff);
-      border: 1px solid #dbe8f1;
-      border-radius: 17px;
-    }
-
-    .ratio-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .ratio-number {
-      color: var(--navy);
-      font-size: 35px;
-      font-weight: 900;
-    }
-
-    .progress {
-      height: 14px;
-      margin-top: 10px;
-      overflow: hidden;
-      background: #e5e7eb;
-      border-radius: 999px;
-    }
-
-    .progress-bar {
-      width: 0;
-      height: 100%;
-      background: var(--orange);
-      transition: 0.2s;
-    }
-
-    .threshold-message {
-      margin-top: 10px;
-      padding: 10px 12px;
-      color: #92400e;
-      background: #fef3c7;
-      border-radius: 10px;
-      font-weight: 900;
-    }
-
-    .threshold-message.formal {
-      color: #166534;
-      background: #dcfce7;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .badge.green {
-      color: #166534;
-      background: #dcfce7;
-    }
-
-    .badge.orange {
-      color: #92400e;
-      background: #fef3c7;
-    }
-
-    .badge.red {
-      color: #991b1b;
-      background: #fee2e2;
-    }
-
-    .badge.blue {
-      color: #075985;
-      background: #e0f2fe;
-    }
-
-    .badge.purple {
-      color: #5b21b6;
-      background: #ede9fe;
-    }
-
-    .badge.gray {
-      color: #475467;
-      background: #f2f4f7;
-    }
-
-    .contract-box {
-      padding: 15px;
-      background: #faf5ff;
-      border: 1px solid #ddd6fe;
-      border-radius: 16px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .stat-card {
-      padding: 16px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      box-shadow: var(--shadow);
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .stat-value {
-      margin-top: 3px;
-      color: var(--navy);
-      font-size: 29px;
-      font-weight: 900;
-    }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr auto;
-      gap: 9px;
-      width: 100%;
-    }
-
-    .card-list {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .case-card,
-    .admin-card {
-      padding: 15px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .card-title {
-      margin: 0;
-      color: var(--navy);
-      font-size: 18px;
-    }
-
-    .card-meta {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .money-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 13px;
-    }
-
-    .money-box {
-      padding: 10px;
-      background: #f8fafc;
-      border-radius: 11px;
-    }
-
-    .money-label {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .money-value {
-      color: var(--navy);
-      font-weight: 900;
-    }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 7px 14px;
-      margin-top: 13px;
-      font-size: 14px;
-    }
-
-    .rank {
-      width: 39px;
-      height: 39px;
-      display: grid;
-      place-items: center;
-      flex: 0 0 39px;
-      color: var(--navy);
-      background: #e8eef4;
-      border-radius: 50%;
-      font-weight: 900;
-    }
-
-    .rank.first {
-      color: #6b4c00;
-      background: #fde68a;
-    }
-
-    .rank.second {
-      color: #475467;
-      background: #e5e7eb;
-    }
-
-    .rank.third {
-      color: #7c2d12;
-      background: #fed7aa;
-    }
-
-    .admin-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .empty {
-      padding: 38px 20px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .sync-box {
-      padding: 14px;
-      color: #344054;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(15, 23, 42, 0.65);
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-card {
-      width: min(720px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .modal-head h3 {
-      margin: 0;
-      color: var(--navy);
-    }
-
-    .modal-body {
-      padding: 18px;
-    }
-
-    .line-preview {
-      min-height: 250px;
-      padding: 15px;
-      white-space: pre-wrap;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-    }
-
-    .close-button {
-      color: var(--muted);
-      background: transparent;
-      border: 0;
-      font-size: 28px;
-    }
-
-    .bottom-bar {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 900;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding:
-        9px 10px
-        calc(9px + env(safe-area-inset-bottom));
-      background: white;
-      border-top: 1px solid var(--line);
-      box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .bottom-bar button {
-      padding: 12px 8px;
-      color: white;
-      background: var(--navy);
-      border: 0;
-      border-radius: 12px;
-      font-weight: 900;
-    }
-
-    .bottom-bar button:nth-child(2) {
-      background: var(--blue);
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding-bottom: 0;
-      }
-
-      .bottom-bar {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .admin-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .form-grid,
-      .toolbar,
-      .detail-grid,
-      .money-grid,
-      .search-row {
-        grid-template-columns: 1fr;
-      }
-
-      .panel-body {
-        padding: 15px;
-      }
-
-      .actions .btn {
-        flex: 1 1 calc(50% - 8px);
-      }
-    }
-
-    @media (max-width: 450px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .actions .btn {
-        width: 100%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="topbar">
-    斡旋案件回報｜物件查詢｜契約變更｜順位管理
-  </div>
-
-  <header class="hero">
-    <div class="wrap">
-      <h1>斡旋回報系統</h1>
-      <p>輸入物件編號或網址，自動帶入物件與相關人員</p>
-
-      <div class="backend-status">
-        <span class="status-dot" id="backendDot"></span>
-        <span id="backendStatus">正在確認後台連線</span>
-      </div>
-    </div>
-  </header>
-
-  <div class="tabs-shell">
-    <div class="wrap">
-      <nav class="tabs">
-        <button
-          type="button"
-          class="tab-button active"
-          data-page="reportPage"
-        >
-          斡旋回報
-        </button>
-
-        <button
-          type="button"
-          class="tab-button"
-          data-page="casePage"
-        >
-          案件與順位
-        </button>
-
-        <button
-          type="button"
-          class="tab-button"
-          data-page="adminPage"
-        >
-          後台設定
-        </button>
-      </nav>
-    </div>
-  </div>
-
-  <main>
-    <div class="wrap">
-
-      <!-- 斡旋回報 -->
-      <section class="tab-page active" id="reportPage">
-        <div class="notice">
-          第一次使用請先到「後台設定」新增人員與物件。
-          搜尋物件後，系統會自動帶入開價、門店、開發、銷售與主管。
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <h2 id="offerFormTitle">新增斡旋回報</h2>
-            <span class="badge blue" id="offerModeBadge">
-              新增模式
-            </span>
-          </div>
-
-          <div class="panel-body">
-            <form id="offerForm">
-              <input type="hidden" id="offerEditId">
-
-              <h3 class="section-title">一、搜尋物件</h3>
-
-              <div class="form-grid">
-                <div class="field full">
-                  <label for="propertySearch">
-                    物件編號、59188 編號或物件網址
-                  </label>
-
-                  <div class="search-row">
-                    <input
-                      type="text"
-                      id="propertySearch"
-                      placeholder="輸入物件編號、59188 編號或貼上網址"
-                    >
-
-                    <button
-                      type="button"
-                      class="btn blue"
-                      id="searchPropertyButton"
-                    >
-                      搜尋並帶入
-                    </button>
-                  </div>
-
-                  <div class="message" id="propertySearchMessage">
-                    尚未搜尋物件。
-                  </div>
-                </div>
-              </div>
-
-              <h3 class="section-title">二、回報時間與期限</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label class="required" for="reportDate">
-                    回報日期
-                  </label>
-                  <input type="date" id="reportDate" required>
-                </div>
-
-                <div class="field">
-                  <label class="required" for="reportTime">
-                    正式送件時間
-                  </label>
-                  <input type="time" id="reportTime" required>
-                </div>
-
-                <div class="field">
-                  <label class="required" for="expiryDate">
-                    斡旋期限日期
-                  </label>
-                  <input type="date" id="expiryDate" required>
-                </div>
-
-                <div class="field">
-                  <label class="required" for="expiryTime">
-                    斡旋期限時間
-                  </label>
-                  <input type="time" id="expiryTime" required>
-                </div>
-
-                <div class="field">
-                  <label class="required" for="reportStore">
-                    回報門店
-                  </label>
-                  <select id="reportStore" required>
-                    <option value="">請選擇門店</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label class="required" for="reporterName">
-                    回報業務
-                  </label>
-                  <select id="reporterName" required>
-                    <option value="">請選擇回報業務</option>
-                  </select>
-                </div>
-              </div>
-
-              <h3 class="section-title">三、物件資料</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label class="required" for="propertyId">
-                    物件編號
-                  </label>
-                  <input type="text" id="propertyId" required>
-                </div>
-
-                <div class="field">
-                  <label for="property591Id">
-                    59188 編號
-                  </label>
-                  <input type="text" id="property591Id">
-                </div>
-
-                <div class="field full">
-                  <label class="required" for="propertyName">
-                    物件名稱
-                  </label>
-                  <input type="text" id="propertyName" required>
-                </div>
-
-                <div class="field full">
-                  <label class="required" for="propertyAddress">
-                    物件地址
-                  </label>
-                  <input type="text" id="propertyAddress" required>
-                </div>
-
-                <div class="field full">
-                  <label for="propertyUrl">
-                    物件網址
-                  </label>
-                  <input
-                    type="url"
-                    id="propertyUrl"
-                    placeholder="https://"
-                  >
-                </div>
-              </div>
-
-              <h3 class="section-title">四、相關人員</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label for="listingStore">
-                    物件所屬門店
-                  </label>
-                  <select id="listingStore">
-                    <option value="">請選擇門店</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="listingManager">
-                    該店主管
-                  </label>
-                  <select id="listingManager">
-                    <option value="">請選擇主管</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="developerName">
-                    開發業務
-                  </label>
-                  <select id="developerName">
-                    <option value="">請選擇開發業務</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="salesName">
-                    銷售業務
-                  </label>
-                  <select id="salesName">
-                    <option value="">請選擇銷售業務</option>
-                  </select>
-                </div>
-              </div>
-
-              <h3 class="section-title">五、斡旋金額</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label class="required" for="askingPrice">
-                    開價（萬元）
-                  </label>
-                  <input
-                    type="number"
-                    id="askingPrice"
-                    min="0"
-                    step="0.01"
-                    required
-                  >
-                </div>
-
-                <div class="field">
-                  <label class="required" for="offerAmount">
-                    斡旋金額（萬元）
-                  </label>
-                  <input
-                    type="number"
-                    id="offerAmount"
-                    min="0"
-                    step="0.01"
-                    required
-                  >
-                </div>
-              </div>
-
-              <div class="ratio-card">
-                <div class="ratio-top">
-                  <div>
-                    <div class="stat-label">達價率</div>
-                    <div class="ratio-number" id="ratioValue">
-                      0.00%
-                    </div>
-                  </div>
-
-                  <span class="badge orange" id="formalBadge">
-                    尚未達標
-                  </span>
-                </div>
-
-                <div class="progress">
-                  <div class="progress-bar" id="progressBar"></div>
-                </div>
-
-                <div
-                  class="threshold-message"
-                  id="thresholdMessage"
-                >
-                  尚未達到開價 80%，不進入正式斡旋順位。
-                </div>
-              </div>
-
-              <h3 class="section-title">六、買方與交易條件</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label for="buyerCode">
-                    買方姓名／客戶代碼
-                  </label>
-                  <input
-                    type="text"
-                    id="buyerCode"
-                    placeholder="建議使用客戶代碼"
-                  >
-                </div>
-
-                <div class="field">
-                  <label for="paymentMethod">
-                    付款方式
-                  </label>
-                  <select id="paymentMethod">
-                    <option value="貸款">貸款</option>
-                    <option value="現金">現金</option>
-                    <option value="部分貸款">部分貸款</option>
-                    <option value="其他">其他</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="loanRatio">
-                    預計貸款成數
-                  </label>
-                  <select id="loanRatio">
-                    <option value="">未填寫</option>
-                    <option value="不貸款">不貸款</option>
-                    <option value="5成以下">5成以下</option>
-                    <option value="6成">6成</option>
-                    <option value="7成">7成</option>
-                    <option value="8成">8成</option>
-                    <option value="8成以上">8成以上</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="needSellHouse">
-                    是否需先售屋
-                  </label>
-                  <select id="needSellHouse">
-                    <option value="否">否</option>
-                    <option value="是">是</option>
-                    <option value="待確認">待確認</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="signingDate">
-                    預計簽約日期
-                  </label>
-                  <input type="date" id="signingDate">
-                </div>
-
-                <div class="field">
-                  <label for="handoverDate">
-                    預計交屋日期
-                  </label>
-                  <input type="date" id="handoverDate">
-                </div>
-
-                <div class="field full">
-                  <label for="specialConditions">
-                    特殊條件
-                  </label>
-                  <textarea
-                    id="specialConditions"
-                    placeholder="貸款不足解除、先售屋、指定交屋日期等"
-                  ></textarea>
-                </div>
-
-                <div class="field full">
-                  <label for="remarks">
-                    主管備註／案件說明
-                  </label>
-                  <textarea
-                    id="remarks"
-                    placeholder="輸入屋主態度、議價策略或重要說明"
-                  ></textarea>
-                </div>
-              </div>
-
-              <h3 class="section-title">七、契約變更內容</h3>
-
-              <div class="contract-box">
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="hasContractChange">
-                      是否有契約變更
-                    </label>
-                    <select id="hasContractChange">
-                      <option value="無">無</option>
-                      <option value="有">有</option>
-                    </select>
-                  </div>
-
-                  <div class="field contract-field hidden">
-                    <label for="contractChangeType">
-                      變更類型
-                    </label>
-                    <select id="contractChangeType">
-                      <option value="">請選擇變更類型</option>
-                      <option value="斡旋金額變更">斡旋金額變更</option>
-                      <option value="付款方式變更">付款方式變更</option>
-                      <option value="貸款條件變更">貸款條件變更</option>
-                      <option value="簽約日期變更">簽約日期變更</option>
-                      <option value="交屋日期變更">交屋日期變更</option>
-                      <option value="附帶條件變更">附帶條件變更</option>
-                      <option value="標的物內容變更">標的物內容變更</option>
-                      <option value="服務費變更">服務費變更</option>
-                      <option value="其他">其他</option>
-                    </select>
-                  </div>
-
-                  <div class="field full contract-field hidden">
-                    <label for="contractOriginalContent">
-                      變更前內容
-                    </label>
-                    <textarea
-                      id="contractOriginalContent"
-                      placeholder="輸入變更前內容"
-                    ></textarea>
-                  </div>
-
-                  <div class="field full contract-field hidden">
-                    <label for="contractNewContent">
-                      變更後內容
-                    </label>
-                    <textarea
-                      id="contractNewContent"
-                      placeholder="輸入變更後內容"
-                    ></textarea>
-                  </div>
-
-                  <div class="field full contract-field hidden">
-                    <label for="contractChangeReason">
-                      變更原因
-                    </label>
-                    <textarea
-                      id="contractChangeReason"
-                      placeholder="輸入契約變更原因"
-                    ></textarea>
-                  </div>
-
-                  <div class="field contract-field hidden">
-                    <label for="contractConfirmedBy">
-                      確認人
-                    </label>
-                    <select id="contractConfirmedBy">
-                      <option value="">請選擇確認人</option>
-                    </select>
-                  </div>
-
-                  <div class="field contract-field hidden">
-                    <label for="contractChangeDate">
-                      確認日期
-                    </label>
-                    <input type="date" id="contractChangeDate">
-                  </div>
-                </div>
-              </div>
-
-              <h3 class="section-title">八、案件狀態</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label for="caseStatus">
-                    目前狀態
-                  </label>
-                  <select id="caseStatus">
-                    <option value="一般出價">一般出價</option>
-                    <option value="正式斡旋">正式斡旋</option>
-                    <option value="議價中">議價中</option>
-                    <option value="待主管回覆">待主管回覆</option>
-                    <option value="待屋主回覆">待屋主回覆</option>
-                    <option value="已成交">已成交</option>
-                    <option value="已退斡">已退斡</option>
-                    <option value="已到期">已到期</option>
-                    <option value="已取消">已取消</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="priorityNote">
-                    順位補充說明
-                  </label>
-                  <input
-                    type="text"
-                    id="priorityNote"
-                    placeholder="例如：同價先送、付款條件較佳"
-                  >
-                </div>
-              </div>
-
-              <div class="actions">
-                <button
-                  type="submit"
-                  class="btn green"
-                  id="saveOfferButton"
-                >
-                  儲存並回傳後台
-                </button>
-
-                <button
-                  type="button"
-                  class="btn blue"
-                  id="previewLineButton"
-                >
-                  預覽 LINE 回報
-                </button>
-
-                <button
-                  type="button"
-                  class="btn gray"
-                  id="resetOfferButton"
-                >
-                  清除表單
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- 案件與順位 -->
-      <section class="tab-page" id="casePage">
-        <div class="stats">
-          <div class="stat-card">
-            <div class="stat-label">全部案件</div>
-            <div class="stat-value" id="statTotal">0</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">正式斡旋</div>
-            <div class="stat-value" id="statFormal">0</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">議價處理中</div>
-            <div class="stat-value" id="statActive">0</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">已成交</div>
-            <div class="stat-value" id="statClosed">0</div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <h2>案件與順位</h2>
-
-            <div class="toolbar">
-              <input
-                type="search"
-                id="caseSearch"
-                placeholder="搜尋物件、業務、主管或門店"
-              >
-
-              <select id="caseStatusFilter">
-                <option value="">全部狀態</option>
-                <option value="一般出價">一般出價</option>
-                <option value="正式斡旋">正式斡旋</option>
-                <option value="議價中">議價中</option>
-                <option value="待主管回覆">待主管回覆</option>
-                <option value="待屋主回覆">待屋主回覆</option>
-                <option value="已成交">已成交</option>
-                <option value="已退斡">已退斡</option>
-                <option value="已到期">已到期</option>
-                <option value="已取消">已取消</option>
-              </select>
-
-              <button
-                type="button"
-                class="btn green"
-                id="exportCsvButton"
-              >
-                匯出 CSV
-              </button>
-            </div>
-          </div>
-
-          <div class="card-list" id="caseList"></div>
-
-          <div class="empty" id="caseEmpty">
-            尚無斡旋案件資料
-          </div>
-        </div>
-      </section>
-
-      <!-- 後台設定 -->
-      <section class="tab-page" id="adminPage">
-        <div class="notice">
-          暫時保留瀏覽器本機後台。人員、物件與案件會先儲存在目前裝置，
-          並嘗試同步至 Google Apps Script。
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <h2>後台同步狀態</h2>
-          </div>
-
-          <div class="panel-body">
-            <div class="sync-box">
-              <strong>後台狀態：</strong>
-              <span id="syncStatusText">尚未連線</span>
-              <br>
-              <strong>本機資料：</strong>
-              人員 <span id="localStaffCount">0</span> 筆，
-              物件 <span id="localPropertyCount">0</span> 筆，
-              案件 <span id="localOfferCount">0</span> 筆
-            </div>
-
-            <div class="actions">
-              <button
-                type="button"
-                class="btn blue"
-                id="syncBackendButton"
-              >
-                重新讀取後台
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="admin-grid">
-          <div>
-            <div class="panel">
-              <div class="panel-head">
-                <h2 id="staffFormTitle">新增人員</h2>
-              </div>
-
-              <div class="panel-body">
-                <form id="staffForm">
-                  <input type="hidden" id="staffEditId">
-
-                  <div class="form-grid">
-                    <div class="field">
-                      <label class="required" for="staffName">
-                        姓名
-                      </label>
-                      <input type="text" id="staffName" required>
-                    </div>
-
-                    <div class="field">
-                      <label class="required" for="staffStore">
-                        門店
-                      </label>
-                      <input type="text" id="staffStore" required>
-                    </div>
-
-                    <div class="field">
-                      <label class="required" for="staffRole">
-                        職務
-                      </label>
-                      <select id="staffRole" required>
-                        <option value="">請選擇職務</option>
-                        <option value="業務">業務</option>
-                        <option value="開發">開發</option>
-                        <option value="銷售">銷售</option>
-                        <option value="主管">主管</option>
-                        <option value="行政">行政</option>
-                      </select>
-                    </div>
-
-                    <div class="field">
-                      <label for="staffActive">
-                        是否啟用
-                      </label>
-                      <select id="staffActive">
-                        <option value="是">是</option>
-                        <option value="否">否</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="actions">
-                    <button type="submit" class="btn green">
-                      儲存人員
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn gray"
-                      id="resetStaffButton"
-                    >
-                      清除
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-head">
-                <h2>人員名單</h2>
-              </div>
-
-              <div class="card-list" id="staffList"></div>
-
-              <div class="empty" id="staffEmpty">
-                尚未建立人員
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="panel">
-              <div class="panel-head">
-                <h2 id="propertyFormTitle">新增物件</h2>
-              </div>
-
-              <div class="panel-body">
-                <form id="propertyForm">
-                  <input type="hidden" id="propertyEditId">
-
-                  <div class="form-grid">
-                    <div class="field">
-                      <label class="required" for="adminPropertyId">
-                        物件編號
-                      </label>
-                      <input
-                        type="text"
-                        id="adminPropertyId"
-                        required
-                      >
-                    </div>
-
-                    <div class="field">
-                      <label for="adminProperty591Id">
-                        59188 編號
-                      </label>
-                      <input
-                        type="text"
-                        id="adminProperty591Id"
-                      >
-                    </div>
-
-                    <div class="field full">
-                      <label class="required" for="adminPropertyName">
-                        物件名稱
-                      </label>
-                      <input
-                        type="text"
-                        id="adminPropertyName"
-                        required
-                      >
-                    </div>
-
-                    <div class="field full">
-                      <label class="required" for="adminPropertyAddress">
-                        物件地址
-                      </label>
-                      <input
-                        type="text"
-                        id="adminPropertyAddress"
-                        required
-                      >
-                    </div>
-
-                    <div class="field full">
-                      <label for="adminPropertyUrl">
-                        物件網址
-                      </label>
-                      <input
-                        type="url"
-                        id="adminPropertyUrl"
-                        placeholder="https://"
-                      >
-                    </div>
-
-                    <div class="field">
-                      <label class="required" for="adminAskingPrice">
-                        開價（萬元）
-                      </label>
-                      <input
-                        type="number"
-                        id="adminAskingPrice"
-                        min="0"
-                        step="0.01"
-                        required
-                      >
-                    </div>
-
-                    <div class="field">
-                      <label for="adminListingStore">
-                        所屬門店
-                      </label>
-                      <select id="adminListingStore">
-                        <option value="">請選擇門店</option>
-                      </select>
-                    </div>
-
-                    <div class="field">
-                      <label for="adminDeveloperName">
-                        開發業務
-                      </label>
-                      <select id="adminDeveloperName">
-                        <option value="">請選擇開發業務</option>
-                      </select>
-                    </div>
-
-                    <div class="field">
-                      <label for="adminSalesName">
-                        銷售業務
-                      </label>
-                      <select id="adminSalesName">
-                        <option value="">請選擇銷售業務</option>
-                      </select>
-                    </div>
-
-                    <div class="field">
-                      <label for="adminListingManager">
-                        該店主管
-                      </label>
-                      <select id="adminListingManager">
-                        <option value="">請選擇主管</option>
-                      </select>
-                    </div>
-
-                    <div class="field">
-                      <label for="adminPropertyActive">
-                        是否啟用
-                      </label>
-                      <select id="adminPropertyActive">
-                        <option value="是">是</option>
-                        <option value="否">否</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="actions">
-                    <button type="submit" class="btn green">
-                      儲存物件
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn gray"
-                      id="resetPropertyButton"
-                    >
-                      清除
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-head">
-                <h2>物件資料庫</h2>
-              </div>
-
-              <div class="card-list" id="propertyList"></div>
-
-              <div class="empty" id="propertyEmpty">
-                尚未建立物件
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- LINE 預覽 -->
-  <div class="modal" id="lineModal">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>LINE 回報內容</h3>
-
-        <button
-          type="button"
-          class="close-button"
-          id="closeLineModal"
-        >
-          ×
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="line-preview" id="linePreview"></div>
-
-        <div class="actions">
-          <button
-            type="button"
-            class="btn green"
-            id="copyLineButton"
-          >
-            複製 LINE 文字
-          </button>
-
-          <button
-            type="button"
-            class="btn gray"
-            id="closeLineModal2"
-          >
-            關閉
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bottom-bar">
-    <button type="button" id="mobileReportButton">
-      斡旋回報
-    </button>
-
-    <button type="button" id="mobileCaseButton">
-      案件順位
-    </button>
-  </div>
-
-  <script>
-    "use strict";
-
-    /*
-      這是你原本場地租借系統使用的 Apps Script 網址。
-
-      目前頁面會嘗試呼叫：
-      GET  ?action=offerBootstrap
-      POST action=saveOffer
-
-      原後台若尚未支援這兩個功能，
-      資料仍會先正常儲存在目前瀏覽器。
-    */
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzGBD2xJ10dC4C2Ca7nRdsn7-9y3lsxxx6zNajhdw-dDCc7hI2Kcb4Zt8jiwmNcK1VO/exec";
-
-    const OFFER_KEY = "offerReportCases_v12";
-    const STAFF_KEY = "offerReportStaff_v12";
-    const PROPERTY_KEY = "offerReportProperties_v12";
-
-    const FORMAL_THRESHOLD = 80;
-
-    let offers = loadArray(OFFER_KEY);
-    let staff = loadArray(STAFF_KEY);
-    let properties = loadArray(PROPERTY_KEY);
-    let currentLineText = "";
-
-    initialize();
-
-    function initialize() {
-      bindTabs();
-      bindEvents();
-      setDefaultDateTime();
-      refreshDropdowns();
-      toggleContractFields();
-      updateRatio();
-      renderAll();
-      loadBackendData();
-    }
-
-    function bindTabs() {
-      document
-        .querySelectorAll(".tab-button")
-        .forEach(button => {
-          button.addEventListener("click", () => {
-            openPage(button.dataset.page);
-          });
-        });
-    }
-
-    function openPage(pageId) {
-      document
-        .querySelectorAll(".tab-button")
-        .forEach(button => {
-          button.classList.toggle(
-            "active",
-            button.dataset.page === pageId
-          );
-        });
-
-      document
-        .querySelectorAll(".tab-page")
-        .forEach(page => {
-          page.classList.toggle(
-            "active",
-            page.id === pageId
-          );
-        });
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-    function bindEvents() {
-      document
-        .getElementById("askingPrice")
-        .addEventListener("input", updateRatio);
-
-      document
-        .getElementById("offerAmount")
-        .addEventListener("input", updateRatio);
-
-      document
-        .getElementById("hasContractChange")
-        .addEventListener(
-          "change",
-          toggleContractFields
-        );
-
-      document
-        .getElementById("searchPropertyButton")
-        .addEventListener("click", searchProperty);
-
-      document
-        .getElementById("propertySearch")
-        .addEventListener("keydown", event => {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            searchProperty();
-          }
-        });
-
-      document
-        .getElementById("offerForm")
-        .addEventListener("submit", saveOffer);
-
-      document
-        .getElementById("staffForm")
-        .addEventListener("submit", saveStaff);
-
-      document
-        .getElementById("propertyForm")
-        .addEventListener("submit", saveProperty);
-
-      document
-        .getElementById("resetOfferButton")
-        .addEventListener("click", resetOfferForm);
-
-      document
-        .getElementById("resetStaffButton")
-        .addEventListener("click", resetStaffForm);
-
-      document
-        .getElementById("resetPropertyButton")
-        .addEventListener("click", resetPropertyForm);
-
-      document
-        .getElementById("previewLineButton")
-        .addEventListener("click", previewCurrentLine);
-
-      document
-        .getElementById("copyLineButton")
-        .addEventListener("click", copyLineText);
-
-      document
-        .getElementById("closeLineModal")
-        .addEventListener("click", closeLineModal);
-
-      document
-        .getElementById("closeLineModal2")
-        .addEventListener("click", closeLineModal);
-
-      document
-        .getElementById("lineModal")
-        .addEventListener("click", event => {
-          if (event.target.id === "lineModal") {
-            closeLineModal();
-          }
-        });
-
-      document
-        .getElementById("caseSearch")
-        .addEventListener("input", renderOffers);
-
-      document
-        .getElementById("caseStatusFilter")
-        .addEventListener("change", renderOffers);
-
-      document
-        .getElementById("exportCsvButton")
-        .addEventListener("click", exportCsv);
-
-      document
-        .getElementById("syncBackendButton")
-        .addEventListener("click", loadBackendData);
-
-      document
-        .getElementById("mobileReportButton")
-        .addEventListener("click", () => {
-          openPage("reportPage");
-        });
-
-      document
-        .getElementById("mobileCaseButton")
-        .addEventListener("click", () => {
-          openPage("casePage");
-        });
-    }
-
-    function valueOf(id, trim = false) {
-      const element = document.getElementById(id);
-      const value = element ? element.value : "";
-      return trim ? value.trim() : value;
-    }
-
-    function setValue(id, value) {
-      const element = document.getElementById(id);
-
-      if (element) {
-        element.value = value ?? "";
-      }
-    }
-
-    function setDefaultDateTime() {
-      const now = new Date();
-      const expiry =
-        new Date(now.getTime() + 24 * 60 * 60 * 1000);
-
-      setValue("reportDate", formatDate(now));
-      setValue("reportTime", formatTime(now));
-      setValue("expiryDate", formatDate(expiry));
-      setValue("expiryTime", formatTime(expiry));
-      setValue("contractChangeDate", formatDate(now));
-    }
-
-    function formatDate(date) {
-      const year = date.getFullYear();
-
-      const month =
-        String(date.getMonth() + 1).padStart(2, "0");
-
-      const day =
-        String(date.getDate()).padStart(2, "0");
-
-      return `${year}-${month}-${day}`;
-    }
-
-    function formatTime(date) {
-      const hours =
-        String(date.getHours()).padStart(2, "0");
-
-      const minutes =
-        String(date.getMinutes()).padStart(2, "0");
-
-      return `${hours}:${minutes}`;
-    }
-
-    function normalizeUrl(url) {
-      return String(url || "")
-        .trim()
-        .replace(/\/+$/, "");
-    }
-
-    function calculateRatio(askingPrice, offerAmount) {
-      if (!askingPrice || askingPrice <= 0) {
-        return 0;
-      }
-
-      return offerAmount / askingPrice * 100;
-    }
-
-    function updateRatio() {
-      const askingPrice =
-        Number(valueOf("askingPrice")) || 0;
-
-      const offerAmount =
-        Number(valueOf("offerAmount")) || 0;
-
-      const ratio =
-        calculateRatio(askingPrice, offerAmount);
-
-      const ratioValue =
-        document.getElementById("ratioValue");
-
-      const progressBar =
-        document.getElementById("progressBar");
-
-      const badge =
-        document.getElementById("formalBadge");
-
-      const message =
-        document.getElementById("thresholdMessage");
-
-      const status =
-        document.getElementById("caseStatus");
-
-      ratioValue.textContent =
-        `${ratio.toFixed(2)}%`;
-
-      progressBar.style.width =
-        `${Math.min(Math.max(ratio, 0), 100)}%`;
-
-      if (ratio >= FORMAL_THRESHOLD) {
-        progressBar.style.background = "#16815f";
-
-        badge.className = "badge green";
-        badge.textContent = "正式斡旋";
-
-        message.className =
-          "threshold-message formal";
-
-        message.textContent =
-          "已達到開價 80%，案件將進入正式斡旋順位。";
-
-        if (status.value === "一般出價") {
-          status.value = "正式斡旋";
-        }
-      } else {
-        progressBar.style.background = "#f28c28";
-
-        badge.className = "badge orange";
-        badge.textContent = "尚未達標";
-
-        message.className =
-          "threshold-message";
-
-        message.textContent =
-          "尚未達到開價 80%，不進入正式斡旋順位。";
-
-        if (status.value === "正式斡旋") {
-          status.value = "一般出價";
-        }
-      }
-    }
-
-    function toggleContractFields() {
-      const show =
-        valueOf("hasContractChange") === "有";
-
-      document
-        .querySelectorAll(".contract-field")
-        .forEach(field => {
-          field.classList.toggle("hidden", !show);
-        });
-    }
-
-    function refreshDropdowns() {
-      const activeStaff =
-        staff.filter(item => item.active === "是");
-
-      const stores = [
-        ...new Set(
-          activeStaff
-            .map(item => item.store)
-            .filter(Boolean)
+const SPREADSHEET_ID = "1PELnNS61MI5dX1Y2HvJ6XARTiF5MkNNr7XfrUIY0j0I";
+const SHEET_NAME = "預約資料";
+
+const ADMIN_EMAILS = [
+  "evolution0209@gmail.com",
+  "pacifitwork8988@gmail.com",
+  "newone0818@gmail.com"
+];
+
+const HEADERS = [
+  "建立時間",
+  "狀態",
+  "姓名",
+  "Email",
+  "電話",
+  "Line ID",
+  "Line暱稱",
+  "教室",
+  "教室代碼",
+  "日期",
+  "時段",
+  "時段代碼",
+  "費用",
+  "總金額",
+  "活動主題",
+  "發票抬頭",
+  "統編",
+  "寄送地址",
+  "匯款後五碼",
+  "備註",
+  "管理備註"
+];
+
+const STATUS_OPTIONS = [
+  "待確認",
+  "暫保留",
+  "已確認",
+  "已付款",
+  "取消",
+  "內部使用"
+];
+
+const STATUS_COLORS = {
+  "待確認": {
+    background: "#FCE4D6",
+    font: "#C65911"
+  },
+  "暫保留": {
+    background: "#FFF2CC",
+    font: "#7F6000"
+  },
+  "已確認": {
+    background: "#D9EAF7",
+    font: "#0B5394"
+  },
+  "已付款": {
+    background: "#D9EAD3",
+    font: "#38761D"
+  },
+  "取消": {
+    background: "#E7E6E6",
+    font: "#666666"
+  },
+  "內部使用": {
+    background: "#EADCF8",
+    font: "#674EA7"
+  }
+};
+
+const ROOM_NAME = {
+  A: "A案 40人大教室",
+  B: "B案 10人會議室"
+};
+
+const TIME_NAME = {
+  morning: "早上 08:00–12:00",
+  afternoon: "下午 13:00–17:00",
+  evening: "晚上 18:00–21:00"
+};
+
+const PRICE = {
+  A: {
+    morning: 4000,
+    afternoon: 4000,
+    evening: 4000
+  },
+  B: {
+    morning: 1500,
+    afternoon: 1500,
+    evening: 1500
+  }
+};
+
+const BANK_INFO = `
+戶名：中成不動產股份有限公司
+銀行：永豐銀行（807）南桃園分行
+帳號：185-001-0018098-6
+`;
+
+const CONTACT_INFO = `
+友成商務空間
+地址：桃園市桃園區中平路98號18樓（亞洲商業大樓）
+電話：03-220-1818
+教室聯絡人：0938-560-333
+`;
+
+function doGet(e) {
+  try {
+    e = e || {};
+    e.parameter = e.parameter || {};
+
+    const action = e.parameter.action || "list";
+    const callback = e.parameter.callback || "";
+
+    let result;
+
+    if (action === "ping") {
+      result = {
+        ok: true,
+        message: "友成商務空間 Apps Script 運作正常",
+        time: Utilities.formatDate(
+          new Date(),
+          "Asia/Taipei",
+          "yyyy-MM-dd HH:mm:ss"
         )
-      ].sort();
-
-      fillSimpleSelect(
-        "reportStore",
-        stores,
-        "請選擇門店"
-      );
-
-      fillSimpleSelect(
-        "listingStore",
-        stores,
-        "請選擇門店"
-      );
-
-      fillSimpleSelect(
-        "adminListingStore",
-        stores,
-        "請選擇門店"
-      );
-
-      fillStaffSelect(
-        "reporterName",
-        activeStaff,
-        "請選擇回報業務"
-      );
-
-      fillStaffSelect(
-        "developerName",
-        activeStaff.filter(item =>
-          ["業務", "開發"].includes(item.role)
-        ),
-        "請選擇開發業務"
-      );
-
-      fillStaffSelect(
-        "salesName",
-        activeStaff.filter(item =>
-          ["業務", "銷售"].includes(item.role)
-        ),
-        "請選擇銷售業務"
-      );
-
-      fillStaffSelect(
-        "listingManager",
-        activeStaff.filter(
-          item => item.role === "主管"
-        ),
-        "請選擇主管"
-      );
-
-      fillStaffSelect(
-        "contractConfirmedBy",
-        activeStaff,
-        "請選擇確認人"
-      );
-
-      fillStaffSelect(
-        "adminDeveloperName",
-        activeStaff.filter(item =>
-          ["業務", "開發"].includes(item.role)
-        ),
-        "請選擇開發業務"
-      );
-
-      fillStaffSelect(
-        "adminSalesName",
-        activeStaff.filter(item =>
-          ["業務", "銷售"].includes(item.role)
-        ),
-        "請選擇銷售業務"
-      );
-
-      fillStaffSelect(
-        "adminListingManager",
-        activeStaff.filter(
-          item => item.role === "主管"
-        ),
-        "請選擇主管"
-      );
-    }
-
-    function fillSimpleSelect(id, values, placeholder) {
-      const select = document.getElementById(id);
-
-      if (!select) {
-        return;
-      }
-
-      const current = select.value;
-
-      select.innerHTML =
-        `<option value="">${escapeHtml(placeholder)}</option>`;
-
-      values.forEach(value => {
-        const option =
-          document.createElement("option");
-
-        option.value = value;
-        option.textContent = value;
-
-        select.appendChild(option);
-      });
-
-      if (values.includes(current)) {
-        select.value = current;
-      }
-    }
-
-    function fillStaffSelect(id, people, placeholder) {
-      const select = document.getElementById(id);
-
-      if (!select) {
-        return;
-      }
-
-      const current = select.value;
-
-      select.innerHTML =
-        `<option value="">${escapeHtml(placeholder)}</option>`;
-
-      people
-        .slice()
-        .sort((a, b) =>
-          a.name.localeCompare(b.name, "zh-Hant")
-        )
-        .forEach(person => {
-          const option =
-            document.createElement("option");
-
-          option.value = person.name;
-
-          option.textContent =
-            `${person.name}｜${person.store}｜${person.role}`;
-
-          select.appendChild(option);
-        });
-
-      if (
-        people.some(person => person.name === current)
-      ) {
-        select.value = current;
-      }
-    }
-
-    function searchProperty() {
-      const keyword =
-        valueOf("propertySearch", true);
-
-      const message =
-        document.getElementById(
-          "propertySearchMessage"
-        );
-
-      if (!keyword) {
-        message.className = "message error";
-
-        message.textContent =
-          "請輸入物件編號、59188 編號或物件網址。";
-
-        return;
-      }
-
-      const keywordLower =
-        keyword.toLowerCase();
-
-      const normalizedUrl =
-        normalizeUrl(keyword).toLowerCase();
-
-      const property =
-        properties.find(item => {
-          const id =
-            String(item.propertyId || "")
-              .toLowerCase();
-
-          const id591 =
-            String(item.property591Id || "")
-              .toLowerCase();
-
-          const url =
-            normalizeUrl(item.url)
-              .toLowerCase();
-
-          return (
-            item.active === "是" &&
-            (
-              id === keywordLower ||
-              id591 === keywordLower ||
-              (url && url === normalizedUrl)
-            )
-          );
-        });
-
-      if (!property) {
-        message.className = "message error";
-
-        message.textContent =
-          "查無此物件，請先到後台設定新增物件。";
-
-        return;
-      }
-
-      setValue("propertyId", property.propertyId);
-      setValue("property591Id", property.property591Id);
-      setValue("propertyName", property.name);
-      setValue("propertyAddress", property.address);
-      setValue("propertyUrl", property.url);
-      setValue("askingPrice", property.askingPrice);
-      setValue("listingStore", property.store);
-      setValue("developerName", property.developer);
-      setValue("salesName", property.sales);
-      setValue("listingManager", property.manager);
-
-      updateRatio();
-
-      message.className = "message success";
-
-      message.textContent =
-        `已帶入物件：${property.name}`;
-    }
-
-    function collectOffer() {
-      const askingPrice =
-        Number(valueOf("askingPrice")) || 0;
-
-      const offerAmount =
-        Number(valueOf("offerAmount")) || 0;
-
-      const ratio =
-        calculateRatio(askingPrice, offerAmount);
-
-      let caseStatus =
-        valueOf("caseStatus");
-
-      if (
-        ratio >= FORMAL_THRESHOLD &&
-        caseStatus === "一般出價"
-      ) {
-        caseStatus = "正式斡旋";
-      }
-
-      if (
-        ratio < FORMAL_THRESHOLD &&
-        caseStatus === "正式斡旋"
-      ) {
-        caseStatus = "一般出價";
-      }
-
-      return {
-        action: "saveOffer",
-        dataType: "offerReport",
-
-        createdAt:
-          new Date().toLocaleString("zh-TW"),
-
-        reportDate: valueOf("reportDate"),
-        reportTime: valueOf("reportTime"),
-        expiryDate: valueOf("expiryDate"),
-        expiryTime: valueOf("expiryTime"),
-
-        reportStore: valueOf("reportStore"),
-        reporterName: valueOf("reporterName"),
-
-        propertyId: valueOf("propertyId", true),
-        property591Id:
-          valueOf("property591Id", true),
-
-        propertyName:
-          valueOf("propertyName", true),
-
-        propertyAddress:
-          valueOf("propertyAddress", true),
-
-        propertyUrl:
-          valueOf("propertyUrl", true),
-
-        listingStore:
-          valueOf("listingStore"),
-
-        listingManager:
-          valueOf("listingManager"),
-
-        developerName:
-          valueOf("developerName"),
-
-        salesName:
-          valueOf("salesName"),
-
-        askingPrice,
-        offerAmount,
-        ratio,
-        isFormal:
-          ratio >= FORMAL_THRESHOLD,
-
-        buyerCode:
-          valueOf("buyerCode", true),
-
-        paymentMethod:
-          valueOf("paymentMethod"),
-
-        loanRatio:
-          valueOf("loanRatio"),
-
-        needSellHouse:
-          valueOf("needSellHouse"),
-
-        signingDate:
-          valueOf("signingDate"),
-
-        handoverDate:
-          valueOf("handoverDate"),
-
-        specialConditions:
-          valueOf("specialConditions", true),
-
-        remarks:
-          valueOf("remarks", true),
-
-        hasContractChange:
-          valueOf("hasContractChange"),
-
-        contractChangeType:
-          valueOf("contractChangeType"),
-
-        contractOriginalContent:
-          valueOf(
-            "contractOriginalContent",
-            true
-          ),
-
-        contractNewContent:
-          valueOf(
-            "contractNewContent",
-            true
-          ),
-
-        contractChangeReason:
-          valueOf(
-            "contractChangeReason",
-            true
-          ),
-
-        contractConfirmedBy:
-          valueOf("contractConfirmedBy"),
-
-        contractChangeDate:
-          valueOf("contractChangeDate"),
-
-        caseStatus,
-
-        priorityNote:
-          valueOf("priorityNote", true)
+      };
+    } else if (action === "list") {
+      result = {
+        ok: true,
+        bookings: getBookingsForCalendar()
+      };
+    } else {
+      result = {
+        ok: false,
+        message: "Unknown action"
       };
     }
 
-    function validateOffer(data) {
-      if (
-        !data.reportDate ||
-        !data.reportTime ||
-        !data.expiryDate ||
-        !data.expiryTime
-      ) {
-        alert("請填寫回報日期、送件時間與期限。");
-        return false;
-      }
+    const json = JSON.stringify(result);
 
-      if (
-        !data.reportStore ||
-        !data.reporterName
-      ) {
-        alert("請選擇回報門店與回報業務。");
-        return false;
-      }
-
-      if (
-        !data.propertyId ||
-        !data.propertyName ||
-        !data.propertyAddress
-      ) {
-        alert("請填寫完整物件資料。");
-        return false;
-      }
-
-      if (data.askingPrice <= 0) {
-        alert("請輸入正確開價。");
-        return false;
-      }
-
-      if (data.offerAmount <= 0) {
-        alert("請輸入正確斡旋金額。");
-        return false;
-      }
-
-      const reportTime =
-        new Date(
-          `${data.reportDate}T${data.reportTime}`
-        );
-
-      const expiryTime =
-        new Date(
-          `${data.expiryDate}T${data.expiryTime}`
-        );
-
-      if (expiryTime <= reportTime) {
-        alert("斡旋期限必須晚於正式送件時間。");
-        return false;
-      }
-
-      if (data.hasContractChange === "有") {
-        if (!data.contractChangeType) {
-          alert("請選擇契約變更類型。");
-          return false;
-        }
-
-        if (
-          !data.contractOriginalContent ||
-          !data.contractNewContent
-        ) {
-          alert("請填寫變更前與變更後內容。");
-          return false;
-        }
-      }
-
-      return true;
+    if (callback) {
+      return ContentService
+        .createTextOutput(callback + "(" + json + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
     }
 
-    async function saveOffer(event) {
-      event.preventDefault();
+    return ContentService
+      .createTextOutput(json)
+      .setMimeType(ContentService.MimeType.JSON);
 
-      const data = collectOffer();
+  } catch (error) {
+    console.error("doGet 發生錯誤：", error);
 
-      if (!validateOffer(data)) {
-        return;
-      }
+    return jsonOutput({
+      ok: false,
+      message: String(error.message || error)
+    });
+  }
+}
 
-      const button =
-        document.getElementById(
-          "saveOfferButton"
-        );
-
-      const editId =
-        valueOf("offerEditId");
-
-      if (editId) {
-        const index =
-          offers.findIndex(
-            item => item.id === editId
-          );
-
-        if (index !== -1) {
-          data.id = editId;
-
-          data.originalCreatedAt =
-            offers[index].originalCreatedAt ||
-            offers[index].createdAt;
-
-          data.updatedAt =
-            new Date().toISOString();
-
-          offers[index] = data;
-        }
-      } else {
-        data.id =
-          "OFFER-" +
-          Date.now() +
-          "-" +
-          Math.random()
-            .toString(36)
-            .slice(2, 7);
-
-        data.originalCreatedAt =
-          new Date().toISOString();
-
-        data.updatedAt =
-          data.originalCreatedAt;
-
-        offers.push(data);
-      }
-
-      saveArray(OFFER_KEY, offers);
-      renderAll();
-
-      try {
-        button.disabled = true;
-        button.textContent = "正在回傳後台...";
-
-        await sendOfferToBackend(data);
-
-        alert(
-          "斡旋回報已儲存，並已送出後台同步要求。"
-        );
-      } catch (error) {
-        console.error(error);
-
-        alert(
-          "資料已儲存在目前瀏覽器，但後台同步失敗。"
-        );
-      } finally {
-        button.disabled = false;
-        button.textContent = "儲存並回傳後台";
-      }
-
-      resetOfferForm();
-      openPage("casePage");
+function doPost(e) {
+  try {
+    if (!e || !e.postData || !e.postData.contents) {
+      throw new Error("沒有收到預約資料");
     }
 
-    async function sendOfferToBackend(data) {
-      if (!SCRIPT_URL) {
-        throw new Error("尚未設定後台網址");
-      }
+    const data =
+      JSON.parse(e.postData.contents || "{}");
 
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-    }
+    console.log(
+      "收到預約資料：" +
+      JSON.stringify(data)
+    );
 
-    async function loadBackendData() {
-      setBackendStatus(
-        "正在讀取後台資料",
-        false
+    const result =
+      saveBooking(data);
+
+    const mailResult = {
+      customer: false,
+      admin: false,
+      errors: []
+    };
+
+    try {
+      sendCustomerEmail(
+        data,
+        result
       );
 
-      try {
-        const response =
-          await fetch(
-            SCRIPT_URL +
-            "?action=offerBootstrap&t=" +
-            Date.now()
-          );
+      mailResult.customer = true;
 
-        if (!response.ok) {
-          throw new Error("後台回應異常");
-        }
+    } catch (mailError) {
 
-        const data =
-          await response.json();
+      console.error(
+        "客戶 Email 寄送失敗：",
+        mailError
+      );
 
-        if (
-          data &&
-          Array.isArray(data.staff)
-        ) {
-          staff = data.staff;
-          saveArray(STAFF_KEY, staff);
-        }
-
-        if (
-          data &&
-          Array.isArray(data.properties)
-        ) {
-          properties = data.properties;
-          saveArray(PROPERTY_KEY, properties);
-        }
-
-        if (
-          data &&
-          Array.isArray(data.offers)
-        ) {
-          offers =
-            mergeOffers(
-              offers,
-              data.offers
-            );
-
-          saveArray(OFFER_KEY, offers);
-        }
-
-        refreshDropdowns();
-        renderAll();
-
-        setBackendStatus(
-          "後台已連線",
-          true
-        );
-      } catch (error) {
-        console.log(
-          "目前使用本機資料。",
-          error
-        );
-
-        setBackendStatus(
-          "目前使用本機資料",
-          false
-        );
-      }
-    }
-
-    function mergeOffers(localOffers, remoteOffers) {
-      const map = new Map();
-
-      [...localOffers, ...remoteOffers]
-        .forEach(item => {
-          if (item && item.id) {
-            map.set(item.id, item);
-          }
-        });
-
-      return [...map.values()];
-    }
-
-    function setBackendStatus(text, online) {
-      document.getElementById(
-        "backendStatus"
-      ).textContent = text;
-
-      document.getElementById(
-        "syncStatusText"
-      ).textContent = text;
-
-      const dot =
-        document.getElementById("backendDot");
-
-      dot.className =
-        online
-          ? "status-dot online"
-          : "status-dot";
-    }
-
-    function resetOfferForm() {
-      document
-        .getElementById("offerForm")
-        .reset();
-
-      setValue("offerEditId", "");
-      setValue("caseStatus", "一般出價");
-      setValue("hasContractChange", "無");
-
-      document.getElementById(
-        "offerFormTitle"
-      ).textContent =
-        "新增斡旋回報";
-
-      document.getElementById(
-        "offerModeBadge"
-      ).textContent =
-        "新增模式";
-
-      document.getElementById(
-        "offerModeBadge"
-      ).className =
-        "badge blue";
-
-      const message =
-        document.getElementById(
-          "propertySearchMessage"
-        );
-
-      message.className = "message";
-      message.textContent =
-        "尚未搜尋物件。";
-
-      setDefaultDateTime();
-      refreshDropdowns();
-      toggleContractFields();
-      updateRatio();
-    }
-
-    function saveStaff(event) {
-      event.preventDefault();
-
-      const editId =
-        valueOf("staffEditId");
-
-      const data = {
-        id:
-          editId ||
-          "STAFF-" +
-          Date.now() +
-          "-" +
-          Math.random()
-            .toString(36)
-            .slice(2, 6),
-
-        name:
-          valueOf("staffName", true),
-
-        store:
-          valueOf("staffStore", true),
-
-        role:
-          valueOf("staffRole"),
-
-        active:
-          valueOf("staffActive")
-      };
-
-      if (
-        !data.name ||
-        !data.store ||
-        !data.role
-      ) {
-        alert("請填寫姓名、門店與職務。");
-        return;
-      }
-
-      if (editId) {
-        const index =
-          staff.findIndex(
-            item => item.id === editId
-          );
-
-        if (index !== -1) {
-          staff[index] = data;
-        }
-      } else {
-        staff.push(data);
-      }
-
-      saveArray(STAFF_KEY, staff);
-      resetStaffForm();
-      refreshDropdowns();
-      renderAll();
-
-      alert("人員資料已儲存。");
-    }
-
-    function resetStaffForm() {
-      document
-        .getElementById("staffForm")
-        .reset();
-
-      setValue("staffEditId", "");
-      setValue("staffActive", "是");
-
-      document.getElementById(
-        "staffFormTitle"
-      ).textContent =
-        "新增人員";
-    }
-
-    window.editStaff = function(id) {
-      const item =
-        staff.find(
-          person => person.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      setValue("staffEditId", item.id);
-      setValue("staffName", item.name);
-      setValue("staffStore", item.store);
-      setValue("staffRole", item.role);
-      setValue("staffActive", item.active);
-
-      document.getElementById(
-        "staffFormTitle"
-      ).textContent =
-        "修改人員";
-
-      openPage("adminPage");
-    };
-
-    window.deleteStaff = function(id) {
-      const item =
-        staff.find(
-          person => person.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      if (
-        !confirm(
-          `確定刪除「${item.name}」嗎？`
+      mailResult.errors.push(
+        "客戶 Email：" +
+        String(
+          mailError.message ||
+          mailError
         )
-      ) {
-        return;
-      }
-
-      staff =
-        staff.filter(
-          person => person.id !== id
-        );
-
-      saveArray(STAFF_KEY, staff);
-      refreshDropdowns();
-      renderAll();
-    };
-
-    function saveProperty(event) {
-      event.preventDefault();
-
-      const editId =
-        valueOf("propertyEditId");
-
-      const data = {
-        id:
-          editId ||
-          "PROPERTY-" +
-          Date.now() +
-          "-" +
-          Math.random()
-            .toString(36)
-            .slice(2, 6),
-
-        propertyId:
-          valueOf(
-            "adminPropertyId",
-            true
-          ),
-
-        property591Id:
-          valueOf(
-            "adminProperty591Id",
-            true
-          ),
-
-        name:
-          valueOf(
-            "adminPropertyName",
-            true
-          ),
-
-        address:
-          valueOf(
-            "adminPropertyAddress",
-            true
-          ),
-
-        url:
-          valueOf(
-            "adminPropertyUrl",
-            true
-          ),
-
-        askingPrice:
-          Number(
-            valueOf("adminAskingPrice")
-          ) || 0,
-
-        store:
-          valueOf("adminListingStore"),
-
-        developer:
-          valueOf("adminDeveloperName"),
-
-        sales:
-          valueOf("adminSalesName"),
-
-        manager:
-          valueOf("adminListingManager"),
-
-        active:
-          valueOf("adminPropertyActive")
-      };
-
-      if (
-        !data.propertyId ||
-        !data.name ||
-        !data.address ||
-        data.askingPrice <= 0
-      ) {
-        alert(
-          "請填寫物件編號、名稱、地址與正確開價。"
-        );
-        return;
-      }
-
-      const duplicate =
-        properties.some(item =>
-          item.propertyId === data.propertyId &&
-          item.id !== editId
-        );
-
-      if (duplicate) {
-        alert("此物件編號已存在。");
-        return;
-      }
-
-      if (editId) {
-        const index =
-          properties.findIndex(
-            item => item.id === editId
-          );
-
-        if (index !== -1) {
-          properties[index] = data;
-        }
-      } else {
-        properties.push(data);
-      }
-
-      saveArray(PROPERTY_KEY, properties);
-      resetPropertyForm();
-      renderAll();
-
-      alert("物件資料已儲存。");
+      );
     }
 
-    function resetPropertyForm() {
-      document
-        .getElementById("propertyForm")
-        .reset();
+    try {
+      sendAdminEmail(
+        data,
+        result
+      );
 
-      setValue("propertyEditId", "");
-      setValue("adminPropertyActive", "是");
+      mailResult.admin = true;
 
-      document.getElementById(
-        "propertyFormTitle"
-      ).textContent =
-        "新增物件";
+    } catch (mailError) {
 
-      refreshDropdowns();
-    }
+      console.error(
+        "管理員 Email 寄送失敗：",
+        mailError
+      );
 
-    window.editProperty = function(id) {
-      const item =
-        properties.find(
-          property => property.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      refreshDropdowns();
-
-      setValue("propertyEditId", item.id);
-      setValue("adminPropertyId", item.propertyId);
-      setValue("adminProperty591Id", item.property591Id);
-      setValue("adminPropertyName", item.name);
-      setValue("adminPropertyAddress", item.address);
-      setValue("adminPropertyUrl", item.url);
-      setValue("adminAskingPrice", item.askingPrice);
-      setValue("adminListingStore", item.store);
-      setValue("adminDeveloperName", item.developer);
-      setValue("adminSalesName", item.sales);
-      setValue("adminListingManager", item.manager);
-      setValue("adminPropertyActive", item.active);
-
-      document.getElementById(
-        "propertyFormTitle"
-      ).textContent =
-        "修改物件";
-
-      openPage("adminPage");
-    };
-
-    window.deleteProperty = function(id) {
-      const item =
-        properties.find(
-          property => property.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      if (
-        !confirm(
-          `確定刪除「${item.name}」嗎？`
+      mailResult.errors.push(
+        "管理員 Email：" +
+        String(
+          mailError.message ||
+          mailError
         )
-      ) {
-        return;
-      }
-
-      properties =
-        properties.filter(
-          property => property.id !== id
-        );
-
-      saveArray(PROPERTY_KEY, properties);
-      renderAll();
-    };
-
-    function getRankMap() {
-      const groups = {};
-      const rankMap = {};
-
-      offers
-        .filter(item =>
-          item.isFormal &&
-          ![
-            "已退斡",
-            "已到期",
-            "已取消"
-          ].includes(item.caseStatus)
-        )
-        .forEach(item => {
-          const key =
-            item.propertyId ||
-            item.property591Id ||
-            item.propertyName;
-
-          if (!groups[key]) {
-            groups[key] = [];
-          }
-
-          groups[key].push(item);
-        });
-
-      Object.values(groups)
-        .forEach(group => {
-          group.sort((a, b) => {
-            if (
-              Number(b.ratio) !==
-              Number(a.ratio)
-            ) {
-              return (
-                Number(b.ratio) -
-                Number(a.ratio)
-              );
-            }
-
-            return (
-              getReportTimestamp(a) -
-              getReportTimestamp(b)
-            );
-          });
-
-          group.forEach((item, index) => {
-            rankMap[item.id] = index + 1;
-          });
-        });
-
-      return rankMap;
+      );
     }
 
-    function getReportTimestamp(item) {
-      return new Date(
-        `${item.reportDate}T${item.reportTime}`
-      ).getTime();
+    return jsonOutput({
+      ok: true,
+      message: "預約資料已成功寫入。",
+      result: result,
+      email: mailResult
+    });
+
+  } catch (error) {
+
+    console.error(
+      "doPost 發生錯誤：",
+      error
+    );
+
+    return jsonOutput({
+      ok: false,
+      message: String(
+        error.message ||
+        error
+      )
+    });
+  }
+}
+
+function saveBooking(data) {
+
+  const sheet =
+    getOrCreateBookingSheet();
+
+  const roomCode =
+    String(
+      data.roomCode || ""
+    ).trim();
+
+  const date =
+    String(
+      data.date || ""
+    ).trim();
+
+  const bankLast5 =
+    String(
+      data.bankLast5 || ""
+    ).trim();
+
+  const timeCodes =
+    String(
+      data.timeCodes || ""
+    )
+    .split(",")
+    .map(
+      s => s.trim()
+    )
+    .filter(Boolean);
+
+  if (
+    !String(
+      data.name || ""
+    ).trim()
+  ) {
+    throw new Error(
+      "缺少姓名"
+    );
+  }
+
+  if (
+    !String(
+      data.phone || ""
+    ).trim()
+  ) {
+    throw new Error(
+      "缺少電話"
+    );
+  }
+
+  if (!roomCode) {
+    throw new Error(
+      "缺少教室"
+    );
+  }
+
+  if (!date) {
+    throw new Error(
+      "缺少日期"
+    );
+  }
+
+  if (
+    timeCodes.length === 0
+  ) {
+    throw new Error(
+      "缺少時段"
+    );
+  }
+
+  if (
+    !ROOM_NAME[
+      roomCode
+    ]
+  ) {
+    throw new Error(
+      "教室代碼錯誤：" +
+      roomCode
+    );
+  }
+
+  let totalFee = 0;
+
+  const timeNames = [];
+
+  timeCodes.forEach(
+    timeCode => {
+
+      const fee =
+        PRICE[
+          roomCode
+        ] &&
+        PRICE[
+          roomCode
+        ][
+          timeCode
+        ]
+        ?
+        PRICE[
+          roomCode
+        ][
+          timeCode
+        ]
+        :
+        0;
+
+      totalFee += fee;
     }
+  );
 
-    function renderAll() {
-      renderStats();
-      renderOffers();
-      renderStaff();
-      renderProperties();
-      renderLocalCounts();
+  const rows = [];
+
+  timeCodes.forEach(
+    timeCode => {
+
+      const fee =
+        PRICE[
+          roomCode
+        ] &&
+        PRICE[
+          roomCode
+        ][
+          timeCode
+        ]
+        ?
+        PRICE[
+          roomCode
+        ][
+          timeCode
+        ]
+        :
+        0;
+
+      const timeName =
+        TIME_NAME[
+          timeCode
+        ] ||
+        timeCode;
+
+      timeNames.push(
+        timeName
+      );
+
+      rows.push([
+        new Date(),
+        "待確認",
+        String(data.name || "").trim(),
+        String(data.email || "").trim(),
+        String(data.phone || "").trim(),
+        String(data.lineId || "").trim(),
+        String(data.lineName || "").trim(),
+        ROOM_NAME[roomCode] || data.room || "",
+        roomCode,
+        date,
+        timeName,
+        timeCode,
+        fee,
+        totalFee,
+        String(data.topic || "").trim(),
+        String(data.invoiceTitle || "").trim(),
+        String(data.taxId || "").trim(),
+        String(data.address || "").trim(),
+        bankLast5,
+        String(data.note || "").trim(),
+        ""
+      ]);
     }
+  );
 
-    function renderStats() {
-      document.getElementById(
-        "statTotal"
-      ).textContent =
-        offers.length;
+  if (
+    rows.length === 0
+  ) {
+    throw new Error(
+      "沒有可寫入的預約時段"
+    );
+  }
 
-      document.getElementById(
-        "statFormal"
-      ).textContent =
-        offers.filter(
-          item => item.isFormal
-        ).length;
+  const startRow =
+    sheet.getLastRow() + 1;
 
-      document.getElementById(
-        "statActive"
-      ).textContent =
-        offers.filter(item =>
-          [
-            "正式斡旋",
-            "議價中",
-            "待主管回覆",
-            "待屋主回覆"
-          ].includes(item.caseStatus)
-        ).length;
+  sheet
+    .getRange(
+      startRow,
+      1,
+      rows.length,
+      HEADERS.length
+    )
+    .setValues(
+      rows
+    );
 
-      document.getElementById(
-        "statClosed"
-      ).textContent =
-        offers.filter(
-          item => item.caseStatus === "已成交"
-        ).length;
+  SpreadsheetApp.flush();
+
+  setupBackendNow();
+
+  console.log(
+    "預約已成功寫入試算表，共 " +
+    rows.length +
+    " 筆。"
+  );
+
+  return {
+    rowsAdded: rows.length,
+    roomName:
+      ROOM_NAME[
+        roomCode
+      ] ||
+      data.room ||
+      "",
+    date: date,
+    timeNames: timeNames,
+    totalFee: totalFee,
+    bankLast5: bankLast5
+  };
+}
+
+function sendCustomerEmail(
+  data,
+  result
+) {
+
+  const customerEmail =
+    String(
+      data.email || ""
+    ).trim();
+
+  if (!customerEmail) {
+
+    console.log(
+      "客戶沒有填 Email，不寄客戶通知信。"
+    );
+
+    return;
+  }
+
+  const bankDisplay =
+    result.bankLast5
+    ?
+    result.bankLast5
+    :
+    "未填寫";
+
+  const subject =
+    "【友成商務空間】已收到您的場地預約資料";
+
+  const body = `
+${data.name || "您好"} 您好：
+
+我們已收到您的場地預約資料。
+
+請注意：
+此信為系統自動通知，代表我們已收到您的資料。
+實際檔期仍需由工作人員確認後，才算正式保留。
+
+————————————
+預約資料
+————————————
+
+姓名：${data.name || ""}
+電話：${data.phone || ""}
+Email：${data.email || ""}
+Line ID：${data.lineId || ""}
+Line 暱稱：${data.lineName || ""}
+
+預約日期：${result.date}
+教室：${result.roomName}
+
+時段：
+${result.timeNames.map(
+  t => "・" + t
+).join("\n")}
+
+活動主題：
+${data.topic || ""}
+
+預估總金額：
+${Number(
+  result.totalFee
+).toLocaleString()} 元
+
+匯款後五碼：
+${bankDisplay}
+
+————————————
+匯款資訊
+————————————
+${BANK_INFO}
+
+提醒：
+
+若目前尚未匯款，
+匯款後五碼可暫時留白。
+
+完成匯款後，
+可再提供給工作人員核對。
+
+實際檔期仍需由工作人員確認後，
+才算正式保留。
+
+————————————
+取消、延期與違約提醒
+————————————
+
+1. 正式預約成立後，如因承租方因素取消、臨時不到場或未依約使用，已付場租費不予退還。
+
+2. 若需更改日期，請盡早通知。場地方可依實際空檔協助擇日延期一次。
+
+3. 延期日期需以場地方可提供之空檔為準，不保證原條件、原時段或指定日期一定可安排。
+
+4. 使用當日取消、未到場、未通知，視同放棄使用。
+
+5. 如遇政府公告停班停課、重大天災或不可抗力，可協助免費延期一次。
+
+————————————
+聯絡資訊
+————————————
+${CONTACT_INFO}
+
+若您發現預約日期、時段或資料有誤，
+請直接回覆本信，或聯繫：
+
+03-220-1818
+0938-560-333
+
+友成商務空間 敬上
+`;
+
+  MailApp.sendEmail({
+    to: customerEmail,
+    subject: subject,
+    body: body,
+    name: "友成商務空間"
+  });
+}
+
+function sendAdminEmail(
+  data,
+  result
+) {
+
+  const recipients =
+    ADMIN_EMAILS
+    .map(
+      email =>
+      String(
+        email
+      ).trim()
+    )
+    .filter(
+      email =>
+      email &&
+      email.includes("@")
+    )
+    .join(",");
+
+  if (!recipients) {
+    return;
+  }
+
+  const bankDisplay =
+    result.bankLast5
+    ?
+    result.bankLast5
+    :
+    "未填寫";
+
+  const subject =
+    "【新預約通知｜請總部處理】友成商務空間收到一筆預約資料";
+
+  const body = `
+總部秘書 / 執行長您好：
+
+友成商務空間收到一筆新的場地預約資料，
+請協助接手後續確認。
+
+————————————
+一、客戶資料
+————————————
+
+姓名：${data.name || ""}
+電話：${data.phone || ""}
+Email：${data.email || ""}
+Line ID：${data.lineId || ""}
+Line 暱稱：${data.lineName || ""}
+
+————————————
+二、預約內容
+————————————
+
+預約日期：
+${result.date}
+
+教室：
+${result.roomName}
+
+時段：
+${result.timeNames.map(
+  t =>
+  "・" + t
+).join("\n")}
+
+活動主題：
+${data.topic || ""}
+
+預估總金額：
+${Number(
+  result.totalFee
+).toLocaleString()} 元
+
+匯款後五碼：
+${bankDisplay}
+
+————————————
+三、發票資料
+————————————
+
+發票抬頭：
+${data.invoiceTitle || ""}
+
+統一編號：
+${data.taxId || ""}
+
+發票寄送地址：
+${data.address || ""}
+
+備註：
+${data.note || ""}
+
+————————————
+四、總部處理流程
+————————————
+
+1. 請先確認 Google 試算表是否已新增這筆資料。
+
+2. 檢查該日期、教室、時段是否可出租。
+
+3. 若客戶已有提供匯款資料，再核對匯款後五碼與款項。
+
+4. 若尚未提供匯款後五碼，可待客戶完成匯款後再補登。
+
+5. 若可出租，請聯繫客戶確認檔期。
+
+6. 若先保留檔期，請將狀態改成：
+暫保留
+
+7. 若已確認出租，請將狀態改成：
+已確認
+
+8. 若已收到款項，請將狀態改成：
+已付款
+
+9. 若客戶取消或資料錯誤，請將狀態改成：
+取消
+
+10. 若為總部內部使用，請將狀態改成：
+內部使用
+
+————————————
+五、前台月曆顯示規則
+————————————
+
+待確認 / 暫保留：
+前台顯示橘色暫保留
+
+已確認 / 已付款：
+前台顯示已預約
+
+取消：
+前台不顯示
+
+內部使用：
+前台顯示紫色內部
+
+友成商務空間預約系統
+`;
+
+  MailApp.sendEmail({
+    to: recipients,
+    subject: subject,
+    body: body,
+    name: "友成商務空間預約系統"
+  });
+}
+
+function getBookingsForCalendar() {
+
+  const sheet =
+    getOrCreateBookingSheet();
+
+  const values =
+    sheet
+    .getDataRange()
+    .getValues();
+
+  if (
+    values.length <= 1
+  ) {
+    return {};
+  }
+
+  const headers =
+    values[0];
+
+  const index = {};
+
+  headers.forEach(
+    (h,i) => {
+
+      index[
+        String(h).trim()
+      ] = i;
+
     }
-
-    function renderLocalCounts() {
-      document.getElementById(
-        "localStaffCount"
-      ).textContent =
-        staff.length;
-
-      document.getElementById(
-        "localPropertyCount"
-      ).textContent =
-        properties.length;
-
-      document.getElementById(
-        "localOfferCount"
-      ).textContent =
-        offers.length;
-    }
-
-    function renderOffers() {
-      const list =
-        document.getElementById("caseList");
-
-      const empty =
-        document.getElementById("caseEmpty");
-
-      const keyword =
-        valueOf("caseSearch", true)
-          .toLowerCase();
-
-      const status =
-        valueOf("caseStatusFilter");
-
-      const rankMap =
-        getRankMap();
-
-      const filtered =
-        offers
-          .filter(item => {
-            const searchText = [
-              item.propertyId,
-              item.property591Id,
-              item.propertyName,
-              item.propertyAddress,
-              item.reportStore,
-              item.reporterName,
-              item.developerName,
-              item.salesName,
-              item.listingManager
-            ]
-              .join(" ")
-              .toLowerCase();
-
-            return (
-              (!keyword ||
-                searchText.includes(keyword)) &&
-              (!status ||
-                item.caseStatus === status)
-            );
-          })
-          .sort((a, b) => {
-            if (
-              Boolean(a.isFormal) !==
-              Boolean(b.isFormal)
-            ) {
-              return (
-                Number(b.isFormal) -
-                Number(a.isFormal)
-              );
-            }
-
-            if (
-              Number(b.ratio) !==
-              Number(a.ratio)
-            ) {
-              return (
-                Number(b.ratio) -
-                Number(a.ratio)
-              );
-            }
-
-            return (
-              getReportTimestamp(b) -
-              getReportTimestamp(a)
-            );
-          });
-
-      list.innerHTML = "";
-
-      empty.style.display =
-        filtered.length
-          ? "none"
-          : "block";
-
-      filtered.forEach(item => {
-        const rank =
-          rankMap[item.id];
-
-        const article =
-          document.createElement("article");
-
-        article.className =
-          "case-card";
-
-        article.innerHTML = `
-          <div class="card-top">
-            <div>
-              <h3 class="card-title">
-                ${escapeHtml(item.propertyName)}
-              </h3>
-
-              <div class="card-meta">
-                編號：
-                ${escapeHtml(item.propertyId || "-")}
-                ｜59188：
-                ${escapeHtml(item.property591Id || "-")}
-              </div>
-
-              <div class="card-meta">
-                ${escapeHtml(item.propertyAddress || "")}
-              </div>
-            </div>
-
-            ${
-              rank
-                ? `<div class="rank ${
-                    rank === 1
-                      ? "first"
-                      : rank === 2
-                        ? "second"
-                        : rank === 3
-                          ? "third"
-                          : ""
-                  }">${rank}</div>`
-                : `<span class="badge gray">
-                    未入順位
-                  </span>`
-            }
-          </div>
-
-          <div class="money-grid">
-            <div class="money-box">
-              <div class="money-label">
-                開價
-              </div>
-
-              <div class="money-value">
-                ${formatMoney(item.askingPrice)} 萬
-              </div>
-            </div>
-
-            <div class="money-box">
-              <div class="money-label">
-                斡旋金額
-              </div>
-
-              <div class="money-value">
-                ${formatMoney(item.offerAmount)} 萬
-              </div>
-            </div>
-
-            <div class="money-box">
-              <div class="money-label">
-                達價率
-              </div>
-
-              <div class="money-value">
-                ${Number(item.ratio || 0).toFixed(2)}%
-              </div>
-            </div>
-          </div>
-
-          <div class="detail-grid">
-            <div>
-              <strong>回報：</strong>
-              ${escapeHtml(item.reportStore || "-")}
-              ／
-              ${escapeHtml(item.reporterName || "-")}
-            </div>
-
-            <div>
-              <strong>送件：</strong>
-              ${escapeHtml(item.reportDate || "-")}
-              ${escapeHtml(item.reportTime || "")}
-            </div>
-
-            <div>
-              <strong>開發：</strong>
-              ${escapeHtml(item.developerName || "-")}
-            </div>
-
-            <div>
-              <strong>銷售：</strong>
-              ${escapeHtml(item.salesName || "-")}
-            </div>
-
-            <div>
-              <strong>主管：</strong>
-              ${escapeHtml(item.listingManager || "-")}
-            </div>
-
-            <div>
-              <strong>期限：</strong>
-              ${escapeHtml(item.expiryDate || "-")}
-              ${escapeHtml(item.expiryTime || "")}
-            </div>
-          </div>
-
-          ${
-            item.hasContractChange === "有"
-              ? `
-                <div
-                  class="contract-box"
-                  style="margin-top:13px;"
-                >
-                  <strong>契約變更：</strong>
-                  ${escapeHtml(item.contractChangeType || "-")}
-                  <br>
-
-                  <strong>變更前：</strong>
-                  ${escapeHtml(
-                    item.contractOriginalContent || "-"
-                  )}
-                  <br>
-
-                  <strong>變更後：</strong>
-                  ${escapeHtml(
-                    item.contractNewContent || "-"
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-          <div class="actions">
-            <span class="badge ${
-              item.isFormal ? "green" : "orange"
-            }">
-              ${
-                item.isFormal
-                  ? "正式斡旋"
-                  : "未達 80%"
-              }
-            </span>
-
-            ${
-              item.hasContractChange === "有"
-                ? `<span class="badge purple">
-                    有契約變更
-                  </span>`
-                : ""
-            }
-
-            <span class="badge blue">
-              ${escapeHtml(item.caseStatus || "-")}
-            </span>
-          </div>
-
-          <div class="actions">
-            <button
-              type="button"
-              class="btn blue small"
-              onclick="showOfferLine('${item.id}')"
-            >
-              LINE 回報
-            </button>
-
-            <button
-              type="button"
-              class="btn gray small"
-              onclick="editOffer('${item.id}')"
-            >
-              修改
-            </button>
-
-            <button
-              type="button"
-              class="btn orange small"
-              onclick="changeOfferStatus('${item.id}')"
-            >
-              更新狀態
-            </button>
-
-            <button
-              type="button"
-              class="btn red small"
-              onclick="deleteOffer('${item.id}')"
-            >
-              刪除
-            </button>
-          </div>
-        `;
-
-        list.appendChild(article);
-      });
-    }
-
-    function renderStaff() {
-      const list =
-        document.getElementById("staffList");
-
-      const empty =
-        document.getElementById("staffEmpty");
-
-      list.innerHTML = "";
-
-      empty.style.display =
-        staff.length
-          ? "none"
-          : "block";
-
-      staff
-        .slice()
-        .sort((a, b) =>
-          a.store.localeCompare(
-            b.store,
-            "zh-Hant"
-          )
-        )
-        .forEach(item => {
-          const article =
-            document.createElement("article");
-
-          article.className =
-            "admin-card";
-
-          article.innerHTML = `
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">
-                  ${escapeHtml(item.name)}
-                </h3>
-
-                <div class="card-meta">
-                  ${escapeHtml(item.store)}
-                  ｜
-                  ${escapeHtml(item.role)}
-                </div>
-              </div>
-
-              <span class="badge ${
-                item.active === "是"
-                  ? "green"
-                  : "gray"
-              }">
-                ${
-                  item.active === "是"
-                    ? "啟用"
-                    : "停用"
-                }
-              </span>
-            </div>
-
-            <div class="actions">
-              <button
-                type="button"
-                class="btn gray small"
-                onclick="editStaff('${item.id}')"
-              >
-                修改
-              </button>
-
-              <button
-                type="button"
-                class="btn red small"
-                onclick="deleteStaff('${item.id}')"
-              >
-                刪除
-              </button>
-            </div>
-          `;
-
-          list.appendChild(article);
-        });
-    }
-
-    function renderProperties() {
-      const list =
-        document.getElementById(
-          "propertyList"
-        );
-
-      const empty =
-        document.getElementById(
-          "propertyEmpty"
-        );
-
-      list.innerHTML = "";
-
-      empty.style.display =
-        properties.length
-          ? "none"
-          : "block";
-
-      properties
-        .slice()
-        .sort((a, b) =>
-          a.propertyId.localeCompare(
-            b.propertyId,
-            "zh-Hant"
-          )
-        )
-        .forEach(item => {
-          const article =
-            document.createElement("article");
-
-          article.className =
-            "admin-card";
-
-          article.innerHTML = `
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">
-                  ${escapeHtml(item.name)}
-                </h3>
-
-                <div class="card-meta">
-                  編號：
-                  ${escapeHtml(item.propertyId)}
-                  ｜59188：
-                  ${escapeHtml(
-                    item.property591Id || "-"
-                  )}
-                </div>
-
-                <div class="card-meta">
-                  ${escapeHtml(item.address)}
-                </div>
-              </div>
-
-              <span class="badge ${
-                item.active === "是"
-                  ? "green"
-                  : "gray"
-              }">
-                ${
-                  item.active === "是"
-                    ? "啟用"
-                    : "停用"
-                }
-              </span>
-            </div>
-
-            <div class="detail-grid">
-              <div>
-                <strong>開價：</strong>
-                ${formatMoney(item.askingPrice)} 萬
-              </div>
-
-              <div>
-                <strong>門店：</strong>
-                ${escapeHtml(item.store || "-")}
-              </div>
-
-              <div>
-                <strong>開發：</strong>
-                ${escapeHtml(item.developer || "-")}
-              </div>
-
-              <div>
-                <strong>銷售：</strong>
-                ${escapeHtml(item.sales || "-")}
-              </div>
-
-              <div>
-                <strong>主管：</strong>
-                ${escapeHtml(item.manager || "-")}
-              </div>
-            </div>
-
-            <div class="actions">
-              <button
-                type="button"
-                class="btn gray small"
-                onclick="editProperty('${item.id}')"
-              >
-                修改
-              </button>
-
-              <button
-                type="button"
-                class="btn red small"
-                onclick="deleteProperty('${item.id}')"
-              >
-                刪除
-              </button>
-            </div>
-          `;
-
-          list.appendChild(article);
-        });
-    }
-
-    window.editOffer = function(id) {
-      const item =
-        offers.find(
-          offer => offer.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      refreshDropdowns();
-
-      const fields = [
-        "reportDate",
-        "reportTime",
-        "expiryDate",
-        "expiryTime",
-        "reportStore",
-        "reporterName",
-        "propertyId",
-        "property591Id",
-        "propertyName",
-        "propertyAddress",
-        "propertyUrl",
-        "listingStore",
-        "listingManager",
-        "developerName",
-        "salesName",
-        "askingPrice",
-        "offerAmount",
-        "buyerCode",
-        "paymentMethod",
-        "loanRatio",
-        "needSellHouse",
-        "signingDate",
-        "handoverDate",
-        "specialConditions",
-        "remarks",
-        "hasContractChange",
-        "contractChangeType",
-        "contractOriginalContent",
-        "contractNewContent",
-        "contractChangeReason",
-        "contractConfirmedBy",
-        "contractChangeDate",
-        "caseStatus",
-        "priorityNote"
+  );
+
+  const bookings = {};
+
+  for (
+    let r=1;
+    r<values.length;
+    r++
+  ) {
+
+    const row =
+      values[r];
+
+    const status =
+      String(
+        row[
+          index["狀態"]
+        ] || ""
+      ).trim();
+
+    const roomCode =
+      String(
+        row[
+          index["教室代碼"]
+        ] || ""
+      ).trim();
+
+    const dateValue =
+      row[
+        index["日期"]
       ];
 
-      fields.forEach(field => {
-        setValue(field, item[field]);
-      });
+    const timeCode =
+      String(
+        row[
+          index["時段代碼"]
+        ] || ""
+      ).trim();
 
-      setValue("offerEditId", item.id);
-      setValue("propertySearch", item.propertyId);
+    if (
+      !dateValue ||
+      !roomCode ||
+      !timeCode
+    ) {
+      continue;
+    }
 
-      document.getElementById(
-        "offerFormTitle"
-      ).textContent =
-        "修改斡旋回報";
+    if (
+      status === "取消"
+    ) {
+      continue;
+    }
 
-      document.getElementById(
-        "offerModeBadge"
-      ).textContent =
-        "修改模式";
+    if (!status) {
+      continue;
+    }
 
-      document.getElementById(
-        "offerModeBadge"
-      ).className =
-        "badge orange";
+    const dateKey =
+      formatDateKey(
+        dateValue
+      );
 
-      toggleContractFields();
-      updateRatio();
-      openPage("reportPage");
-    };
+    if (!dateKey) {
+      continue;
+    }
 
-    window.deleteOffer = function(id) {
-      const item =
-        offers.find(
-          offer => offer.id === id
+    let displayStatus = "";
+    let label = "";
+
+    if (
+      status === "內部使用"
+    ) {
+
+      displayStatus =
+        "internal";
+
+      label =
+        `${roomCode}${shortTime(timeCode)} 內部`;
+
+    } else if (
+      status === "暫保留" ||
+      status === "待確認"
+    ) {
+
+      displayStatus =
+        "hold";
+
+      label =
+        `${roomCode}${shortTime(timeCode)} 暫保留`;
+
+    } else if (
+      roomCode === "A"
+    ) {
+
+      displayStatus =
+        "bookedA";
+
+      label =
+        `A${shortTime(timeCode)} 已預約`;
+
+    } else if (
+      roomCode === "B"
+    ) {
+
+      displayStatus =
+        "bookedB";
+
+      label =
+        `B${shortTime(timeCode)} 已預約`;
+
+    } else {
+
+      displayStatus =
+        "hold";
+
+      label =
+        `${roomCode}${shortTime(timeCode)} 已預約`;
+
+    }
+
+    if (
+      !bookings[
+        dateKey
+      ]
+    ) {
+      bookings[
+        dateKey
+      ] = [];
+    }
+
+    bookings[
+      dateKey
+    ].push({
+      room: roomCode,
+      time: timeCode,
+      status: displayStatus,
+      label: label
+    });
+  }
+
+  return bookings;
+}
+
+function getOrCreateBookingSheet() {
+
+  const ss =
+    SpreadsheetApp
+    .openById(
+      SPREADSHEET_ID
+    );
+
+  let sheet =
+    ss
+    .getSheetByName(
+      SHEET_NAME
+    );
+
+  if (!sheet) {
+
+    sheet =
+      ss.insertSheet(
+        SHEET_NAME
+      );
+  }
+
+  const lastColumn =
+    Math.max(
+      sheet.getLastColumn(),
+      HEADERS.length
+    );
+
+  const firstRow =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      lastColumn
+    )
+    .getValues()[0];
+
+  const hasHeaders =
+    firstRow.some(
+      cell =>
+      String(
+        cell
+      ).trim() !== ""
+    );
+
+  if (!hasHeaders) {
+
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      HEADERS.length
+    )
+    .setValues([
+      HEADERS
+    ]);
+
+    sheet.setFrozenRows(
+      1
+    );
+
+  } else {
+
+    ensureTotalAmountColumn(
+      sheet
+    );
+
+    ensureHeaders(
+      sheet
+    );
+  }
+
+  return sheet;
+}
+
+function ensureTotalAmountColumn(
+  sheet
+) {
+
+  const lastColumn =
+    sheet.getLastColumn();
+
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      lastColumn
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  if (
+    headers.includes(
+      "總金額"
+    )
+  ) {
+    return;
+  }
+
+  const feeIndex =
+    headers.indexOf(
+      "費用"
+    );
+
+  if (
+    feeIndex === -1
+  ) {
+    return;
+  }
+
+  sheet.insertColumnAfter(
+    feeIndex + 1
+  );
+
+  sheet
+  .getRange(
+    1,
+    feeIndex + 2
+  )
+  .setValue(
+    "總金額"
+  );
+}
+
+function ensureHeaders(
+  sheet
+) {
+
+  const lastColumn =
+    Math.max(
+      sheet.getLastColumn(),
+      HEADERS.length
+    );
+
+  const currentHeaders =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      lastColumn
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  for (
+    let i=0;
+    i<HEADERS.length;
+    i++
+  ) {
+
+    if (
+      currentHeaders[i]
+      !==
+      HEADERS[i]
+    ) {
+
+      sheet
+      .getRange(
+        1,
+        1,
+        1,
+        HEADERS.length
+      )
+      .setValues([
+        HEADERS
+      ]);
+
+      sheet.setFrozenRows(
+        1
+      );
+
+      return;
+    }
+  }
+}
+
+function setupStatusDropdown(
+  sheet
+) {
+
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      sheet.getLastColumn()
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  const statusColIndex =
+    headers.indexOf(
+      "狀態"
+    ) + 1;
+
+  if (
+    statusColIndex <= 0
+  ) {
+    return;
+  }
+
+  const rule =
+    SpreadsheetApp
+    .newDataValidation()
+    .requireValueInList(
+      STATUS_OPTIONS,
+      true
+    )
+    .setAllowInvalid(
+      false
+    )
+    .build();
+
+  const maxRows =
+    sheet.getMaxRows();
+
+  if (
+    maxRows > 1
+  ) {
+
+    sheet
+    .getRange(
+      2,
+      statusColIndex,
+      maxRows - 1,
+      1
+    )
+    .setDataValidation(
+      rule
+    );
+  }
+}
+
+function setupSheetStyle(
+  sheet
+) {
+
+  const lastColumn =
+    sheet.getLastColumn();
+
+  sheet.setFrozenRows(
+    1
+  );
+
+  sheet
+  .getRange(
+    1,
+    1,
+    1,
+    lastColumn
+  )
+  .setFontWeight(
+    "bold"
+  )
+  .setBackground(
+    "#123c55"
+  )
+  .setFontColor(
+    "#ffffff"
+  )
+  .setHorizontalAlignment(
+    "center"
+  );
+
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      lastColumn
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  const statusColIndex =
+    headers.indexOf(
+      "狀態"
+    ) + 1;
+
+  const feeColIndex =
+    headers.indexOf(
+      "費用"
+    ) + 1;
+
+  const totalColIndex =
+    headers.indexOf(
+      "總金額"
+    ) + 1;
+
+  const bankColIndex =
+    headers.indexOf(
+      "匯款後五碼"
+    ) + 1;
+
+  const noteColIndex =
+    headers.indexOf(
+      "備註"
+    ) + 1;
+
+  const adminNoteColIndex =
+    headers.indexOf(
+      "管理備註"
+    ) + 1;
+
+  if (
+    statusColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      statusColIndex,
+      120
+    );
+  }
+
+  if (
+    feeColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      feeColIndex,
+      90
+    );
+  }
+
+  if (
+    totalColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      totalColIndex,
+      100
+    );
+  }
+
+  if (
+    bankColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      bankColIndex,
+      130
+    );
+  }
+
+  if (
+    noteColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      noteColIndex,
+      220
+    );
+  }
+
+  if (
+    adminNoteColIndex > 0
+  ) {
+    sheet.setColumnWidth(
+      adminNoteColIndex,
+      220
+    );
+  }
+}
+
+function setupStatusConditionalFormatting(
+  sheet
+) {
+
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      sheet.getLastColumn()
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  const statusColIndex =
+    headers.indexOf(
+      "狀態"
+    ) + 1;
+
+  if (
+    statusColIndex <= 0
+  ) {
+    return;
+  }
+
+  const maxRows =
+    sheet.getMaxRows();
+
+  if (
+    maxRows <= 1
+  ) {
+    return;
+  }
+
+  const statusRange =
+    sheet.getRange(
+      2,
+      statusColIndex,
+      maxRows - 1,
+      1
+    );
+
+  const oldRules =
+    sheet
+    .getConditionalFormatRules();
+
+  const keptRules =
+    oldRules.filter(
+      rule => {
+
+        const ranges =
+          rule.getRanges();
+
+        return !ranges.some(
+          range =>
+          range.getColumn() ===
+          statusColIndex
+          &&
+          range.getNumColumns() ===
+          1
         );
 
-      if (!item) {
-        return;
       }
+    );
 
-      if (
-        !confirm(
-          `確定刪除「${item.propertyName}」的斡旋回報嗎？`
-        )
-      ) {
-        return;
-      }
+  Object.keys(
+    STATUS_COLORS
+  )
+  .forEach(
+    statusText => {
 
-      offers =
-        offers.filter(
-          offer => offer.id !== id
-        );
-
-      saveArray(OFFER_KEY, offers);
-      renderAll();
-    };
-
-    window.changeOfferStatus = function(id) {
-      const item =
-        offers.find(
-          offer => offer.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      const options =
-        item.isFormal
-          ? [
-              "正式斡旋",
-              "議價中",
-              "待主管回覆",
-              "待屋主回覆",
-              "已成交",
-              "已退斡",
-              "已到期",
-              "已取消"
-            ]
-          : [
-              "一般出價",
-              "待主管回覆",
-              "已取消",
-              "已到期"
-            ];
-
-      const index =
-        options.indexOf(item.caseStatus);
-
-      item.caseStatus =
-        options[
-          index === -1
-            ? 0
-            : (index + 1) %
-              options.length
+      const color =
+        STATUS_COLORS[
+          statusText
         ];
 
-      item.updatedAt =
-        new Date().toISOString();
+      const rule =
+        SpreadsheetApp
+        .newConditionalFormatRule()
+        .whenTextEqualTo(
+          statusText
+        )
+        .setBackground(
+          color.background
+        )
+        .setFontColor(
+          color.font
+        )
+        .setBold(
+          true
+        )
+        .setRanges([
+          statusRange
+        ])
+        .build();
 
-      saveArray(OFFER_KEY, offers);
-      renderAll();
-    };
-
-    function previewCurrentLine() {
-      const data =
-        collectOffer();
-
-      currentLineText =
-        buildLineMessage(data);
-
-      document.getElementById(
-        "linePreview"
-      ).textContent =
-        currentLineText;
-
-      document.getElementById(
-        "lineModal"
-      ).classList.add("show");
-    }
-
-    window.showOfferLine = function(id) {
-      const item =
-        offers.find(
-          offer => offer.id === id
-        );
-
-      if (!item) {
-        return;
-      }
-
-      currentLineText =
-        buildLineMessage(
-          item,
-          getRankMap()[id]
-        );
-
-      document.getElementById(
-        "linePreview"
-      ).textContent =
-        currentLineText;
-
-      document.getElementById(
-        "lineModal"
-      ).classList.add("show");
-    };
-
-    function buildLineMessage(data, rank = null) {
-      const title =
-        data.isFormal
-          ? "【正式斡旋啟動】"
-          : "【一般出價回報】";
-
-      const rankText =
-        rank
-          ? `目前順位：第 ${rank} 順位`
-          : data.isFormal
-            ? "目前順位：儲存後由系統排序"
-            : "目前順位：未達 80%，不列入正式順位";
-
-      const lines = [
-        title,
-        "",
-        `物件：${data.propertyName || "-"}`,
-        `物件編號：${data.propertyId || "-"}`,
-        `59188 編號：${data.property591Id || "-"}`,
-        `地址：${data.propertyAddress || "-"}`,
-        "",
-        `開價：${formatMoney(data.askingPrice)} 萬`,
-        `斡旋金額：${formatMoney(data.offerAmount)} 萬`,
-        `達價率：${Number(data.ratio || 0).toFixed(2)}%`,
-        rankText,
-        "",
-        `回報門店：${data.reportStore || "-"}`,
-        `回報業務：${data.reporterName || "-"}`,
-        `開發業務：${data.developerName || "-"}`,
-        `銷售業務：${data.salesName || "-"}`,
-        `該店主管：${data.listingManager || "-"}`,
-        "",
-        `正式送件：${data.reportDate || "-"} ${data.reportTime || ""}`,
-        `斡旋期限：${data.expiryDate || "-"} ${data.expiryTime || ""}`,
-        `目前狀態：${data.caseStatus || "-"}`,
-        "",
-        `付款方式：${data.paymentMethod || "-"}`,
-        `貸款成數：${data.loanRatio || "-"}`,
-        `是否需先售屋：${data.needSellHouse || "-"}`,
-        `預計簽約：${data.signingDate || "-"}`,
-        `預計交屋：${data.handoverDate || "-"}`,
-        "",
-        `特殊條件：${data.specialConditions || "無"}`,
-        `備註：${data.remarks || "無"}`,
-        "",
-        `契約變更：${data.hasContractChange || "無"}`
-      ];
-
-      if (
-        data.hasContractChange === "有"
-      ) {
-        lines.push(
-          `變更類型：${data.contractChangeType || "-"}`,
-          `變更前內容：${data.contractOriginalContent || "-"}`,
-          `變更後內容：${data.contractNewContent || "-"}`,
-          `變更原因：${data.contractChangeReason || "-"}`,
-          `確認人：${data.contractConfirmedBy || "-"}`,
-          `確認日期：${data.contractChangeDate || "-"}`
-        );
-      }
-
-      if (data.propertyUrl) {
-        lines.push(
-          "",
-          `物件網址：${data.propertyUrl}`
-        );
-      }
-
-      return lines.join("\n");
-    }
-
-    function closeLineModal() {
-      document.getElementById(
-        "lineModal"
-      ).classList.remove("show");
-    }
-
-    async function copyLineText() {
-      try {
-        await navigator.clipboard.writeText(
-          currentLineText
-        );
-
-        alert("LINE 回報文字已複製。");
-      } catch (error) {
-        const textarea =
-          document.createElement("textarea");
-
-        textarea.value =
-          currentLineText;
-
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        textarea.remove();
-
-        alert("LINE 回報文字已複製。");
-      }
-    }
-
-    function exportCsv() {
-      if (!offers.length) {
-        alert("目前沒有可匯出的案件。");
-        return;
-      }
-
-      const rankMap =
-        getRankMap();
-
-      const headers = [
-        "案件ID",
-        "順位",
-        "回報日期",
-        "送件時間",
-        "期限日期",
-        "期限時間",
-        "回報門店",
-        "回報業務",
-        "物件編號",
-        "59188編號",
-        "物件名稱",
-        "物件地址",
-        "物件網址",
-        "所屬門店",
-        "主管",
-        "開發業務",
-        "銷售業務",
-        "開價萬元",
-        "斡旋金額萬元",
-        "達價率",
-        "正式斡旋",
-        "買方代碼",
-        "付款方式",
-        "貸款成數",
-        "是否需先售屋",
-        "預計簽約",
-        "預計交屋",
-        "特殊條件",
-        "備註",
-        "契約變更",
-        "變更類型",
-        "變更前",
-        "變更後",
-        "變更原因",
-        "確認人",
-        "確認日期",
-        "案件狀態",
-        "順位補充"
-      ];
-
-      const rows =
-        offers.map(item => [
-          item.id,
-          rankMap[item.id] || "",
-          item.reportDate,
-          item.reportTime,
-          item.expiryDate,
-          item.expiryTime,
-          item.reportStore,
-          item.reporterName,
-          item.propertyId,
-          item.property591Id,
-          item.propertyName,
-          item.propertyAddress,
-          item.propertyUrl,
-          item.listingStore,
-          item.listingManager,
-          item.developerName,
-          item.salesName,
-          item.askingPrice,
-          item.offerAmount,
-          Number(item.ratio || 0).toFixed(2) + "%",
-          item.isFormal ? "是" : "否",
-          item.buyerCode,
-          item.paymentMethod,
-          item.loanRatio,
-          item.needSellHouse,
-          item.signingDate,
-          item.handoverDate,
-          item.specialConditions,
-          item.remarks,
-          item.hasContractChange,
-          item.contractChangeType,
-          item.contractOriginalContent,
-          item.contractNewContent,
-          item.contractChangeReason,
-          item.contractConfirmedBy,
-          item.contractChangeDate,
-          item.caseStatus,
-          item.priorityNote
-        ]);
-
-      const csv =
-        [headers, ...rows]
-          .map(row =>
-            row
-              .map(value =>
-                `"${String(value ?? "")
-                  .replace(/"/g, '""')}"`
-              )
-              .join(",")
-          )
-          .join("\n");
-
-      const blob =
-        new Blob(
-          ["\uFEFF" + csv],
-          {
-            type:
-              "text/csv;charset=utf-8;"
-          }
-        );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-
-      link.download =
-        `斡旋案件_${formatDate(new Date())}.csv`;
-
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      URL.revokeObjectURL(url);
-    }
-
-    function formatMoney(value) {
-      return Number(value || 0)
-        .toLocaleString(
-          "zh-TW",
-          {
-            maximumFractionDigits: 2
-          }
-        );
-    }
-
-    function saveArray(key, data) {
-      localStorage.setItem(
-        key,
-        JSON.stringify(data)
+      keptRules.push(
+        rule
       );
     }
+  );
 
-    function loadArray(key) {
-      try {
-        const stored =
-          localStorage.getItem(key);
+  sheet
+  .setConditionalFormatRules(
+    keptRules
+  );
+}
 
-        if (!stored) {
-          return [];
-        }
+function applyStatusColorsNow(
+  sheet
+) {
 
-        const parsed =
-          JSON.parse(stored);
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      sheet.getLastColumn()
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
 
-        return Array.isArray(parsed)
-          ? parsed
-          : [];
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
+  const statusColIndex =
+    headers.indexOf(
+      "狀態"
+    ) + 1;
+
+  if (
+    statusColIndex <= 0
+  ) {
+    return;
+  }
+
+  const lastRow =
+    sheet.getLastRow();
+
+  if (
+    lastRow < 2
+  ) {
+    return;
+  }
+
+  for (
+    let row=2;
+    row<=lastRow;
+    row++
+  ) {
+
+    const cell =
+      sheet.getRange(
+        row,
+        statusColIndex
+      );
+
+    const status =
+      String(
+        cell.getValue() || ""
+      ).trim();
+
+    if (
+      STATUS_COLORS[
+        status
+      ]
+    ) {
+
+      cell
+      .setBackground(
+        STATUS_COLORS[
+          status
+        ].background
+      )
+      .setFontColor(
+        STATUS_COLORS[
+          status
+        ].font
+      )
+      .setFontWeight(
+        "bold"
+      );
+
+    } else {
+
+      cell
+      .setBackground(
+        "#ffffff"
+      )
+      .setFontColor(
+        "#000000"
+      )
+      .setFontWeight(
+        "normal"
+      );
     }
+  }
+}
 
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-  </script>
-</body>
-</html>
+function onEdit(e) {
+
+  if (
+    !e ||
+    !e.range
+  ) {
+    return;
+  }
+
+  const sheet =
+    e.range
+    .getSheet();
+
+  if (
+    sheet.getName()
+    !==
+    SHEET_NAME
+  ) {
+    return;
+  }
+
+  const headers =
+    sheet
+    .getRange(
+      1,
+      1,
+      1,
+      sheet.getLastColumn()
+    )
+    .getValues()[0]
+    .map(
+      h =>
+      String(h).trim()
+    );
+
+  const statusColIndex =
+    headers.indexOf(
+      "狀態"
+    ) + 1;
+
+  if (
+    statusColIndex <= 0
+  ) {
+    return;
+  }
+
+  if (
+    e.range.getColumn()
+    !==
+    statusColIndex
+    ||
+    e.range.getRow()
+    ===
+    1
+  ) {
+    return;
+  }
+
+  const status =
+    String(
+      e.range
+      .getValue() || ""
+    ).trim();
+
+  if (
+    STATUS_COLORS[
+      status
+    ]
+  ) {
+
+    e.range
+    .setBackground(
+      STATUS_COLORS[
+        status
+      ].background
+    )
+    .setFontColor(
+      STATUS_COLORS[
+        status
+      ].font
+    )
+    .setFontWeight(
+      "bold"
+    );
+
+  } else {
+
+    e.range
+    .setBackground(
+      "#ffffff"
+    )
+    .setFontColor(
+      "#000000"
+    )
+    .setFontWeight(
+      "normal"
+    );
+  }
+}
+
+function setupBackendNow() {
+
+  const sheet =
+    getOrCreateBookingSheet();
+
+  setupStatusDropdown(
+    sheet
+  );
+
+  setupSheetStyle(
+    sheet
+  );
+
+  setupStatusConditionalFormatting(
+    sheet
+  );
+
+  applyStatusColorsNow(
+    sheet
+  );
+
+  console.log(
+    "後台設定完成。"
+  );
+}
+
+function formatDateKey(
+  value
+) {
+
+  if (
+    Object.prototype
+    .toString
+    .call(value)
+    ===
+    "[object Date]"
+  ) {
+
+    return Utilities
+    .formatDate(
+      value,
+      "Asia/Taipei",
+      "yyyy-MM-dd"
+    );
+  }
+
+  const str =
+    String(
+      value || ""
+    ).trim();
+
+  if (
+    /^\d{4}-\d{2}-\d{2}$/
+    .test(str)
+  ) {
+    return str;
+  }
+
+  const date =
+    new Date(
+      str
+    );
+
+  if (
+    !isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return Utilities
+    .formatDate(
+      date,
+      "Asia/Taipei",
+      "yyyy-MM-dd"
+    );
+  }
+
+  return "";
+}
+
+function shortTime(
+  timeCode
+) {
+
+  if (
+    timeCode ===
+    "morning"
+  ) {
+    return "早";
+  }
+
+  if (
+    timeCode ===
+    "afternoon"
+  ) {
+    return "午";
+  }
+
+  if (
+    timeCode ===
+    "evening"
+  ) {
+    return "晚";
+  }
+
+  return "";
+}
+
+function jsonOutput(
+  obj
+) {
+
+  return ContentService
+    .createTextOutput(
+      JSON.stringify(
+        obj
+      )
+    )
+    .setMimeType(
+      ContentService
+      .MimeType
+      .JSON
+    );
+}
+
+function testSpreadsheet() {
+
+  const ss =
+    SpreadsheetApp
+    .openById(
+      SPREADSHEET_ID
+    );
+
+  const sheet =
+    getOrCreateBookingSheet();
+
+  console.log(
+    "試算表名稱：" +
+    ss.getName()
+  );
+
+  console.log(
+    "工作表名稱：" +
+    sheet.getName()
+  );
+
+  console.log(
+    "試算表 ID：" +
+    ss.getId()
+  );
+}
+
+function testAdminEmail() {
+
+  MailApp.sendEmail({
+
+    to:
+      ADMIN_EMAILS
+      .join(","),
+
+    subject:
+      "【測試成功】友成商務空間預約系統",
+
+    body:
+`這是一封測試信。
+
+如果您收到這封 Email，
+代表 Apps Script 的 MailApp 寄信功能正常。
+
+測試時間：
+${Utilities.formatDate(
+  new Date(),
+  "Asia/Taipei",
+  "yyyy-MM-dd HH:mm:ss"
+)}
+
+友成商務空間預約系統`,
+
+    name:
+      "友成商務空間預約系統"
+
+  });
+
+  console.log(
+    "測試 Email 已寄出。"
+  );
+}
+
+function testWriteBooking() {
+
+  const testData = {
+
+    name:
+      "系統測試",
+
+    email:
+      "",
+
+    phone:
+      "0900000000",
+
+    lineId:
+      "",
+
+    lineName:
+      "",
+
+    room:
+      "A案 40人大教室",
+
+    roomCode:
+      "A",
+
+    date:
+      Utilities.formatDate(
+        new Date(),
+        "Asia/Taipei",
+        "yyyy-MM-dd"
+      ),
+
+    times:
+      "早上 08:00–12:00",
+
+    timeCodes:
+      "morning",
+
+    fee:
+      4000,
+
+    topic:
+      "系統測試",
+
+    invoiceTitle:
+      "",
+
+    taxId:
+      "",
+
+    address:
+      "",
+
+    bankLast5:
+      "",
+
+    note:
+      "這是 Apps Script 手動測試資料"
+
+  };
+
+  const result =
+    saveBooking(
+      testData
+    );
+
+  console.log(
+    JSON.stringify(
+      result
+    )
+  );
+}
