@@ -16,6 +16,7 @@
 
   <style>
     *{box-sizing:border-box}
+
     :root{
       --navy:#123c55;
       --blue:#1597c8;
@@ -29,10 +30,12 @@
       --light:#f6f8fb;
       --dark:#1f2933;
       --muted:#667085;
-      --line:#e4e7ec
+      --line:#e4e7ec;
     }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
@@ -40,7 +43,7 @@
       color:#222;
       background:#fff;
       line-height:1.75;
-      padding-bottom:88px
+      padding-bottom:88px;
     }
 
     a{color:inherit}
@@ -48,12 +51,12 @@
     img{
       width:100%;
       display:block;
-      border-radius:18px
+      border-radius:18px;
     }
 
     .wrap{
       width:min(100% - 28px,1120px);
-      margin:auto
+      margin:auto;
     }
 
     .topbar{
@@ -62,7 +65,7 @@
       text-align:center;
       padding:10px 14px;
       font-size:14px;
-      font-weight:900
+      font-weight:900;
     }
 
     .hero{
@@ -73,7 +76,7 @@
         linear-gradient(135deg,rgba(18,60,85,.92),rgba(217,54,54,.58)),
         url("大樓外觀.jpg");
       background-size:cover;
-      background-position:center
+      background-position:center;
     }
 
     .badge{
@@ -85,7 +88,7 @@
       font-size:14px;
       font-weight:900;
       margin-bottom:14px;
-      box-shadow:0 8px 18px rgba(0,0,0,.22)
+      box-shadow:0 8px 18px rgba(0,0,0,.22);
     }
 
     h1{
@@ -93,20 +96,20 @@
       line-height:1.14;
       margin:0 0 12px;
       text-shadow:0 4px 14px rgba(0,0,0,.36);
-      letter-spacing:.5px
+      letter-spacing:.5px;
     }
 
     .hero p{
       margin:0 0 20px;
       font-size:17px;
       font-weight:900;
-      text-shadow:0 3px 12px rgba(0,0,0,.32)
+      text-shadow:0 3px 12px rgba(0,0,0,.32);
     }
 
     .hero-actions{
       display:grid;
       gap:10px;
-      margin-top:20px
+      margin-top:20px;
     }
 
     .btn{
@@ -122,36 +125,39 @@
       box-shadow:0 8px 18px rgba(0,0,0,.16);
       transition:.2s;
       border:0;
-      cursor:pointer
+      cursor:pointer;
     }
 
     .btn:hover{
       transform:translateY(-2px);
-      filter:brightness(1.05)
+      filter:brightness(1.05);
     }
 
     .btn:disabled{
       opacity:.6;
       cursor:not-allowed;
-      transform:none
+      transform:none;
     }
 
     .btn.red{background:var(--red)}
     .btn.blue{background:var(--blue)}
     .btn.dark{background:var(--dark)}
     .btn.green{background:var(--green)}
-    .btn.yellow{background:var(--yellow);color:#111}
+    .btn.yellow{
+      background:var(--yellow);
+      color:#111;
+    }
 
     .quick{
       background:var(--cream);
       padding:18px 14px;
-      box-shadow:0 4px 14px rgba(0,0,0,.05)
+      box-shadow:0 4px 14px rgba(0,0,0,.05);
     }
 
     .quick-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:10px
+      gap:10px;
     }
 
     .quick-grid a{
@@ -163,22 +169,26 @@
       text-decoration:none;
       font-size:15px;
       font-weight:900;
-      box-shadow:0 5px 14px rgba(0,0,0,.05)
+      box-shadow:0 5px 14px rgba(0,0,0,.05);
     }
 
-    section{padding:42px 0}
+    section{
+      padding:42px 0;
+    }
 
     .white{background:#fff}
     .cream{background:var(--cream)}
     .light{background:var(--light)}
-    .bluebg{background:linear-gradient(135deg,#e8f8ff,#fff)}
+    .bluebg{
+      background:linear-gradient(135deg,#e8f8ff,#fff);
+    }
 
     h2{
       font-size:29px;
       line-height:1.28;
       text-align:center;
       margin:0 0 10px;
-      color:var(--dark)
+      color:var(--dark);
     }
 
     .sub{
@@ -186,7 +196,7 @@
       color:var(--muted);
       font-size:16px;
       margin:0 auto 24px;
-      max-width:780px
+      max-width:780px;
     }
 
     .card{
@@ -195,14 +205,14 @@
       border-radius:20px;
       padding:20px;
       margin-bottom:14px;
-      box-shadow:0 8px 20px rgba(31,41,51,.07)
+      box-shadow:0 8px 20px rgba(31,41,51,.07);
     }
 
     .card h3{
       margin:0 0 8px;
       font-size:22px;
       color:var(--navy);
-      line-height:1.3
+      line-height:1.3;
     }
 
     .photo-card{
@@ -211,27 +221,27 @@
       border-radius:20px;
       overflow:hidden;
       margin-bottom:16px;
-      box-shadow:0 8px 20px rgba(31,41,51,.07)
+      box-shadow:0 8px 20px rgba(31,41,51,.07);
     }
 
     .photo-card img{
       border-radius:0;
       aspect-ratio:4/3;
-      object-fit:cover
+      object-fit:cover;
     }
 
     .photo-card p{
       margin:0;
       padding:14px 16px 17px;
       font-weight:900;
-      color:var(--dark)
+      color:var(--dark);
     }
 
     .intro-strip{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:12px;
-      margin-top:18px
+      margin-top:18px;
     }
 
     .intro-item{
@@ -241,28 +251,36 @@
       padding:16px 10px;
       text-align:center;
       font-weight:900;
-      box-shadow:0 7px 18px rgba(31,41,51,.06)
+      box-shadow:0 7px 18px rgba(31,41,51,.06);
     }
 
-    .intro-item:nth-child(2){border-top-color:var(--orange)}
-    .intro-item:nth-child(3){border-top-color:var(--green)}
-    .intro-item:nth-child(4){border-top-color:var(--purple)}
+    .intro-item:nth-child(2){
+      border-top-color:var(--orange);
+    }
+
+    .intro-item:nth-child(3){
+      border-top-color:var(--green);
+    }
+
+    .intro-item:nth-child(4){
+      border-top-color:var(--purple);
+    }
 
     .intro-item strong{
       display:block;
       color:var(--red);
       font-size:24px;
-      line-height:1.25
+      line-height:1.25;
     }
 
     .room-a{
       background:linear-gradient(135deg,#fffde1,#fff7ad);
-      border:2px solid var(--yellow)
+      border:2px solid var(--yellow);
     }
 
     .room-b{
       background:linear-gradient(135deg,#e5f8ff,#c8efff);
-      border:2px solid var(--sky)
+      border:2px solid var(--sky);
     }
 
     .tag{
@@ -274,25 +292,25 @@
       border-radius:999px;
       font-size:13px;
       font-weight:900;
-      margin:3px 3px 7px 0
+      margin:3px 3px 7px 0;
     }
 
     .gallery{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:10px;
-      margin-top:14px
+      margin-top:14px;
     }
 
     .gallery img{
       aspect-ratio:1/1;
       object-fit:cover;
       border-radius:14px;
-      box-shadow:0 6px 15px rgba(31,41,51,.08)
+      box-shadow:0 6px 15px rgba(31,41,51,.08);
     }
 
     .price-card{
-      border-top:8px solid var(--red)
+      border-top:8px solid var(--red);
     }
 
     .price-big{
@@ -300,7 +318,7 @@
       line-height:1.22;
       color:var(--red);
       font-weight:900;
-      margin:7px 0
+      margin:7px 0;
     }
 
     .time-note{
@@ -310,13 +328,13 @@
       padding:15px;
       font-weight:800;
       margin-top:14px;
-      color:#42300b
+      color:#42300b;
     }
 
     .rules{
       padding-left:0;
       margin:0;
-      list-style:none
+      list-style:none;
     }
 
     .rules li{
@@ -326,13 +344,13 @@
       border-radius:13px;
       padding:12px 14px;
       margin-bottom:10px;
-      font-weight:800
+      font-weight:800;
     }
 
     .terms-grid{
       display:grid;
       gap:14px;
-      margin-top:18px
+      margin-top:18px;
     }
 
     .term-card{
@@ -341,58 +359,44 @@
       border-radius:18px;
       padding:18px;
       box-shadow:0 8px 20px rgba(31,41,51,.06);
-      border-top:7px solid var(--orange)
+      border-top:7px solid var(--orange);
     }
 
-    .term-card:nth-child(2){border-top-color:var(--red)}
-    .term-card:nth-child(3){border-top-color:var(--green)}
-    .term-card:nth-child(4){border-top-color:var(--purple)}
+    .term-card:nth-child(2){
+      border-top-color:var(--red);
+    }
+
+    .term-card:nth-child(3){
+      border-top-color:var(--green);
+    }
+
+    .term-card:nth-child(4){
+      border-top-color:var(--purple);
+    }
 
     .term-card h3{
       margin:0 0 8px;
       color:var(--navy);
-      font-size:20px
-    }
-
-    .refund-table{
-      width:100%;
-      border-collapse:collapse;
-      background:#fff;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 8px 20px rgba(31,41,51,.06);
-      margin-top:16px
-    }
-
-    .refund-table th,
-    .refund-table td{
-      border:1px solid #e4e7ec;
-      padding:12px;
-      text-align:left;
-      font-weight:800;
-      font-size:15px
-    }
-
-    .refund-table th{
-      background:var(--navy);
-      color:#fff
+      font-size:20px;
     }
 
     .parking-img{
       border-radius:20px;
       box-shadow:0 10px 24px rgba(31,41,51,.1);
       border:1px solid var(--line);
-      background:#fff
+      background:#fff;
     }
 
-    .parking-list{margin-top:16px}
+    .parking-list{
+      margin-top:16px;
+    }
 
     .calendar-shell{
       background:#fff;
       border:1px solid var(--line);
       border-radius:22px;
       padding:16px;
-      box-shadow:0 10px 26px rgba(31,41,51,.08)
+      box-shadow:0 10px 26px rgba(31,41,51,.08);
     }
 
     .calendar-head{
@@ -400,7 +404,7 @@
       gap:10px;
       align-items:center;
       justify-content:space-between;
-      margin-bottom:12px
+      margin-bottom:12px;
     }
 
     .calendar-title{
@@ -408,7 +412,7 @@
       font-weight:900;
       color:var(--navy);
       text-align:center;
-      flex:1
+      flex:1;
     }
 
     .cal-btn{
@@ -419,13 +423,13 @@
       font-weight:900;
       padding:10px 12px;
       border-radius:12px;
-      cursor:pointer
+      cursor:pointer;
     }
 
     .calendar-grid{
       display:grid;
       grid-template-columns:repeat(7,1fr);
-      gap:6px
+      gap:6px;
     }
 
     .weekday{
@@ -433,7 +437,7 @@
       font-size:13px;
       font-weight:900;
       color:var(--muted);
-      padding:5px 0
+      padding:5px 0;
     }
 
     .day{
@@ -445,29 +449,29 @@
       cursor:pointer;
       transition:.15s;
       overflow:hidden;
-      text-align:left
+      text-align:left;
     }
 
     .day:hover{
       transform:translateY(-2px);
-      box-shadow:0 8px 16px rgba(31,41,51,.08)
+      box-shadow:0 8px 16px rgba(31,41,51,.08);
     }
 
     .day.muted{
       opacity:.35;
       background:#f4f6f8;
-      cursor:default
+      cursor:default;
     }
 
     .day.selected{
       outline:3px solid var(--orange);
-      background:#fff9e9
+      background:#fff9e9;
     }
 
     .date-num{
       font-weight:900;
       color:var(--dark);
-      margin-bottom:4px
+      margin-bottom:4px;
     }
 
     .slot-pill{
@@ -481,7 +485,7 @@
       margin:3px 0;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis
+      text-overflow:ellipsis;
     }
 
     .slot-a{background:var(--red)}
@@ -495,7 +499,7 @@
       flex-wrap:wrap;
       margin-top:14px;
       font-size:13px;
-      font-weight:900
+      font-weight:900;
     }
 
     .legend-item{
@@ -504,14 +508,14 @@
       gap:6px;
       background:#f7f8fa;
       padding:6px 9px;
-      border-radius:999px
+      border-radius:999px;
     }
 
     .dot{
       width:12px;
       height:12px;
       border-radius:50%;
-      display:inline-block
+      display:inline-block;
     }
 
     .dot.red{background:var(--red)}
@@ -522,40 +526,40 @@
     .booking-panel{
       margin-top:18px;
       display:grid;
-      gap:14px
+      gap:14px;
     }
 
     .field{
       background:#fff;
       border:1px solid var(--line);
       border-radius:18px;
-      padding:16px
+      padding:16px;
     }
 
     .field h3{
       margin:0 0 10px;
       color:var(--navy);
-      font-size:20px
+      font-size:20px;
     }
 
     .choice-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:10px
+      gap:10px;
     }
 
     .choice-grid.time{
-      grid-template-columns:1fr
+      grid-template-columns:1fr;
     }
 
     .choice{
-      position:relative
+      position:relative;
     }
 
     .choice input{
       position:absolute;
       opacity:0;
-      pointer-events:none
+      pointer-events:none;
     }
 
     .choice label{
@@ -566,20 +570,20 @@
       padding:12px;
       font-weight:900;
       text-align:center;
-      cursor:pointer
+      cursor:pointer;
     }
 
     .choice input:checked + label{
       border-color:var(--orange);
       background:#fff3d6;
-      color:#111
+      color:#111;
     }
 
     .choice input:disabled + label{
       opacity:.45;
       background:#eee;
       cursor:not-allowed;
-      text-decoration:line-through
+      text-decoration:line-through;
     }
 
     .estimate{
@@ -587,14 +591,14 @@
       border:2px solid #ffe1a1;
       border-radius:20px;
       padding:18px;
-      font-weight:900
+      font-weight:900;
     }
 
     .estimate-total{
       font-size:32px;
       color:var(--red);
       line-height:1.2;
-      margin-top:8px
+      margin-top:8px;
     }
 
     .summary-box{
@@ -605,19 +609,19 @@
       margin-top:12px;
       white-space:pre-line;
       font-weight:800;
-      color:#24313d
+      color:#24313d;
     }
 
     .form-grid{
       display:grid;
-      gap:12px
+      gap:12px;
     }
 
     label.form-label{
       display:block;
       font-weight:900;
       color:#344054;
-      margin-bottom:5px
+      margin-bottom:5px;
     }
 
     input,
@@ -628,12 +632,12 @@
       padding:12px;
       font-size:16px;
       font-family:inherit;
-      background:#fff
+      background:#fff;
     }
 
     textarea{
       min-height:90px;
-      resize:vertical
+      resize:vertical;
     }
 
     .agree-box{
@@ -646,12 +650,12 @@
       padding:12px;
       margin-top:14px;
       font-weight:900;
-      color:#5a3d06
+      color:#5a3d06;
     }
 
     .agree-box input{
       width:auto;
-      margin-top:6px
+      margin-top:6px;
     }
 
     .contact{
@@ -662,11 +666,16 @@
       background-position:center;
       color:#fff;
       text-align:center;
-      padding-bottom:50px
+      padding-bottom:50px;
     }
 
-    .contact h2{color:#fff}
-    .contact .sub{color:#e8eef5}
+    .contact h2{
+      color:#fff;
+    }
+
+    .contact .sub{
+      color:#e8eef5;
+    }
 
     .contact-box{
       background:rgba(255,255,255,.13);
@@ -674,11 +683,11 @@
       border-radius:18px;
       padding:18px;
       margin:16px 0;
-      backdrop-filter:blur(6px)
+      backdrop-filter:blur(6px);
     }
 
     .contact-box strong{
-      color:var(--yellow)
+      color:var(--yellow);
     }
 
     .bottom-bar{
@@ -693,7 +702,7 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:8px;
-      box-shadow:0 -8px 20px rgba(0,0,0,.12)
+      box-shadow:0 -8px 20px rgba(0,0,0,.12);
     }
 
     .bottom-bar a{
@@ -705,11 +714,11 @@
       font-weight:900;
       color:#fff;
       background:var(--red);
-      font-size:15px
+      font-size:15px;
     }
 
     .bottom-bar a:nth-child(2){
-      background:var(--blue)
+      background:var(--blue);
     }
 
     @media (min-width:768px){
@@ -717,29 +726,91 @@
       .hero{padding:100px 20px 88px}
       h1{font-size:58px}
       .hero p{font-size:22px}
-      .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-      .quick{position:sticky;top:0;z-index:20}
-      .quick-grid{grid-template-columns:repeat(8,1fr)}
-      .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-      .photo-card{margin-bottom:0}
-      .intro-strip{grid-template-columns:repeat(4,1fr)}
-      .price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-      .room-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-      .gallery{grid-template-columns:repeat(5,1fr)}
-      .equipment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-      .terms-grid{grid-template-columns:repeat(4,1fr)}
-      .parking-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-      .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-      .booking-panel{grid-template-columns:1.15fr .85fr;align-items:start}
-      .choice-grid.time{grid-template-columns:repeat(3,1fr)}
-      .form-grid.two{grid-template-columns:repeat(2,1fr)}
-      .bottom-bar{display:none}
+      .hero-actions{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:8px;
+      }
+      .quick{
+        position:sticky;
+        top:0;
+        z-index:20;
+      }
+      .quick-grid{
+        grid-template-columns:repeat(8,1fr);
+      }
+      .overview-grid{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:18px;
+      }
+      .photo-card{
+        margin-bottom:0;
+      }
+      .intro-strip{
+        grid-template-columns:repeat(4,1fr);
+      }
+      .price-grid{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+      }
+      .room-layout{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:28px;
+        align-items:center;
+      }
+      .gallery{
+        grid-template-columns:repeat(5,1fr);
+      }
+      .equipment-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:18px;
+      }
+      .terms-grid{
+        grid-template-columns:repeat(4,1fr);
+      }
+      .parking-list{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:18px;
+      }
+      .location-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:28px;
+        align-items:center;
+      }
+      .booking-panel{
+        grid-template-columns:1.15fr .85fr;
+        align-items:start;
+      }
+      .choice-grid.time{
+        grid-template-columns:repeat(3,1fr);
+      }
+      .form-grid.two{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .bottom-bar{
+        display:none;
+      }
     }
 
     @media (max-width:520px){
-      .day{min-height:74px;padding:5px}
-      .slot-pill{font-size:10px;padding:2px 4px}
-      .calendar-shell{padding:10px}
+      .day{
+        min-height:74px;
+        padding:5px;
+      }
+      .slot-pill{
+        font-size:10px;
+        padding:2px 4px;
+      }
+      .calendar-shell{
+        padding:10px;
+      }
     }
   </style>
 </head>
@@ -752,15 +823,34 @@
 
   <header class="hero">
     <div class="wrap">
-      <div class="badge">桃園中平路・商務教室租借</div>
-      <h1>桃園中平商務教室租借</h1>
-      <p>40人大教室・10人會議室｜企業內訓・課程講座・商務會議</p>
+      <div class="badge">
+        桃園中平路・商務教室租借
+      </div>
+
+      <h1>
+        桃園中平商務教室租借
+      </h1>
+
+      <p>
+        40人大教室・10人會議室｜企業內訓・課程講座・商務會議
+      </p>
 
       <div class="hero-actions">
-        <a class="btn red" href="#overview">查看場地介紹</a>
-        <a class="btn yellow" href="#price">查看租借費用</a>
-        <a class="btn blue" href="#booking">查看預約時段</a>
-        <a class="btn dark" href="#contact">聯絡資訊</a>
+        <a class="btn red" href="#overview">
+          查看場地介紹
+        </a>
+
+        <a class="btn yellow" href="#price">
+          查看租借費用
+        </a>
+
+        <a class="btn blue" href="#booking">
+          查看預約時段
+        </a>
+
+        <a class="btn dark" href="#contact">
+          聯絡資訊
+        </a>
       </div>
     </div>
   </header>
@@ -782,13 +872,16 @@
 
   <section id="overview" class="white">
     <div class="wrap">
+
       <h2>場地總覽</h2>
+
       <p class="sub">
         友成商務空間位於桃園市桃園區中平路98號18樓，
         適合企業內訓、課程講座、產品說明會、商務會議與小型團隊活動。
       </p>
 
       <div class="overview-grid">
+
         <div class="photo-card">
           <img src="大樓外觀.jpg" alt="亞洲商業大樓外觀">
           <p>大樓外觀｜方便來賓確認位置</p>
@@ -808,30 +901,60 @@
           <img src="會議1-2.jpg" alt="B案10人會議室空間總覽">
           <p>B案｜10人會議室商務會議空間</p>
         </div>
+
       </div>
 
       <div class="intro-strip">
-        <div class="intro-item"><strong>30–40人</strong>A案大教室</div>
-        <div class="intro-item"><strong>8–10人</strong>B案會議室</div>
-        <div class="intro-item"><strong>3時段</strong>早・午・晚</div>
-        <div class="intro-item"><strong>自助式</strong>桌椅可調整</div>
+
+        <div class="intro-item">
+          <strong>30–40人</strong>
+          A案大教室
+        </div>
+
+        <div class="intro-item">
+          <strong>8–10人</strong>
+          B案會議室
+        </div>
+
+        <div class="intro-item">
+          <strong>3時段</strong>
+          早・午・晚
+        </div>
+
+        <div class="intro-item">
+          <strong>自助式</strong>
+          桌椅可調整
+        </div>
+
       </div>
     </div>
   </section>
 
   <section id="a-room" class="cream">
     <div class="wrap">
+
       <h2>A案｜40人大教室</h2>
-      <p class="sub">30–40人｜適合企業內訓、課程講座、產品說明會。</p>
+
+      <p class="sub">
+        30–40人｜適合企業內訓、課程講座、產品說明會。
+      </p>
 
       <div class="card room-a">
+
         <div class="room-layout">
+
           <div>
-            <img src="會議2-9.jpg" alt="A案40人大教室完整空間">
+            <img
+              src="會議2-9.jpg"
+              alt="A案40人大教室完整空間"
+            >
           </div>
 
           <div>
-            <h3>大型課程與企業內訓首選</h3>
+
+            <h3>
+              大型課程與企業內訓首選
+            </h3>
 
             <p>
               A案為 30–40 人大教室空間，桌椅配置完整，
@@ -851,36 +974,57 @@
             <span class="tag">WiFi</span>
             <span class="tag">HDMI 線</span>
 
-            <a class="btn red" style="margin-top:12px;width:100%;" href="#booking">
+            <a
+              class="btn red"
+              style="margin-top:12px;width:100%;"
+              href="#booking"
+            >
               預約 A案大教室
             </a>
+
           </div>
+
         </div>
 
         <div class="gallery">
+
           <img src="會議2-9.jpg" loading="lazy">
           <img src="會議2-8.jpg" loading="lazy">
           <img src="會議2-2.jpg" loading="lazy">
           <img src="會議2-7.jpg" loading="lazy">
           <img src="會議2-10.jpg" loading="lazy">
+
         </div>
+
       </div>
     </div>
   </section>
 
   <section id="b-room" class="white">
     <div class="wrap">
+
       <h2>B案｜10人會議室</h2>
-      <p class="sub">8–10人｜適合主管會議、商務洽談、顧問會議。</p>
+
+      <p class="sub">
+        8–10人｜適合主管會議、商務洽談、顧問會議。
+      </p>
 
       <div class="card room-b">
+
         <div class="room-layout">
+
           <div>
-            <img src="會議1-2.jpg" alt="B案10人會議室完整空間">
+            <img
+              src="會議1-2.jpg"
+              alt="B案10人會議室完整空間"
+            >
           </div>
 
           <div>
-            <h3>安靜、明亮、適合決策討論</h3>
+
+            <h3>
+              安靜、明亮、適合決策討論
+            </h3>
 
             <p>
               B案為 8–10 人商務會議室，
@@ -898,62 +1042,91 @@
             <span class="tag">白板</span>
             <span class="tag">冷氣</span>
 
-            <a class="btn blue" style="margin-top:12px;width:100%;" href="#booking">
+            <a
+              class="btn blue"
+              style="margin-top:12px;width:100%;"
+              href="#booking"
+            >
               預約 B案會議室
             </a>
+
           </div>
+
         </div>
 
         <div class="gallery">
+
           <img src="會議1-2.jpg" loading="lazy">
           <img src="會議1-3.jpg" loading="lazy">
           <img src="會議1-4.jpg" loading="lazy">
           <img src="會議1-5.jpg" loading="lazy">
           <img src="會議1-1.jpg" loading="lazy">
+
         </div>
+
       </div>
     </div>
   </section>
 
   <section id="price" class="light">
     <div class="wrap">
+
       <h2>租借費用</h2>
+
       <p class="sub">
         教室採早 / 午 / 晚為一時段計。若需加時，每半小時 500 元。
       </p>
 
       <div class="price-grid">
+
         <div class="card price-card">
           <h3>A案｜40人大教室</h3>
           <p>適合課程講座、企業內訓、產品說明會。</p>
-          <div class="price-big">早 / 午 3500 元</div>
-          <div class="price-big">晚上 3000 元</div>
+
+          <div class="price-big">
+            早 / 午 / 晚 4000 元
+          </div>
         </div>
 
         <div class="card price-card">
           <h3>B案｜10人會議室</h3>
           <p>適合主管會議、商務洽談、顧問會議。</p>
-          <div class="price-big">早 / 午 / 晚 1500 元</div>
+
+          <div class="price-big">
+            早 / 午 / 晚 1500 元
+          </div>
         </div>
+
       </div>
 
       <div class="time-note">
-        時段：早上 08:00–12:00｜下午 13:00–17:00｜晚上 18:00–21:00<br>
+        時段：早上 08:00–12:00｜下午 13:00–17:00｜晚上 18:00–21:00
+        <br>
         加時費：每半小時 500 元，未滿半小時以半小時計。
       </div>
 
-      <a class="btn red" style="margin-top:16px;width:100%;" href="#booking">
+      <a
+        class="btn red"
+        style="margin-top:16px;width:100%;"
+        href="#booking"
+      >
         查看可預約時段並試算費用
       </a>
+
     </div>
   </section>
 
   <section id="equipment" class="white">
     <div class="wrap">
+
       <h2>教室設備</h2>
-      <p class="sub">設備應有盡有，講師只需自備筆電即可。</p>
+
+      <p class="sub">
+        設備應有盡有，講師只需自備筆電即可。
+      </p>
 
       <div class="equipment-grid">
+
         <div class="card">
           <h3>網路與基本設備</h3>
           <p>提供免費 WiFi、桌椅、冷氣。</p>
@@ -968,12 +1141,15 @@
           <h3>音響與麥克風</h3>
           <p>提供音響與無線麥克風。</p>
         </div>
+
       </div>
+
     </div>
   </section>
 
   <section id="terms" class="bluebg">
     <div class="wrap">
+
       <h2>取消、延期與違約條款</h2>
 
       <p class="sub">
@@ -982,8 +1158,10 @@
       </p>
 
       <div class="terms-grid">
+
         <div class="term-card">
           <h3>預約成立</h3>
+
           <p>
             線上送出資料為「待確認」。
             經工作人員確認檔期並完成付款或雙方確認保留後，
@@ -993,6 +1171,7 @@
 
         <div class="term-card">
           <h3>取消不退費</h3>
+
           <p>
             正式預約成立後，如因承租方因素取消，
             已付場租費不予退還。
@@ -1001,6 +1180,7 @@
 
         <div class="term-card">
           <h3>可協助擇日延期</h3>
+
           <p>
             若承租方需更改日期，
             可依實際空檔協助擇日延期一次。
@@ -1009,17 +1189,21 @@
 
         <div class="term-card">
           <h3>違規責任</h3>
+
           <p>
             場地、設備、家具若因故意或過失毀損，
             承租方應負修復、清潔或重置費用。
           </p>
         </div>
+
       </div>
+
     </div>
   </section>
 
   <section id="rules" class="cream">
     <div class="wrap">
+
       <h2>場地租用守則</h2>
 
       <ul class="rules">
@@ -1031,11 +1215,13 @@
         <li>垃圾、便當、飲料請自行帶離。</li>
         <li>禁止違法活動、危險物品、明火、賭博、吸毒及暴力行為。</li>
       </ul>
+
     </div>
   </section>
 
   <section id="parking" class="bluebg">
     <div class="wrap">
+
       <h2>周邊停車資訊</h2>
 
       <img
@@ -1046,6 +1232,7 @@
       >
 
       <div class="parking-list">
+
         <div class="card">
           <h3>桃園市立游泳池停車場</h3>
           <p>📍 桃園市桃園區中山里中平路34-82號</p>
@@ -1060,20 +1247,28 @@
           <h3>城市車旅停車場 桃園宏昌一站</h3>
           <p>📍 桃園市桃園區中原里中平路123號</p>
         </div>
+
       </div>
+
     </div>
   </section>
 
   <section id="location" class="white">
     <div class="wrap">
+
       <h2>交通與位置</h2>
 
       <div class="location-grid">
+
         <div>
-          <img src="大樓外觀.jpg" loading="lazy">
+          <img
+            src="大樓外觀.jpg"
+            loading="lazy"
+          >
         </div>
 
         <div class="card">
+
           <h3>友成商務空間</h3>
 
           <p>
@@ -1090,8 +1285,11 @@
             <strong>教室聯絡人：</strong>
             0938-560-333
           </p>
+
         </div>
+
       </div>
+
     </div>
   </section>
 
@@ -1108,36 +1306,59 @@
       <div class="calendar-shell">
 
         <div class="calendar-head">
-          <button class="cal-btn" type="button" id="prevMonth">
+
+          <button
+            class="cal-btn"
+            type="button"
+            id="prevMonth"
+          >
             ‹ 上月
           </button>
 
-          <div class="calendar-title" id="calendarTitle"></div>
+          <div
+            class="calendar-title"
+            id="calendarTitle"
+          ></div>
 
-          <button class="cal-btn" type="button" id="nextMonth">
+          <button
+            class="cal-btn"
+            type="button"
+            id="nextMonth"
+          >
             下月 ›
           </button>
+
         </div>
 
-        <div class="calendar-grid" id="calendarGrid"></div>
+        <div
+          class="calendar-grid"
+          id="calendarGrid"
+        ></div>
 
         <div class="calendar-legend">
+
           <span class="legend-item">
-            <span class="dot red"></span>A案已預約
+            <span class="dot red"></span>
+            A案已預約
           </span>
 
           <span class="legend-item">
-            <span class="dot blue"></span>B案已預約
+            <span class="dot blue"></span>
+            B案已預約
           </span>
 
           <span class="legend-item">
-            <span class="dot orange"></span>暫保留
+            <span class="dot orange"></span>
+            暫保留
           </span>
 
           <span class="legend-item">
-            <span class="dot purple"></span>內部使用
+            <span class="dot purple"></span>
+            內部使用
           </span>
+
         </div>
+
       </div>
 
       <div class="booking-panel">
@@ -1162,6 +1383,7 @@
               <div class="choice-grid">
 
                 <div class="choice">
+
                   <input
                     type="radio"
                     name="room"
@@ -1171,12 +1393,15 @@
                   >
 
                   <label for="roomA">
-                    A案<br>
+                    A案
+                    <br>
                     40人大教室
                   </label>
+
                 </div>
 
                 <div class="choice">
+
                   <input
                     type="radio"
                     name="room"
@@ -1185,12 +1410,15 @@
                   >
 
                   <label for="roomB">
-                    B案<br>
+                    B案
+                    <br>
                     10人會議室
                   </label>
+
                 </div>
 
               </div>
+
             </div>
 
             <div class="field">
@@ -1200,6 +1428,7 @@
               <div class="choice-grid time">
 
                 <div class="choice">
+
                   <input
                     type="checkbox"
                     name="time"
@@ -1208,12 +1437,15 @@
                   >
 
                   <label for="morning">
-                    早上<br>
+                    早上
+                    <br>
                     08:00–12:00
                   </label>
+
                 </div>
 
                 <div class="choice">
+
                   <input
                     type="checkbox"
                     name="time"
@@ -1222,12 +1454,15 @@
                   >
 
                   <label for="afternoon">
-                    下午<br>
+                    下午
+                    <br>
                     13:00–17:00
                   </label>
+
                 </div>
 
                 <div class="choice">
+
                   <input
                     type="checkbox"
                     name="time"
@@ -1236,12 +1471,15 @@
                   >
 
                   <label for="evening">
-                    晚上<br>
+                    晚上
+                    <br>
                     18:00–21:00
                   </label>
+
                 </div>
 
               </div>
+
             </div>
 
           </div>
@@ -1253,7 +1491,10 @@
             <div class="form-grid two">
 
               <div>
-                <label class="form-label" for="name">
+                <label
+                  class="form-label"
+                  for="name"
+                >
                   姓名 *
                 </label>
 
@@ -1265,7 +1506,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="phone">
+                <label
+                  class="form-label"
+                  for="phone"
+                >
                   電話 *
                 </label>
 
@@ -1277,7 +1521,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="email">
+                <label
+                  class="form-label"
+                  for="email"
+                >
                   Email
                 </label>
 
@@ -1289,7 +1536,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="lineId">
+                <label
+                  class="form-label"
+                  for="lineId"
+                >
                   Line ID
                 </label>
 
@@ -1301,7 +1551,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="lineName">
+                <label
+                  class="form-label"
+                  for="lineName"
+                >
                   Line 暱稱
                 </label>
 
@@ -1313,7 +1566,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="topic">
+                <label
+                  class="form-label"
+                  for="topic"
+                >
                   活動主題
                 </label>
 
@@ -1325,7 +1581,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="invoiceTitle">
+                <label
+                  class="form-label"
+                  for="invoiceTitle"
+                >
                   發票抬頭
                 </label>
 
@@ -1337,7 +1596,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="taxId">
+                <label
+                  class="form-label"
+                  for="taxId"
+                >
                   統一編號
                 </label>
 
@@ -1349,7 +1611,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="bankLast5">
+                <label
+                  class="form-label"
+                  for="bankLast5"
+                >
                   匯款後五碼（選填）
                 </label>
 
@@ -1361,7 +1626,10 @@
               </div>
 
               <div>
-                <label class="form-label" for="address">
+                <label
+                  class="form-label"
+                  for="address"
+                >
                   發票寄送地址
                 </label>
 
@@ -1376,7 +1644,10 @@
 
             <div style="margin-top:12px;">
 
-              <label class="form-label" for="note">
+              <label
+                class="form-label"
+                for="note"
+              >
                 備註
               </label>
 
@@ -1415,11 +1686,17 @@
             請選擇日期、教室與時段。
           </div>
 
-          <div class="estimate-total" id="estimateTotal">
+          <div
+            class="estimate-total"
+            id="estimateTotal"
+          >
             0 元
           </div>
 
-          <div class="summary-box" id="bookingSummary">
+          <div
+            class="summary-box"
+            id="bookingSummary"
+          >
             尚未選擇預約內容。
           </div>
 
@@ -1441,7 +1718,9 @@
             送出預約資料
           </button>
 
-          <p style="font-size:13px;color:#667085;">
+          <p
+            style="font-size:13px;color:#667085;"
+          >
             提醒：送出表單不代表預約完成，
             需由工作人員確認檔期後才算保留。
           </p>
@@ -1453,7 +1732,10 @@
     </div>
   </section>
 
-  <section id="contact" class="contact">
+  <section
+    id="contact"
+    class="contact"
+  >
 
     <div class="wrap">
 
@@ -1462,9 +1744,12 @@
       <div class="contact-box">
 
         <p>
-          <strong>友成商務空間</strong><br>
-          桃園市桃園區中平路98號18樓<br>
-          電話：03-220-1818<br>
+          <strong>友成商務空間</strong>
+          <br>
+          桃園市桃園區中平路98號18樓
+          <br>
+          電話：03-220-1818
+          <br>
           教室聯絡人：0938-560-333
         </p>
 
@@ -1475,8 +1760,15 @@
   </section>
 
   <div class="bottom-bar">
-    <a href="#booking">查看預約</a>
-    <a href="#contact">聯絡資訊</a>
+
+    <a href="#booking">
+      查看預約
+    </a>
+
+    <a href="#contact">
+      聯絡資訊
+    </a>
+
   </div>
 
 <script>
@@ -1488,9 +1780,9 @@ const SCRIPT_URL =
 const prices = {
 
   A:{
-    morning:3500,
-    afternoon:3500,
-    evening:3000
+    morning:4000,
+    afternoon:4000,
+    evening:4000
   },
 
   B:{
@@ -1526,32 +1818,49 @@ let bookedData = {};
 
 
 const calendarGrid =
-document.getElementById("calendarGrid");
+document.getElementById(
+  "calendarGrid"
+);
 
 const calendarTitle =
-document.getElementById("calendarTitle");
+document.getElementById(
+  "calendarTitle"
+);
 
 const selectedDateText =
-document.getElementById("selectedDateText");
+document.getElementById(
+  "selectedDateText"
+);
 
 const estimateText =
-document.getElementById("estimateText");
+document.getElementById(
+  "estimateText"
+);
 
 const estimateTotal =
-document.getElementById("estimateTotal");
+document.getElementById(
+  "estimateTotal"
+);
 
 const bookingSummary =
-document.getElementById("bookingSummary");
+document.getElementById(
+  "bookingSummary"
+);
 
 
 const roomInputs =
-document.querySelectorAll("input[name='room']");
+document.querySelectorAll(
+  "input[name='room']"
+);
 
 const timeInputs =
-document.querySelectorAll("input[name='time']");
+document.querySelectorAll(
+  "input[name='time']"
+);
 
 
-const today = new Date();
+const today =
+new Date();
 
 let currentYear =
 today.getFullYear();
@@ -1559,19 +1868,28 @@ today.getFullYear();
 let currentMonth =
 today.getMonth();
 
-let selectedDate = null;
+let selectedDate =
+null;
 
 
 
 function pad(n){
 
-  return String(n).padStart(2,"0");
+  return String(n)
+  .padStart(
+    2,
+    "0"
+  );
 
 }
 
 
 
-function toDateKey(year,month,day){
+function toDateKey(
+  year,
+  month,
+  day
+){
 
   return `${year}-${pad(month+1)}-${pad(day)}`;
 
@@ -1581,9 +1899,11 @@ function toDateKey(year,month,day){
 
 function getSelectedRoom(){
 
-  return document.querySelector(
+  return document
+  .querySelector(
     "input[name='room']:checked"
-  ).value;
+  )
+  .value;
 
 }
 
@@ -1591,14 +1911,15 @@ function getSelectedRoom(){
 
 function getSelectedTimes(){
 
-  return Array.from(timeInputs)
-
+  return Array
+  .from(
+    timeInputs
+  )
   .filter(
     input =>
     input.checked &&
     !input.disabled
   )
-
   .map(
     input =>
     input.value
@@ -1608,19 +1929,33 @@ function getSelectedTimes(){
 
 
 
-function statusClass(status){
+function statusClass(
+  status
+){
 
-  if(status==="bookedA")
+  if(
+    status==="bookedA"
+  ){
     return "slot-a";
+  }
 
-  if(status==="bookedB")
+  if(
+    status==="bookedB"
+  ){
     return "slot-b";
+  }
 
-  if(status==="hold")
+  if(
+    status==="hold"
+  ){
     return "slot-hold";
+  }
 
-  if(status==="internal")
+  if(
+    status==="internal"
+  ){
     return "slot-internal";
+  }
 
   return "slot-hold";
 
@@ -1630,28 +1965,49 @@ function statusClass(status){
 
 function renderCalendar(){
 
-  calendarGrid.innerHTML="";
+  calendarGrid
+  .innerHTML="";
 
 
   const weekdays =
-  ["日","一","二","三","四","五","六"];
+  [
+    "日",
+    "一",
+    "二",
+    "三",
+    "四",
+    "五",
+    "六"
+  ];
 
 
-  weekdays.forEach(weekday=>{
+  weekdays
+  .forEach(
+    weekday=>{
 
-    const element =
-    document.createElement("div");
+      const element =
+      document
+      .createElement(
+        "div"
+      );
 
-    element.className="weekday";
+      element.className =
+      "weekday";
 
-    element.textContent=weekday;
+      element.textContent =
+      weekday;
 
-    calendarGrid.appendChild(element);
+      calendarGrid
+      .appendChild(
+        element
+      );
 
-  });
+    }
+  );
 
 
-  calendarTitle.textContent =
+  calendarTitle
+  .textContent =
   `${currentYear} 年 ${currentMonth+1} 月`;
 
 
@@ -1672,12 +2028,13 @@ function renderCalendar(){
 
 
   const startWeekday =
-  firstDay.getDay();
+  firstDay
+  .getDay();
 
 
   const daysInMonth =
-  lastDay.getDate();
-
+  lastDay
+  .getDate();
 
 
   for(
@@ -1687,15 +2044,20 @@ function renderCalendar(){
   ){
 
     const empty =
-    document.createElement("div");
+    document
+    .createElement(
+      "div"
+    );
 
     empty.className =
     "day muted";
 
-    calendarGrid.appendChild(empty);
+    calendarGrid
+    .appendChild(
+      empty
+    );
 
   }
-
 
 
   for(
@@ -1713,19 +2075,27 @@ function renderCalendar(){
 
 
     const cell =
-    document.createElement("button");
+    document
+    .createElement(
+      "button"
+    );
 
 
-    cell.type="button";
+    cell.type =
+    "button";
 
-    cell.className="day";
+    cell.className =
+    "day";
 
 
     if(
-      selectedDate===dateKey
+      selectedDate===
+      dateKey
     ){
 
-      cell.classList.add(
+      cell
+      .classList
+      .add(
         "selected"
       );
 
@@ -1733,7 +2103,10 @@ function renderCalendar(){
 
 
     const number =
-    document.createElement("div");
+    document
+    .createElement(
+      "div"
+    );
 
 
     number.className =
@@ -1744,43 +2117,50 @@ function renderCalendar(){
     day;
 
 
-    cell.appendChild(
+    cell
+    .appendChild(
       number
     );
 
 
     const bookings =
-    bookedData[dateKey] || [];
+    bookedData[
+      dateKey
+    ] || [];
 
 
-    bookings.forEach(
+    bookings
+    .forEach(
       booking=>{
 
-      const pill =
-      document.createElement(
-        "span"
-      );
+        const pill =
+        document
+        .createElement(
+          "span"
+        );
 
 
-      pill.className =
-      `slot-pill ${statusClass(
-        booking.status
-      )}`;
+        pill.className =
+        `slot-pill ${statusClass(
+          booking.status
+        )}`;
 
 
-      pill.textContent =
-      booking.label;
+        pill.textContent =
+        booking.label;
 
 
-      cell.appendChild(
-        pill
-      );
+        cell
+        .appendChild(
+          pill
+        );
 
-    });
+      }
+    );
 
 
-
-    cell.addEventListener(
+    cell
+    .addEventListener(
       "click",
       ()=>{
 
@@ -1788,7 +2168,8 @@ function renderCalendar(){
         dateKey;
 
 
-        selectedDateText.textContent =
+        selectedDateText
+        .textContent =
         dateKey;
 
 
@@ -1802,7 +2183,8 @@ function renderCalendar(){
     );
 
 
-    calendarGrid.appendChild(
+    calendarGrid
+    .appendChild(
       cell
     );
 
@@ -1822,7 +2204,9 @@ function updateDisabledTimes(){
   selectedDate
   ?
   (
-    bookedData[selectedDate]
+    bookedData[
+      selectedDate
+    ]
     ||
     []
   )
@@ -1830,15 +2214,19 @@ function updateDisabledTimes(){
   [];
 
 
-  timeInputs.forEach(
+  timeInputs
+  .forEach(
     input=>{
 
       const blocked =
-      bookings.some(
+      bookings
+      .some(
         booking =>
-        booking.room===room
+        booking.room===
+        room
         &&
-        booking.time===input.value
+        booking.time===
+        input.value
       );
 
 
@@ -1846,14 +2234,17 @@ function updateDisabledTimes(){
       blocked;
 
 
-      if(blocked){
+      if(
+        blocked
+      ){
 
         input.checked =
         false;
 
       }
 
-  });
+    }
+  );
 
 }
 
@@ -1869,17 +2260,22 @@ function updateEstimate(){
   getSelectedTimes();
 
 
-  if(!selectedDate){
+  if(
+    !selectedDate
+  ){
 
-    estimateText.textContent =
+    estimateText
+    .textContent =
     "請先點選月曆日期。";
 
 
-    estimateTotal.textContent =
+    estimateTotal
+    .textContent =
     "0 元";
 
 
-    bookingSummary.textContent =
+    bookingSummary
+    .textContent =
     "尚未選擇預約內容。";
 
 
@@ -1888,18 +2284,22 @@ function updateEstimate(){
   }
 
 
+  if(
+    times.length===0
+  ){
 
-  if(times.length===0){
-
-    estimateText.textContent =
+    estimateText
+    .textContent =
     "請選擇至少一個時段。";
 
 
-    estimateTotal.textContent =
+    estimateTotal
+    .textContent =
     "0 元";
 
 
-    bookingSummary.textContent =
+    bookingSummary
+    .textContent =
 `已選日期：${selectedDate}
 已選教室：${roomNames[room]}
 尚未選擇時段。`;
@@ -1910,17 +2310,23 @@ function updateEstimate(){
   }
 
 
+  let total =
+  0;
 
-  let total=0;
+  const lines =
+  [];
 
-  const lines=[];
 
-
-  times.forEach(
+  times
+  .forEach(
     time=>{
 
       const price =
-      prices[room][time];
+      prices[
+        room
+      ][
+        time
+      ];
 
 
       total +=
@@ -1931,19 +2337,25 @@ function updateEstimate(){
         `${timeNames[time]}：${price.toLocaleString()} 元`
       );
 
-  });
+    }
+  );
 
 
+  estimateText
+  .innerHTML =
+  lines
+  .join(
+    "<br>"
+  );
 
-  estimateText.innerHTML =
-  lines.join("<br>");
 
-
-  estimateTotal.textContent =
+  estimateTotal
+  .textContent =
   `${total.toLocaleString()} 元`;
 
 
-  bookingSummary.textContent =
+  bookingSummary
+  .textContent =
 `預約摘要
 
 日期：${selectedDate}
@@ -1952,7 +2364,8 @@ function updateEstimate(){
 
 時段：
 ${times.map(
-time => "・"+timeNames[time]
+  time =>
+  "・"+timeNames[time]
 ).join("\n")}
 
 預估總金額：
@@ -1975,13 +2388,18 @@ function getTotalFee(){
   getSelectedTimes();
 
 
-  return times.reduce(
+  return times
+  .reduce(
     (
       sum,
       time
     ) =>
       sum +
-      prices[room][time],
+      prices[
+        room
+      ][
+        time
+      ],
     0
   );
 
@@ -1994,7 +2412,8 @@ function collectFormData(){
   return {
 
     createdAt:
-    new Date().toLocaleString(
+    new Date()
+    .toLocaleString(
       "zh-TW"
     ),
 
@@ -2003,31 +2422,41 @@ function collectFormData(){
 
     name:
     document
-    .getElementById("name")
+    .getElementById(
+      "name"
+    )
     .value
     .trim(),
 
     email:
     document
-    .getElementById("email")
+    .getElementById(
+      "email"
+    )
     .value
     .trim(),
 
     phone:
     document
-    .getElementById("phone")
+    .getElementById(
+      "phone"
+    )
     .value
     .trim(),
 
     lineId:
     document
-    .getElementById("lineId")
+    .getElementById(
+      "lineId"
+    )
     .value
     .trim(),
 
     lineName:
     document
-    .getElementById("lineName")
+    .getElementById(
+      "lineName"
+    )
     .value
     .trim(),
 
@@ -2046,56 +2475,76 @@ function collectFormData(){
     getSelectedTimes()
     .map(
       time =>
-      timeNames[time]
+      timeNames[
+        time
+      ]
     )
-    .join("、"),
+    .join(
+      "、"
+    ),
 
     timeCodes:
     getSelectedTimes()
-    .join(","),
+    .join(
+      ","
+    ),
 
     fee:
     getTotalFee(),
 
     topic:
     document
-    .getElementById("topic")
+    .getElementById(
+      "topic"
+    )
     .value
     .trim(),
 
     invoiceTitle:
     document
-    .getElementById("invoiceTitle")
+    .getElementById(
+      "invoiceTitle"
+    )
     .value
     .trim(),
 
     taxId:
     document
-    .getElementById("taxId")
+    .getElementById(
+      "taxId"
+    )
     .value
     .trim(),
 
     address:
     document
-    .getElementById("address")
+    .getElementById(
+      "address"
+    )
     .value
     .trim(),
 
     bankLast5:
     document
-    .getElementById("bankLast5")
+    .getElementById(
+      "bankLast5"
+    )
     .value
     .trim(),
 
     note:
     document
-    .getElementById("note")
+    .getElementById(
+      "note"
+    )
     .value
     .trim(),
 
     agreeTerms:
     document
-    .getElementById("agreeTerms")
+    .getElementById(
+      "agreeTerms"
+    )
     .checked
     ?
     "是"
@@ -2115,16 +2564,34 @@ async function loadBookingsFromScript(){
     const response =
     await fetch(
       SCRIPT_URL +
-      "?action=list"
+      "?action=list&_=" +
+      Date.now(),
+      {
+        cache:"no-store"
+      }
     );
 
 
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "讀取預約資料失敗：" +
+        response.status
+      );
+
+    }
+
+
     const data =
-    await response.json();
+    await response
+    .json();
 
 
     if(
       data &&
+      data.ok !== false &&
       data.bookings
     ){
 
@@ -2138,17 +2605,130 @@ async function loadBookingsFromScript(){
 
       updateEstimate();
 
+      return true;
+
     }
 
-  }
-  catch(error){
 
-    console.log(
+    return false;
+
+  }
+  catch(
+    error
+  ){
+
+    console.error(
       "讀取預約資料失敗",
       error
     );
 
+    return false;
+
   }
+
+}
+
+
+
+function sleep(
+  ms
+){
+
+  return new Promise(
+    resolve =>
+    setTimeout(
+      resolve,
+      ms
+    )
+  );
+
+}
+
+
+
+function bookingExists(
+  data
+){
+
+  const wantedTimes =
+  String(
+    data.timeCodes ||
+    ""
+  )
+  .split(
+    ","
+  )
+  .map(
+    item =>
+    item.trim()
+  )
+  .filter(
+    Boolean
+  );
+
+
+  const bookings =
+  bookedData[
+    data.date
+  ] || [];
+
+
+  return wantedTimes
+  .every(
+    timeCode =>
+    bookings
+    .some(
+      booking =>
+      booking.room ===
+      data.roomCode
+      &&
+      booking.time ===
+      timeCode
+    )
+  );
+
+}
+
+
+
+async function verifyBookingSaved(
+  data
+){
+
+  for(
+    let attempt=0;
+    attempt<5;
+    attempt++
+  ){
+
+    await sleep(
+      attempt===0
+      ?
+      1200
+      :
+      900
+    );
+
+
+    const loaded =
+    await loadBookingsFromScript();
+
+
+    if(
+      loaded &&
+      bookingExists(
+        data
+      )
+    ){
+
+      return true;
+
+    }
+
+  }
+
+
+  return false;
 
 }
 
@@ -2160,8 +2740,9 @@ async function submitBooking(){
   collectFormData();
 
 
-
-  if(!selectedDate){
+  if(
+    !selectedDate
+  ){
 
     alert(
       "請先點選月曆日期。"
@@ -2172,8 +2753,9 @@ async function submitBooking(){
   }
 
 
-
-  if(!data.timeCodes){
+  if(
+    !data.timeCodes
+  ){
 
     alert(
       "請至少選擇一個時段。"
@@ -2184,8 +2766,9 @@ async function submitBooking(){
   }
 
 
-
-  if(!data.name){
+  if(
+    !data.name
+  ){
 
     alert(
       "請填寫姓名。"
@@ -2196,8 +2779,9 @@ async function submitBooking(){
   }
 
 
-
-  if(!data.phone){
+  if(
+    !data.phone
+  ){
 
     alert(
       "請填寫電話。"
@@ -2206,7 +2790,6 @@ async function submitBooking(){
     return;
 
   }
-
 
 
   if(
@@ -2224,7 +2807,6 @@ async function submitBooking(){
     return;
 
   }
-
 
 
   const confirmText =
@@ -2251,7 +2833,8 @@ ${data.room}
 
 時段：
 ${data.times.split("、").map(
-time => "・"+time
+  time =>
+  "・"+time
 ).join("\n")}
 
 活動主題：
@@ -2259,7 +2842,7 @@ ${data.topic || "未填寫"}
 
 預估總金額：
 ${Number(
-data.fee
+  data.fee
 ).toLocaleString()} 元
 
 匯款後五碼：
@@ -2268,36 +2851,38 @@ ${data.bankLast5 || "未填寫"}
 確認送出嗎？`;
 
 
-
   const confirmed =
-  confirm(confirmText);
+  confirm(
+    confirmText
+  );
 
 
-
-  if(!confirmed){
+  if(
+    !confirmed
+  ){
 
     return;
 
   }
 
 
-
   const button =
-  document.getElementById(
+  document
+  .getElementById(
     "submitBooking"
   );
 
 
-
   try{
 
-    button.textContent =
+    button
+    .textContent =
     "送出中...";
 
 
-    button.disabled =
+    button
+    .disabled =
     true;
-
 
 
     await fetch(
@@ -2310,21 +2895,38 @@ ${data.bankLast5 || "未填寫"}
 
         headers:{
           "Content-Type":
-          "application/json"
+          "text/plain;charset=utf-8"
         },
 
         body:
-        JSON.stringify(data)
+        JSON.stringify(
+          data
+        )
 
       }
     );
 
 
-
-    alert(
-      "已送出預約資料！工作人員會再與您確認檔期。"
+    const verified =
+    await verifyBookingSaved(
+      data
     );
 
+
+    if(
+      !verified
+    ){
+
+      throw new Error(
+        "系統尚未確認資料已寫入預約表"
+      );
+
+    }
+
+
+    alert(
+      "預約資料已成功送出！工作人員會再與您確認檔期。"
+    );
 
 
     [
@@ -2344,27 +2946,30 @@ ${data.bankLast5 || "未填寫"}
       id=>{
 
         document
-        .getElementById(id)
+        .getElementById(
+          id
+        )
         .value="";
 
-    });
-
+      }
+    );
 
 
     document
     .getElementById(
       "agreeTerms"
     )
-    .checked=false;
+    .checked =
+    false;
 
 
-
-    timeInputs.forEach(
+    timeInputs
+    .forEach(
       input=>{
-        input.checked=false;
+        input.checked =
+        false;
       }
     );
-
 
 
     await loadBookingsFromScript();
@@ -2372,22 +2977,29 @@ ${data.bankLast5 || "未填寫"}
     updateEstimate();
 
   }
+  catch(
+    error
+  ){
 
-  catch(error){
+    console.error(
+      "預約送出失敗",
+      error
+    );
 
     alert(
-      "送出失敗，請稍後再試或電話洽詢。"
+      "預約尚未確認成功寫入，請不要重複付款。\n請稍後再試，或電話洽詢 03-220-1818。"
     );
 
   }
-
   finally{
 
-    button.textContent =
+    button
+    .textContent =
     "送出預約資料";
 
 
-    button.disabled =
+    button
+    .disabled =
     false;
 
   }
@@ -2411,7 +3023,8 @@ document
       currentMonth<0
     ){
 
-      currentMonth=11;
+      currentMonth =
+      11;
 
       currentYear--;
 
@@ -2440,7 +3053,8 @@ document
       currentMonth>11
     ){
 
-      currentMonth=0;
+      currentMonth =
+      0;
 
       currentYear++;
 
@@ -2454,10 +3068,12 @@ document
 
 
 
-roomInputs.forEach(
+roomInputs
+.forEach(
   input=>{
 
-    input.addEventListener(
+    input
+    .addEventListener(
       "change",
       ()=>{
 
@@ -2473,10 +3089,12 @@ roomInputs.forEach(
 
 
 
-timeInputs.forEach(
+timeInputs
+.forEach(
   input=>{
 
-    input.addEventListener(
+    input
+    .addEventListener(
       "change",
       updateEstimate
     );
@@ -2496,8 +3114,11 @@ document
 
     try{
 
-      await navigator.clipboard.writeText(
-        bookingSummary.textContent
+      await navigator
+      .clipboard
+      .writeText(
+        bookingSummary
+        .textContent
       );
 
 
@@ -2506,8 +3127,9 @@ document
       );
 
     }
-
-    catch(error){
+    catch(
+      error
+    ){
 
       alert(
         "複製失敗，請手動複製。"
