@@ -49,7 +49,7 @@ function ac_setup() {
 
   sheet.getRange(1, AC_CONFIG.CONFIRM_TIME_COL).setValue('確認時間');
   sheet.getRange(1, AC_CONFIG.PAID_COL).setValue('已收款');
-  sheet.getRange(2, AC_CONFIG.PAID_COL, Math.max(sheet.getMaxRows() - 1, 1), 1).insertCheckboxes();
+  ac_cleanupCheckboxes();
 
   // 先清掉舊的同名觸發條件，避免重複
   ScriptApp.getProjectTriggers().forEach(t => {
@@ -62,6 +62,33 @@ function ac_setup() {
   ScriptApp.newTrigger('ac_autoCancel').timeBased().everyHours(1).create();
 
   Logger.log('✅ 設定完成：狀態改成「已確認」會自動記時間，每小時檢查一次逾期未付款。');
+}
+
+
+/**
+ * 勾選框只放在有資料的列；空白列的勾選框移除，
+ * 避免網頁新預約被寫到很下面的空白列。
+ */
+function ac_cleanupCheckboxes() {
+  const sheet = SpreadsheetApp.openById(AC_CONFIG.SPREADSHEET_ID).getSheetByName(AC_CONFIG.SHEET_NAME);
+  const maxRows = sheet.getMaxRows();
+  const colA = sheet.getRange(1, 1, maxRows, 1).getValues();
+
+  let lastDataRow = 1;
+  for (let i = colA.length - 1; i >= 1; i--) {
+    if (String(colA[i][0]).trim() !== '') { lastDataRow = i + 1; break; }
+  }
+
+  if (lastDataRow >= 2) {
+    sheet.getRange(2, AC_CONFIG.PAID_COL, lastDataRow - 1, 1).insertCheckboxes();
+  }
+  if (maxRows > lastDataRow) {
+    const empty = sheet.getRange(lastDataRow + 1, AC_CONFIG.PAID_COL, maxRows - lastDataRow, 1);
+    empty.removeCheckboxes();
+    empty.clearContent();
+    empty.clearDataValidations();
+  }
+  Logger.log('✅ 勾選框已整理：只保留第 2～' + lastDataRow + ' 列。');
 }
 
 
