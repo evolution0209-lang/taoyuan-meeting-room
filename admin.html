@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>管理後台｜友成商務空間</title>
+  <style>
+    :root{
+      --navy:#123c55;--blue:#1597c8;--orange:#f28c28;--red:#d93636;
+      --green:#16a085;--purple:#7251b5;--yellow:#ffe600;
+      --light:#f6f8fb;--line:#e4e7ec;--muted:#667085;--dark:#1f2933
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--light);color:var(--dark)}
+    .wrap{max-width:1080px;margin:auto;padding:0 14px}
+    header{background:var(--navy);color:#fff;padding:14px 0}
+    header .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    header h1{margin:0;font-size:20px}
+    header .tools{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{border:0;border-radius:10px;padding:9px 14px;font-weight:900;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block;color:#fff;background:var(--blue)}
+    .btn.ghost{background:rgba(255,255,255,.15)}
+    .btn.orange{background:var(--orange)}
+    .btn:disabled{opacity:.6;cursor:wait}
+
+    #login{max-width:380px;margin:70px auto;background:#fff;border-radius:20px;padding:28px 22px;box-shadow:0 14px 30px rgba(31,41,51,.1);text-align:center}
+    #login h2{margin:0 0 6px;color:var(--navy)}
+    #login p{color:var(--muted);margin:0 0 18px;font-weight:700}
+    #login input{width:100%;font-size:18px;padding:13px 14px;border:2px solid var(--line);border-radius:12px;margin-bottom:12px}
+    #login input:focus{outline:none;border-color:var(--blue)}
+    #login .btn{width:100%;padding:13px;font-size:17px}
+    .msg{color:var(--red);font-weight:800;min-height:22px;margin-top:10px}
+
+    #board{display:none;padding:18px 0 60px}
+    .updated{color:var(--muted);font-size:13px;font-weight:700;margin:0 0 14px}
+    .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+    .tile{background:#fff;border-radius:16px;padding:14px;border:1px solid var(--line);border-top:6px solid var(--blue)}
+    .tile b{display:block;font-size:30px;color:var(--navy)}
+    .tile span{font-weight:800;color:var(--muted);font-size:14px}
+    .tile.t2{border-top-color:var(--orange)}
+    .tile.t3{border-top-color:var(--red)}
+    .tile.t4{border-top-color:var(--green)}
+
+    h2.sec{font-size:19px;color:var(--navy);margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+    .empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:14px;color:var(--muted);font-weight:700}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;border-left:6px solid var(--blue)}
+    .card .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:900}
+    .card .meta{color:#344054;font-weight:700;font-size:14px;margin-top:6px;line-height:1.7}
+    .card a{color:var(--blue);font-weight:900}
+    .tag{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:900;color:#fff;background:var(--blue)}
+    .s-待確認{border-left-color:var(--orange)} .s-待確認 .tag{background:var(--orange)}
+    .s-暫保留{border-left-color:#bfa100} .s-暫保留 .tag{background:#bfa100}
+    .s-已確認{border-left-color:var(--blue)}
+    .s-已付款{border-left-color:var(--green)} .s-已付款 .tag{background:var(--green)}
+    .s-內部使用{border-left-color:var(--purple)} .s-內部使用 .tag{background:var(--purple)}
+    .due{color:var(--red);font-weight:900}
+    .date-head{font-weight:900;color:var(--navy);margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--line)}
+    .date-head.today{color:var(--red)}
+
+    @media (min-width:768px){
+      .tiles{grid-template-columns:repeat(4,1fr)}
+      .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <h1>友成商務空間｜管理後台</h1>
+      <div class="tools" id="tools" hidden>
+        <button class="btn orange" id="refresh" type="button">重新整理</button>
+        <a class="btn" id="sheetLink" href="#" target="_blank" rel="noopener">開啟試算表</a>
+        <button class="btn ghost" id="logout" type="button">登出</button>
+      </div>
+    </div>
+  </header>
+
+  <form id="login">
+    <h2>🔒 管理後台</h2>
+    <p>請輸入密碼查看預約狀況</p>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="密碼" required>
+    <button class="btn" id="loginBtn" type="submit">進入後台</button>
+    <div class="msg" id="loginMsg"></div>
+  </form>
+
+  <main id="board">
+    <div class="wrap">
+      <p class="updated" id="updated"></p>
+
+      <div class="tiles">
+        <div class="tile"><b id="nToday">0</b><span>今日預約</span></div>
+        <div class="tile t2"><b id="nPending">0</b><span>待確認（要回覆）</span></div>
+        <div class="tile t3"><b id="nUnpaid">0</b><span>待付款</span></div>
+        <div class="tile t4"><b id="nUpcoming">0</b><span>未來 30 天預約</span></div>
+      </div>
+
+      <div class="grid2">
+        <div>
+          <h2 class="sec">🟠 待確認（請聯絡客人）</h2>
+          <div id="listPending"></div>
+        </div>
+        <div>
+          <h2 class="sec">💳 待付款（期限內未付會自動取消）</h2>
+          <div id="listUnpaid"></div>
+        </div>
+      </div>
+
+      <h2 class="sec">📅 接下來的預約</h2>
+      <div id="listUpcoming"></div>
+
+      <h2 class="sec">🗑 最近自動取消</h2>
+      <div id="listCancelled"></div>
+    </div>
+  </main>
+
+<script>
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyShO1shtAUeg78WQXL5nOVo0uaEM0eNVFS3y_O6hIXcewdCzo6Rjo429uXJd9eWorQ_g/exec";
+
+const $ = id => document.getElementById(id);
+const WEEK = ["日","一","二","三","四","五","六"];
+let password = "";
+
+function store(key, val){
+  try{
+    if(val === undefined) return sessionStorage.getItem(key) || "";
+    if(val === null) sessionStorage.removeItem(key);
+    else sessionStorage.setItem(key, val);
+  }catch(e){ return ""; }
+}
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function dateLabel(key){
+  const [y,m,d] = key.split("-").map(Number);
+  const dt = new Date(y, m-1, d);
+  return `${m}/${d}（${WEEK[dt.getDay()]}）`;
+}
+
+function remaining(deadline){
+  const t = new Date(deadline.replace(" ", "T") + ":00+08:00").getTime() - Date.now();
+  if(t <= 0) return "已逾期，下次檢查時會自動取消";
+  const h = Math.floor(t / 3600000);
+  return h >= 24 ? `剩 ${Math.floor(h/24)} 天 ${h%24} 小時` : `剩 ${h} 小時`;
+}
+
+function card(b, opts = {}){
+  const tel = String(b.phone || "").replace(/[^0-9+]/g, "");
+  return `
+    <div class="card s-${esc(b.status)}">
+      <div class="top">
+        <span>${opts.showDate ? esc(dateLabel(b.date)) + " " : ""}${esc(b.time)}｜${esc(b.room)}</span>
+        <span class="tag">${esc(b.status)}${b.paid && b.status !== "已付款" ? "・已收款" : ""}</span>
+      </div>
+      <div class="meta">
+        ${esc(b.name)}${tel ? `｜<a href="tel:${esc(tel)}">${esc(b.phone)}</a>` : ""}<br>
+        ${b.topic ? "活動：" + esc(b.topic) + "<br>" : ""}
+        ${b.total ? "金額：NT$ " + esc(b.total) : ""}${b.bankLast5 && b.bankLast5 !== "0" ? "｜匯款後五碼：" + esc(b.bankLast5) : ""}
+        ${b.deadline ? `<br><span class="due">付款期限：${esc(b.deadline)}（${esc(remaining(b.deadline))}）</span>` : ""}
+        ${b.note ? "<br>備註：" + esc(b.note) : ""}
+      </div>
+    </div>`;
+}
+
+function render(data){
+  const today = data.today;
+  const in30 = new Date(Date.now() + 30*86400000).toISOString().slice(0,10);
+  const list = data.bookings || [];
+
+  const todays = list.filter(b => b.date === today);
+  const pending = list.filter(b => b.status === "待確認" || b.status === "暫保留");
+  const unpaid = list.filter(b => b.deadline);
+  const upcoming = list.filter(b => b.date >= today);
+
+  $("nToday").textContent = todays.length;
+  $("nPending").textContent = pending.length;
+  $("nUnpaid").textContent = unpaid.length;
+  $("nUpcoming").textContent = upcoming.filter(b => b.date <= in30).length;
+  $("updated").textContent = `資料更新時間：${data.generatedAt}`;
+  if(data.sheetUrl) $("sheetLink").href = data.sheetUrl;
+
+  $("listPending").innerHTML = pending.length
+    ? pending.map(b => card(b, {showDate:true})).join("")
+    : `<div class="empty">目前沒有待確認的預約 👍</div>`;
+
+  $("listUnpaid").innerHTML = unpaid.length
+    ? unpaid.map(b => card(b, {showDate:true})).join("")
+    : `<div class="empty">目前沒有待付款的預約 👍</div>`;
+
+  if(!upcoming.length){
+    $("listUpcoming").innerHTML = `<div class="empty">目前沒有接下來的預約</div>`;
+  }else{
+    let html = "", last = "";
+    upcoming.forEach(b => {
+      if(b.date !== last){
+        html += `<div class="date-head ${b.date === today ? "today" : ""}">${esc(dateLabel(b.date))}${b.date === today ? "｜今天" : ""}</div>`;
+        last = b.date;
+      }
+      html += card(b);
+    });
+    $("listUpcoming").innerHTML = html;
+  }
+
+  const c = data.cancelled || [];
+  $("listCancelled").innerHTML = c.length
+    ? c.map(x => `
+      <div class="card" style="border-left-color:#98a2b3">
+        <div class="top"><span>${esc(x.date ? dateLabel(x.date) : "")} ${esc(x.time)}｜${esc(x.room)}</span><span>${esc(x.name)}</span></div>
+        <div class="meta">取消時間：${esc(x.cancelledAt)}<br>${esc(x.reason)}</div>
+      </div>`).join("")
+    : `<div class="empty">最近沒有自動取消的預約</div>`;
+}
+
+async function load(){
+  const btn = $("refresh");
+  btn.disabled = true;
+  btn.textContent = "讀取中...";
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "admin", password })
+    });
+    const data = await res.json();
+    if(!data.ok){
+      throw new Error(data.message || "讀取失敗");
+    }
+    $("login").style.display = "none";
+    $("board").style.display = "block";
+    $("tools").hidden = false;
+    render(data);
+    return true;
+  }catch(err){
+    store("yc_admin_pw", null);
+    $("board").style.display = "none";
+    $("tools").hidden = true;
+    $("login").style.display = "block";
+    $("loginMsg").textContent = err.message || "連線失敗，請稍後再試";
+    return false;
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "重新整理";
+  }
+}
+
+$("login").addEventListener("submit", async e => {
+  e.preventDefault();
+  password = $("pw").value;
+  $("loginMsg").textContent = "";
+  $("loginBtn").disabled = true;
+  $("loginBtn").textContent = "驗證中...";
+  const ok = await load();
+  $("loginBtn").disabled = false;
+  $("loginBtn").textContent = "進入後台";
+  if(ok){
+    store("yc_admin_pw", password);
+    $("pw").value = "";
+  }
+});
+
+$("refresh").addEventListener("click", load);
+
+$("logout").addEventListener("click", () => {
+  password = "";
+  store("yc_admin_pw", null);
+  location.reload();
+});
+
+// 同一個分頁重新整理時不用再輸入密碼（關掉分頁就要重新登入）
+password = store("yc_admin_pw");
+if(password) load();
+</script>
+</body>
+</html>
