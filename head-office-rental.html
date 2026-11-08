@@ -66,14 +66,64 @@
     }
 
     .hero{
+      position:relative;
+      overflow:hidden;
       color:#fff;
       text-align:center;
       padding:58px 14px 44px;
-      background:
-        linear-gradient(135deg,rgba(18,60,85,.92),rgba(217,54,54,.58)),
-        url("images/大樓外觀.jpg");
-      background-size:cover;
-      background-position:center
+      background:var(--navy)
+    }
+
+    /* 動態背景：休息交流區，慢慢放大（Ken Burns） */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url("images/休息室.jpg") center/cover no-repeat;
+      transform:scale(1.05);
+      animation:kenburns 22s ease-in-out infinite alternate;
+      will-change:transform
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(160deg,rgba(18,60,85,.78) 0%,rgba(18,60,85,.55) 55%,rgba(0,0,0,.45) 100%)
+    }
+
+    .hero > .wrap{
+      position:relative;
+      z-index:1
+    }
+
+    @keyframes kenburns{
+      0%{transform:scale(1.05) translate(0,0)}
+      100%{transform:scale(1.16) translate(-2%,-1%)}
+    }
+
+    @keyframes fadeUp{
+      0%{opacity:0;transform:translateY(22px)}
+      100%{opacity:1;transform:translateY(0)}
+    }
+
+    .hero .badge,
+    .hero h1,
+    .hero p,
+    .hero .hero-actions{
+      animation:fadeUp .7s ease-out both
+    }
+
+    .hero h1{animation-delay:.12s}
+    .hero p{animation-delay:.24s}
+    .hero .hero-actions{animation-delay:.36s}
+
+    @media (prefers-reduced-motion:reduce){
+      .hero::before,
+      .hero .badge,
+      .hero h1,
+      .hero p,
+      .hero .hero-actions{animation:none}
     }
 
     .badge{
@@ -793,6 +843,17 @@
       color:var(--yellow)
     }
 
+    .admin-link{
+      text-align:center;
+      margin:22px 0 0;
+      font-size:13px
+    }
+
+    .admin-link a{
+      color:rgba(255,255,255,.55);
+      text-decoration:underline
+    }
+
     .bottom-bar{
       position:fixed;
       left:0;
@@ -880,7 +941,23 @@
       .booking-panel{grid-template-columns:1.15fr .85fr;align-items:start}
       .choice-grid.time{grid-template-columns:repeat(3,1fr)}
       .form-grid.two{grid-template-columns:repeat(2,1fr)}
-      .bottom-bar{display:none}
+      .bottom-bar{
+        left:auto;
+        right:22px;
+        bottom:22px;
+        width:auto;
+        background:transparent;
+        border:0;
+        box-shadow:none;
+        padding:0;
+        display:flex;
+        gap:10px
+      }
+      .bottom-bar a{
+        padding:14px 22px;
+        border-radius:999px;
+        box-shadow:0 10px 24px rgba(0,0,0,.22)
+      }
     }
 
     @media (max-width:520px){
@@ -1722,13 +1799,17 @@
 
       </div>
 
+      <p class="admin-link">
+        <a href="admin.html" rel="nofollow">管理後台</a>
+      </p>
+
     </div>
 
   </section>
 
   <div class="bottom-bar">
-    <a href="#booking">查看預約</a>
-    <a href="#contact">聯絡資訊</a>
+    <a href="#booking">📅 立即預約</a>
+    <a href="tel:032201818">📞 撥打電話</a>
   </div>
 
 <script>
